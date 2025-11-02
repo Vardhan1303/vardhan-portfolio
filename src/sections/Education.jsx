@@ -44,8 +44,8 @@ export default function Education() {
 
       {/* MAIN CONTENT */}
       <div className="relative w-full py-20">
-        {/* CENTER TIMELINE LINE */}
-        <div className="absolute top-0 bottom-0 left-1/2 w-[4px] bg-blue-200 transform -translate-x-1/2 z-0"></div>
+        {/* CENTER TIMELINE LINE - HIDDEN ON MOBILE */}
+        <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-[4px] bg-blue-200 transform -translate-x-1/2 z-0"></div>
 
         <div className="space-y-32 relative z-10">
           {educationData.map((edu, index) => {
@@ -57,7 +57,7 @@ export default function Education() {
                   isReversed ? "md:flex-row-reverse" : ""
                 }`}
               >
-                {/* IMAGE SIDE - Full Height */}
+                {/* IMAGE SIDE - VISIBLE ON BOTH MOBILE AND DESKTOP */}
                 <motion.div
                   className="md:w-1/2 relative"
                   initial={{ opacity: 0, x: isReversed ? 100 : -100 }}
@@ -70,7 +70,7 @@ export default function Education() {
                       src={edu.image}
                       alt={`${edu.institution} campus`}
                       loading="lazy"
-                      className="hidden md:block w-full h-full object-cover"
+                      className="w-full h-full object-cover"
                     />
                   ) : (
                     <div className="hidden md:flex w-full h-full bg-blue-100 items-center justify-center text-gray-500 italic">
@@ -79,7 +79,7 @@ export default function Education() {
                   )}
                 </motion.div>
 
-                {/* CENTER DOT */}
+                {/* CENTER DOT - DESKTOP ONLY */}
                 <div className="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
                   <div className="w-6 h-6 bg-gray-500 border-4 border-blue-400 rounded-full shadow-md"></div>
                 </div>
