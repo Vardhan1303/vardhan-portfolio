@@ -51,7 +51,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <span className="inline-block bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent pb-1 sm:pb-2 leading-relaxed">
+          <span className="inline-block bg-gradient-to-r from-blue-400 via-white to-blue-400 bg-clip-text text-transparent pb-1 sm:pb-2 leading-relaxed">
             Vardhan Mistry
           </span>
         </motion.h1>
