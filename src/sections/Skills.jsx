@@ -39,8 +39,8 @@ export default function Skills() {
           
         </motion.div>
 
-        {/* Horizontal connecting line */}
-        <div className="relative mb-16">
+        {/* Horizontal connecting line - HIDDEN ON MOBILE */}
+        <div className="relative mb-16 hidden md:block">
           <motion.div 
             className="absolute left-0 right-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-blue-400 to-transparent"
             initial={{ scaleX: 0 }}
@@ -49,8 +49,8 @@ export default function Skills() {
             viewport={{ once: true }}
           />
           
-          {/* Vertical lines connecting to each skill card */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 relative">
+          {/* Vertical lines connecting to each skill card - DESKTOP ONLY */}
+          <div className="grid grid-cols-3 lg:grid-cols-5 gap-6 relative">
             {Object.keys(skills).map((category, index) => (
               <motion.div
                 key={category}
@@ -62,14 +62,14 @@ export default function Skills() {
                 style={{ transformOrigin: "top" }}
               >
                 <div className="w-0.5 h-16 bg-gradient-to-b from-blue-400 to-blue-600" />
-                <div className="absolute bottom-0 w-3 h-3 bg-blue-600 rounded-full" />
+                <div className="absolute bottom-0 w-3 h-3 bg-blue-600 rounded-full shadow-lg" />
               </motion.div>
             ))}
           </div>
         </div>
 
         {/* Skills Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {Object.entries(skills).map(([category, skillList], index) => {
             const Icon = iconMap[category];
             const isExpanding = category === "Data & NLP";
