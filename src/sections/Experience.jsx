@@ -88,8 +88,8 @@ export default function Experience() {
 
       {/* MAIN CONTENT */}
       <div className="relative w-full py-20">
-        {/* Center Timeline Line */}
-        <div className="absolute top-0 bottom-0 left-1/2 w-[4px] bg-gray-600 transform -translate-x-1/2 z-0"></div>
+        {/* Center Timeline Line - HIDDEN ON MOBILE */}
+        <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-[4px] bg-gray-600 transform -translate-x-1/2 z-0"></div>
 
         <div className="space-y-32 relative z-10">
           {experiences.map((exp, index) => (
@@ -99,23 +99,29 @@ export default function Experience() {
                 index % 2 !== 0 ? "md:flex-row-reverse" : ""
               }`}
             >
-              {/* IMAGE SIDE - Full Height */}
+              {/* IMAGE SIDE - VISIBLE ON BOTH MOBILE AND DESKTOP */}
               <motion.div
                 className="md:w-1/2 relative"
                 initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
                 whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.8 }}
               >
-                {exp.image && (
+                {exp.image ? (
                   <img
                     src={exp.image}
                     alt={exp.company || exp.subtitle}
-                    className="hidden md:block w-full h-full object-cover"
+                    loading="lazy"
+                    className="w-full h-full object-cover"
                   />
+                ) : (
+                  <div className="hidden md:flex w-full h-full bg-gray-800/30 items-center justify-center text-gray-400 italic">
+                    No image available
+                  </div>
                 )}
               </motion.div>
 
-              {/* CENTER DOT */}
+              {/* CENTER DOT - DESKTOP ONLY */}
               <div className="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
                 <div className="w-6 h-6 bg-gray-500 border-4 border-blue-400 rounded-full shadow-md"></div>
               </div>
@@ -125,6 +131,7 @@ export default function Experience() {
                 className="md:w-1/2 text-center md:text-left space-y-6 flex flex-col justify-center px-6 md:px-12 py-8"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.8 }}
               >
                 {/* Check if it's grouped by company or single position */}
