@@ -104,20 +104,7 @@ export default function Navbar() {
               {section.title}
             </a>
           ))}
-          <div className="flex gap-4 mt-2">
-            <button
-              onClick={() => setLang("EN")}
-              className={`${lang === "EN" ? "text-blue-700 font-semibold" : "text-gray-500"}`}
-            >
-              EN
-            </button>
-            <button
-              onClick={() => setLang("DE")}
-              className={`${lang === "DE" ? "text-blue-700 font-semibold" : "text-gray-500"}`}
-            >
-              DE
-            </button>
-          </div>
+          
         </div>
       )}
     </header>
