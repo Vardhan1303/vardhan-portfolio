@@ -16,7 +16,7 @@ export default function About() {
             <img 
               src="/images/about_me.jpg"
               alt="Vardhan Mistry"
-              className="w-full h-64 object-cover"
+              className="w-full h-auto object-contain"
               loading="lazy"
             />
           </div>
