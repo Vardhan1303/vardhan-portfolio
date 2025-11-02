@@ -115,7 +115,7 @@ function ProjectCard({ project, index }) {
             src={project.image}
             alt={`Screenshot of ${project.title}`}
             loading="lazy"
-            className="hidden md:block w-full h-full object-cover"
+            className="w-full h-full object-cover"
           />
         ) : (
           <div className="hidden md:flex w-full h-full bg-blue-800/30 items-center justify-center text-gray-400 italic">
