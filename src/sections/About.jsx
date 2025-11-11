@@ -40,7 +40,7 @@ export default function About() {
               I chose <span className="font-medium">Germany</span> for its world-class engineering education and innovation culture.
               I am currently in the final semester of my master's and completing my thesis at
               <span className="font-medium"> IAV GmbH, Chemnitz</span>, an automotive company,
-              where I work as an <span className="font-medium">Automotive Software Engineer</span>.
+              where I work as an <span className="font-medium">Master Thesis Student (Automotive Software Engineer)</span>.
             </p>
 
             {/* Current Technical Focus */}
