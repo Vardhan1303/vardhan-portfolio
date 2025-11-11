@@ -14,9 +14,9 @@ const experiences = [
           "Designed and trained **Variational Autoencoder (VAE)** on real soiling mask datasets to synthesize diverse, photorealistic contamination patterns, achieving production-grade synthetic data quality",
           "Developed comprehensive **binary segmentation models** for lens contamination detection: **DeepLabv3+ (ResNet-101)** for accuracy, **SegFormer (MiT-B1)** for balanced performance, and **PIDNet-Small** for edge deployment with **7ms latency**",
           "Conducted rigorous **4-case comparative analysis**: real-only, synthetic-only, mixed dataset, and real+synthetic+clean images, achieving **93% recall** on soiling detection with **0.01% false positive rate** on clean images",
-          "Built custom **data collection pipeline** using Raspberry Pi with fisheye camera mounted on vehicle, capturing real-world contamination scenarios across varying weather and lighting conditions",
-          "Fine-tuned models on **80,000+ images** with hyperparameter optimization, achieving **Dice coefficient: 0.90-0.94** across test scenarios and validating generalization across camera types",
-          "Implemented **real-time inference pipeline** with state machine logic for automated cleaning system triggering (water spray + air pressure), validated on unseen video streams, live webcam feeds, and production test scenarios",
+          
+          "Fine-tuned models on **60,000+ images** with hyperparameter optimization, achieving **Dice coefficient: 0.90-0.94** across test scenarios and validating generalization across camera types",
+          "Implemented **real-time inference pipeline** (on system) with state machine logic for automated cleaning system triggering (water spray + air pressure), validated on unseen video streams, live webcam feeds, and production test scenarios",
           "Achieved deployment-ready performance: **DeepLabv3+ (35ms)**, **SegFormer (25ms)**, **PIDNet (7ms)** latency, enabling flexible model selection based on accuracy-speed trade-offs for different vehicle platforms",
           "Key Technologies: Python, PyTorch, CycleGAN, DirtyGAN, VAE, DeepLabv3+ (CNN), ViT (Vision Transformer), SegFormer, PIDNet, Computer Vision, Semantic Segmentation, GANs, Raspberry Pi, Real-time Inference, ADAS"
         ]
