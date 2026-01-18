@@ -27,7 +27,7 @@ export default function About() {
             {/* Background and Early Career */}
             <p>
               I hold a Bachelor's degree in <span className="font-medium">Mechanical Engineering</span> and recently completed my <span className="font-medium">Master's degree in Mechatronics</span>.
-              My academic and professional background combines<span className="font-medium">mechanical engineering with software, electronics, and automation</span>.
+              My academic and professional background combines <span className="font-medium">mechanical engineering with software, electronics, and automation</span>.
             </p>
 
             {/* Transition to Mechatronics */}
@@ -59,7 +59,7 @@ export default function About() {
       </div>
 
       {/* Right column - 40% - Photo (Desktop Only) */}
-      <div className="hidden md:block md:w-[40%] bg-gray-300 relative overflow-hidden">
+      <div className="hidden md:block md:w-[50%] bg-gray-300 relative overflow-hidden">
         <img 
           src="/images/about_me.jpg"
           alt="Vardhan Mistry"
