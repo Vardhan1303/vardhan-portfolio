@@ -99,7 +99,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 1 }}
         >
           <span className="text-gray-400 text-xs sm:text-sm">Tech stack:</span>
-          {["Python", "C/C++", "OpenCV", "PyTorch", "TensorFlow", "ROS/ROS2", "GANs", "NLP", "LLM"].map(
+          {["Python", "C/C++", "OpenCV", "PyTorch", "TensorFlow", "ROS/ROS2", "Computer Vision", "Deep Learning", "GAN-based Data Generation", "NLP", "LLM-based Applications"].map(
             (tech, i) => (
               <motion.span
                 key={i}
