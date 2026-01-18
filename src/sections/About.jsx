@@ -26,41 +26,33 @@ export default function About() {
 
             {/* Background and Early Career */}
             <p>
-              I began my journey as a <span className="font-medium">Mechanical Engineer</span>, earning my Bachelor's degree in Mechanical Engineering.
-              Over the years, I gained diverse experience across the <span className="font-medium">food industry, electric vehicle sector,
-              pharmaceutical projects, greenfield developments, and manufacturing environments</span>.
-              This solid foundation shaped my technical adaptability and problem-solving approach by providing me with practical experience in <span className="font-medium">
-              design, simulation, project management, manufacturing, and maintenance</span>.
+              I hold a Bachelor's degree in <span className="font-medium">Mechanical Engineering</span> and recently completed my <span className="font-medium">Master's degree in Mechatronics</span>.
+              My academic and professional background combines<span className="font-medium">mechanical engineering with software, electronics, and automation</span>.
             </p>
 
             {/* Transition to Mechatronics */}
             <p>
-              My interest in automation and intelligent systems led me to pursue a
-              <span className="font-medium"> Master's in Mechatronics</span>, which is the ideal fusion of computer, electronics, and mechanical engineering.
-              I chose <span className="font-medium">Germany</span> for its world-class engineering education and innovation culture.
-              I am currently in the final semester of my master's and completing my thesis at
-              <span className="font-medium"> IAV GmbH, Chemnitz</span>, an automotive company,
-              where I work as an <span className="font-medium">Master Thesis Student (Automotive Software Engineer)</span>.
+              Before and during my studies, I gained practical experience in different industrial environments, including the 
+              <span className="font-medium"> food industry, electric vehicle projects, pharmaceutical facilities, and manufacturing plants</span>. 
+              Through this work, I developed a solid foundation in engineering design, simulation, project coordination, manufacturing processes, and maintenance.
             </p>
 
             {/* Current Technical Focus */}
             <p>
-              Throughout this journey, I have developed strong expertise in <span className="font-medium">
-              autonomous driving, computer vision, artificial intelligence, machine learning, robotics, and automation</span>.
-              The combination of mechanical accuracy, computational intelligence, and electronic control in my work enables me to tackle problems from a really interdisciplinary standpoint.
+              During my Master’s studies in Germany, I focused on automation, robotics, and intelligent systems. I completed my master’s thesis at <span className="font-medium">
+              IAV GmbH in Stollberg</span>, working as a <span className="font-medium">Master’s Thesis Student in automotive software engineering</span>, where I contributed to software and perception-related topics in an industrial context.
             </p>
 
             {/* Personal Philosophy */}
             <p>
-              I see myself as a lifelong student even beyond university, every challenge is a lesson and every project an opportunity to grow.
-              This belief keeps me curious, open-minded, and eager to explore new technologies and collaborations.
+              My technical interests and experience are mainly in <span className="font-medium">computer vision, machine learning, deep learning, robotics, and automation</span>, with a strong focus on practical and applied solutions. 
+              I enjoy working in interdisciplinary environments where mechanical systems and software come together.
             </p>
 
             {/* Future Goals */}
             <p>
-              I am now stepping into the professional field permanently, aiming to contribute to innovative projects in Germany, a country I want to call home. I am <span className="font-medium">open to opportunities</span> across
-              <span className="font-medium"> AI, robotics, automation, or mechatronics</span> domains where I can bring together my
-              mechanical background and modern intelligent systems expertise.
+              I am currently seeking a <span className="font-medium">full-time position in Germany</span> and am open to roles in <span className="font-medium">AI/ML, computer vision, robotics, automation, or mechatronics</span>, 
+              where I can apply my engineering background and continue to grow as a professional.
             </p>
           </div>
         </div>
