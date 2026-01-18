@@ -81,31 +81,37 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           I am a mechatronics engineer working on real-world AI and computer vision systems.
-My experience ranges from industrial automation projects to building AI-based camera perception pipelines. I work with computer vision, deep learning, and GAN-based data generation, and I focus on deploying models that run reliably in real-time environments.
-
-I have worked on projects involving large-scale industrial systems as well as high-volume synthetic image pipelines. I am currently open to roles in AI/ML, computer vision, robotics, and applied data science.
+          My experience ranges from industrial automation projects to building AI-based
+          camera perception pipelines. I work with{" "}
+          <span className="text-blue-300 font-semibold">
+            computer vision, deep learning, and GAN-based data generation
+          </span>
+          , with a strong focus on deploying models that run reliably in real-time
+          environments.
         </motion.p>
 
-        {/* Tech Stack Icons */}
+        {/* Tech Stack */}
         <motion.div
           className="flex flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-8 items-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1 }}
         >
-          <span className="text-gray-400 text-xs sm:text-sm">Tech Stack:</span>
-          {["Python", "PyTorch", "OpenCV", "TensorFlow", "GANs", "YOLO", "ROS", "NLP"].map((tech, i) => (
-            <motion.span
-              key={i}
-              className="text-xs sm:text-sm px-2 sm:px-3 py-1 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded text-gray-300"
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1 + i * 0.1 }}
-              whileHover={{ scale: 1.1, borderColor: 'rgb(96, 165, 250)' }}
-            >
-              {tech}
-            </motion.span>
-          ))}
+          <span className="text-gray-400 text-xs sm:text-sm">Tech stack:</span>
+          {["Python", "PyTorch", "OpenCV", "TensorFlow", "YOLO", "ROS", "GANs", "NLP"].map(
+            (tech, i) => (
+              <motion.span
+                key={i}
+                className="text-xs sm:text-sm px-2 sm:px-3 py-1 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded text-gray-300"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1 + i * 0.1 }}
+                whileHover={{ scale: 1.1, borderColor: "rgb(96, 165, 250)" }}
+              >
+                {tech}
+              </motion.span>
+            )
+          )}
         </motion.div>
       </div>
 
