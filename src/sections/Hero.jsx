@@ -80,15 +80,10 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          Versatile engineer bridging mechanical systems and intelligent software —
-          from managing industrial automation projects to pioneering AI-driven
-          camera perception systems. Experienced in{" "}
-          <span className="text-blue-300 font-semibold">Computer Vision, GANs, Deep Learning, Semantic Segmentation</span>{" "}
-          and real-time ML deployment. Proven track record from{" "}
-          <span className="text-blue-300 font-semibold">12,000-tonne steel structures</span> to{" "}
-          <span className="text-blue-300 font-semibold">80,000+ synthetic image pipelines</span>.
-          Open to roles in{" "}
-          <span className="text-blue-300 font-semibold">AI/ML, Computer Vision, NLP, Data Science, LLMs, and Robotics</span>.
+          I am a mechatronics engineer working on real-world AI and computer vision systems.
+My experience ranges from industrial automation projects to building AI-based camera perception pipelines. I work with computer vision, deep learning, and GAN-based data generation, and I focus on deploying models that run reliably in real-time environments.
+
+I have worked on projects involving large-scale industrial systems as well as high-volume synthetic image pipelines. I am currently open to roles in AI/ML, computer vision, robotics, and applied data science.
         </motion.p>
 
         {/* Tech Stack Icons */}
