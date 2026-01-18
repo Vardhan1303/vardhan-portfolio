@@ -59,7 +59,7 @@ export default function About() {
       </div>
 
       {/* Right column - 40% - Photo (Desktop Only) */}
-      <div className="hidden md:block md:w-[50%] bg-gray-300 relative overflow-hidden">
+      <div className="hidden md:block md:w-[30%] bg-gray-300 relative overflow-hidden">
         <img 
           src="/images/about_me.jpg"
           alt="Vardhan Mistry"
