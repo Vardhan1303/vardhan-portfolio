@@ -80,15 +80,16 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          I am a mechatronics engineer working on real-world AI and computer vision systems.
-          My experience ranges from industrial automation projects to building AI-based
-          camera perception pipelines. I work with{" "}
+          I am a recent MSc Mechatronics graduate seeking a full-time role in Germany.
+          My background includes hands-on work in AI and computer vision, with experience
+          in deep learning and applied machine learning projects. I am interested in
+          roles related to{" "}
           <span className="text-blue-300 font-semibold">
-            computer vision, deep learning, and GAN-based data generation
+            AI/ML, computer vision, robotics, NLP, and LLM-based systems
           </span>
-          , with a strong focus on deploying models that run reliably in real-time
-          environments.
+          .
         </motion.p>
+
 
         {/* Tech Stack */}
         <motion.div
