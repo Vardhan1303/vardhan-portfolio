@@ -62,7 +62,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          {["MSc Mechatronics", "AI/ML Engineer", "Computer Vision Specialist", ].map((tag, i) => (
+          {["MSc Mechatronics", "Computer Vision Engineer", "AI / ML Engineer"].map((tag, i) => (
             <motion.span
               key={i}
               className="px-3 sm:px-4 py-1 sm:py-2 bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 rounded-full text-blue-300 text-xs sm:text-sm md:text-base font-medium"
