@@ -95,7 +95,7 @@ export default function Experience() {
           {experiences.map((exp, index) => (
             <div
               key={exp.id}
-              className={`flex flex-col md:flex-row items-stretch relative min-h-[400px] md:min-h-[500px] ${
+              className={`flex flex-col md:flex-row items-start relative ${
                 index % 2 !== 0 ? "md:flex-row-reverse" : ""
               }`}
             >
