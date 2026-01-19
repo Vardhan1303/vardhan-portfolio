@@ -1,8 +1,8 @@
 const experiences = [
   {
     id: 1,
-    company: "IAV GmbH – Chemnitz, Germany",
-    image: "/images/experience_iav.jpg",
+    company: "IAV GmbH – Stollberg, Germany",
+    image: "/images/experience_iav.gif",
     positions: [
       {
         date: "Apr 2025 – Dec 2025",
