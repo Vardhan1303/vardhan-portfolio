@@ -18,7 +18,7 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-gray-50/95 backdrop-blur border-b border-gray-200">
       {/* Top thin color line */}
-      <div className="h-2 w-full flex">
+      <div className="h-1 w-full flex">
         <div className="flex-1 bg-black"></div>
         <div className="flex-1 bg-blue-900"></div>
         <div className="flex-1 bg-green-500"></div>
