@@ -22,7 +22,8 @@ const educationData = [
     },
     date: "September 2023 – January 2026",
     degree: "Master of Science (M.Sc.) in Mechatronics",
-    institution: "Hochschule Ravensburg-Weingarten University of Applied Sciences (RWU), Germany",
+    institution: "Ravensburg-Weingarten University of Applied Sciences (RWU)",
+    location: "Weingarten, Baden-Württemberg, Germany",
     gpa: "1,9 (Excellent)",
     thesis: "Flexible Soiling Detection on Automotive Cameras",
     thesisGrade: "1,0 (Excellent)",
@@ -41,6 +42,7 @@ const educationData = [
     date: "July 2018 – May 2022",
     degree: "Bachelor of Engineering (B.E.) in Mechanical Engineering",
     institution: "The Maharaja Sayajirao University of Baroda (MSU), India",
+    location: "Vadodara, Gujarat, India",
     accreditation: "NAAC Accredited A+ Grade",
     gpa: "1,2 (Excellent)",
     coursework: "Thermodynamics, Fluid Mechanics, Material Science, CAD/CAM, Manufacturing Processes, Machine Design",
@@ -220,6 +222,19 @@ function EducationCard({ edu, index, onOpenCert }) {
         {/* Institution */}
         <p style={{ fontSize: "clamp(0.78rem, 1.5vw, 0.88rem)", color: "#4169e1", fontWeight: 600, margin: "0 0 0.15rem" }}>
           {edu.institution}
+        </p>
+
+        {/* Location */}
+        <p
+          style={{
+            fontSize: "0.8rem",
+            color: "#9ca3af",
+            fontWeight: 500,
+            margin: "0 0 0.5rem 0",
+            letterSpacing: "0.03em",
+          }}
+        >
+          📍 {exp.location}
         </p>
 
         {/* Accreditation */}
