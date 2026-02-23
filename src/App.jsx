@@ -28,8 +28,8 @@ function ScrollToTopButton() {
         bottom: "2rem",
         right: "2rem",
         zIndex: 100,
-        width: "52px",
-        height: "52px",
+        width: "62px",
+        height: "62px",
         borderRadius: "8px",
         background: "#2563eb",
         color: "#fff",
@@ -51,12 +51,12 @@ function ScrollToTopButton() {
       }}
     >
       <svg
-        width="28"
-        height="28"
+        width="38"
+        height="38"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth="3"        // thicker stroke = more visible
+        strokeWidth="3.5"        // thicker stroke = more visible
         strokeLinecap="round"
         strokeLinejoin="round"
       >
