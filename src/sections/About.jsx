@@ -26,7 +26,7 @@ export default function About() {
         }
 
         .about-photo {
-          width: 220px;
+          width: 250px;
           flex-shrink: 0;
           position: relative;
           overflow: hidden;
@@ -128,7 +128,14 @@ export default function About() {
               textAlign: "justify",
             }}
           >
-            MSc Mechatronics graduate with over two years of industrial experience and a strong research driven computational background in AI, machine learning, deep learning, computer vision, and image processing. I design scalable and reproducible data pipelines, develop and fine tune models, and perform rigorous experimental evaluation. I have hands on experience optimizing inference and deploying models on embedded and edge hardware, transforming research concepts into reliable production ready systems. I work independently on complex technical problems with both academic rigor and industrial focus.
+            MSc Mechatronics graduate with over two years of industrial experience and 
+            a strong research driven computational background in AI, machine learning, 
+            deep learning, computer vision, and image processing. I design scalable and 
+            reproducible data pipelines, develop and fine tune models, and perform rigorous 
+            experimental evaluation. I have hands on experience optimizing inference and 
+            deploying models on embedded and edge hardware, transforming research concepts 
+            into reliable production ready systems. I work independently on complex technical 
+            problems with both academic rigor and industrial focus.
           </p>
         </div>
       </div>
