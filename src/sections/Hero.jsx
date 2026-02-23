@@ -1,138 +1,161 @@
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { FileText } from "lucide-react";
 
+// ─── Particle Canvas ────────────────────────────────────────────────────────
+function ParticleCanvas() {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    let animId;
+    let mouse = { x: null, y: null };
+
+    const resize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const handleMouse = (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    };
+    const clearMouse = () => { mouse.x = null; mouse.y = null; };
+    canvas.addEventListener("mousemove", handleMouse);
+    canvas.addEventListener("mouseleave", clearMouse);
+
+    const COUNT = 80;
+    const particles = Array.from({ length: COUNT }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      r: Math.random() * 1.5 + 0.8,
+    }));
+
+    const CONNECT_DIST = 140;
+    const MOUSE_DIST = 160;
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      }
+
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECT_DIST) {
+            const alpha = (1 - dist / CONNECT_DIST) * 0.25;
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+            ctx.lineWidth = 0.6;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+
+        if (mouse.x !== null) {
+          const dx = particles[i].x - mouse.x;
+          const dy = particles[i].y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < MOUSE_DIST) {
+            const alpha = (1 - dist / MOUSE_DIST) * 0.5;
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(99,179,237,${alpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      for (const p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,255,255,0.6)";
+        ctx.fill();
+      }
+
+      animId = requestAnimationFrame(draw);
+    };
+    draw();
+
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", resize);
+      canvas.removeEventListener("mousemove", handleMouse);
+      canvas.removeEventListener("mouseleave", clearMouse);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full"
+      style={{ display: "block" }}
+    />
+  );
+}
+
+// ─── Hero ────────────────────────────────────────────────────────────────────
 export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-end justify-start text-white px-4 sm:px-8 md:px-16 lg:px-24 pb-20 sm:pb-28 md:pb-32 pt-[70px] sm:pt-[80px] md:pt-[90px] overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center text-white overflow-hidden bg-[#0d0d0d]"
     >
-      {/* Background image with zoom animation */}
-      <motion.img
-        src="images/hero_image.png"
-        alt="Hero Background"
-        className="absolute inset-0 w-full h-full object-cover object-center md:object-top"
-        initial={{ scale: 1.1 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-      />
+      <ParticleCanvas />
 
-      {/* Enhanced gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900/70 via-gray-800/60 to-black/80"></div>
-
-      {/* Animated floating particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-blue-400/30 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.2, 0.8, 0.2],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Text content */}
-      <div className="relative z-10 max-w-2xl sm:max-w-3xl md:max-w-4xl text-left">
+      {/* Content */}
+      <div className="relative z-10 text-center px-6">
+        {/* Name */}
         <motion.h1
-          className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-5xl sm:text-6xl md:text-7xl font-bold mb-4 leading-tight"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <span className="inline-block bg-gradient-to-r from-blue-400 via-white to-blue-400 bg-clip-text text-transparent pb-1 sm:pb-2 leading-relaxed">
-            Vardhan Mistry
-          </span>
+          Hi, I&apos;m{" "}
+          <span className="text-blue-400">Vardhan</span>
         </motion.h1>
 
-        <motion.div
-          className="flex flex-wrap gap-2 sm:gap-3 mb-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          {["MSc Mechatronics", "Computer Vision Engineer", "AI / ML Engineer"].map((tag, i) => (
-            <motion.span
-              key={i}
-              className="px-3 sm:px-4 py-1 sm:py-2 bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 rounded-full text-blue-300 text-xs sm:text-sm md:text-base font-medium"
-              whileHover={{ scale: 1.05, backgroundColor: "rgba(59, 130, 246, 0.3)" }}
-              transition={{ duration: 0.2 }}
-            >
-              {tag}
-            </motion.span>
-          ))}
-        </motion.div>
-
+        {/* Title */}
         <motion.p
-          className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8"
+          className="text-white text-lg sm:text-xl md:text-2xl font-semibold mb-10 tracking-wide"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.7, delay: 0.35 }}
         >
-          I am a recent MSc Mechatronics graduate seeking a full-time role in Germany.
-          My background includes hands-on work in AI and computer vision, with experience
-          in deep learning and applied machine learning projects. I am interested in
-          roles related to{" "}
-          <span className="text-blue-300 font-semibold">
-            AI/ML, computer vision, robotics, NLP, and LLM-based systems
-          </span>
-          .
+          MSc Mechatronics
         </motion.p>
 
-
-        {/* Tech Stack */}
-        <motion.div
-          className="flex flex-wrap gap-2 sm:gap-3 mt-4 sm:mt-8 items-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}
-        >
-          <span className="text-gray-400 text-xs sm:text-sm">Tech stack:</span>
-          {["Python", "C/C++", "OpenCV", "PyTorch", "TensorFlow", "ROS/ROS2", "Computer Vision", "Deep Learning", "Machine Learning"].map(
-            (tech, i) => (
-              <motion.span
-                key={i}
-                className="text-xs sm:text-sm px-2 sm:px-3 py-1 bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded text-gray-300"
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1 + i * 0.1 }}
-                whileHover={{ scale: 1.1, borderColor: "rgb(96, 165, 250)" }}
-              >
-                {tech}
-              </motion.span>
-            )
-          )}
-        </motion.div>
-      </div>
-
-      {/* Scroll down indicator */}
-      <motion.div
-        className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1.2 }}
-      >
+        {/* CV Button — place your PDF at /public/resume.pdf */}
         <motion.a
-          href="#about"
-          className="flex flex-col items-center text-gray-300 hover:text-white transition-colors"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          href="/resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-6 py-2.5 border border-blue-400/60 text-blue-300 text-sm rounded hover:bg-blue-400/10 transition-colors duration-200"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.5 }}
         >
-          <span className="text-xs sm:text-sm mb-1 sm:mb-2">Scroll Down</span>
-          <ChevronDown size={22} />
+          <FileText size={14} />
+          Curriculum Vitae
         </motion.a>
-      </motion.div>
+      </div>
     </section>
   );
 }
