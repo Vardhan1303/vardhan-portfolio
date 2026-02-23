@@ -1,200 +1,337 @@
 import { motion } from "framer-motion";
-import projects from "../data/projects";
 
-function escapeHtml(str = "") {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
+const fontLink = document.createElement("link");
+fontLink.rel = "stylesheet";
+fontLink.href =
+  "https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap";
+if (!document.head.querySelector('link[href*="Raleway"]')) {
+  document.head.appendChild(fontLink);
 }
 
-// Convert **bold** to <strong> and preserve safe text
-function formatInlineMarkup(text = "") {
-  const escaped = escapeHtml(text);
-  return escaped.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-}
-
-function renderDescription(project) {
-  const desc = project.description;
-  
-  // If user supplied structured bullets, render directly
-  if (project.bullets && Array.isArray(project.bullets)) {
-    // Filter out "Key Technologies:" line for separate rendering
-    const bulletItems = project.bullets.filter(b => !b.startsWith("Key Technologies:"));
-    
-    return (
-      <ul className="list-disc ml-6 space-y-2 text-left inline-block">
-        {bulletItems.map((b, i) => (
-          <li key={i} dangerouslySetInnerHTML={{ __html: formatInlineMarkup(b) }} />
-        ))}
-      </ul>
-    );
-  }
-
-  if (!desc) return null;
-
-  // Split into trimmed non-empty lines
-  const lines = desc.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
-
-  // Lines that start with '•' are bullets
-  const bullets = lines.filter((l) => l.startsWith("•"));
-  const paras = lines.filter((l) => !l.startsWith("•"));
-
-  return (
-    <>
-      {bullets.length > 0 && (
-        <ul className="list-disc ml-6 space-y-2 text-left inline-block">
-          {bullets.map((l, i) => {
-            const withoutBullet = l.replace(/^•\s*/, "");
-            return <li key={i} dangerouslySetInnerHTML={{ __html: formatInlineMarkup(withoutBullet) }} />;
-          })}
-        </ul>
-      )}
-
-      {paras.length > 0 &&
-        paras.map((p, i) => (
-          <p key={i} className="text-gray-300 leading-relaxed text-left" dangerouslySetInnerHTML={{ __html: formatInlineMarkup(p) }} />
-        ))
-      }
-    </>
+// ── Tech → emoji map ─────────────────────────────────────────────────────────
+const techEmoji = {
+  Python: "🐍", PyTorch: "🔥", TensorFlow: "🧠", OpenCV: "👁️",
+  "Computer Vision": "📷", "Deep Learning": "🤖", "Machine Learning": "📊",
+  ROS2: "🤖", ROS: "🤖", Docker: "🐳", Git: "🔧", "C++": "⚙️", C: "⚙️",
+  Linux: "🐧", CUDA: "⚡", NumPy: "🔢", Pandas: "🐼", Matplotlib: "📈",
+  "Scikit-learn": "🔬", JavaScript: "🌐", TypeScript: "🌐", React: "⚛️",
+  "Node.js": "🟢", Azure: "☁️", AWS: "☁️", SQL: "🗄️", MATLAB: "📐",
+  Keras: "🧬", "Image Processing": "🖼️", Robotics: "🦾",
+};
+function getTechEmoji(tech) {
+  if (techEmoji[tech]) return techEmoji[tech];
+  const key = Object.keys(techEmoji).find((k) =>
+    tech.toLowerCase().includes(k.toLowerCase())
   );
+  return key ? techEmoji[key] : "🔹";
 }
 
-export default function Projects() {
-  return (
-    <section
-      id="projects"
-      className="bg-blue-900/30 text-gray-200 relative overflow-hidden"
-    >
-      {/* === HEADER BAR === */}
-      <div className="relative w-full bg-blue-800/50 py-12">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white tracking-wide">
-            Highlighted Projects
-          </h2>
-        </div>
-      </div>
+// ── Data — replace with your real projects ───────────────────────────────────
+const projects = [
+  {
+    id: 1,
+    image: "/images/projects/project1.png",   // ← screenshot of your project
+    date: "January 2026",
+    title: "Foxglove Extension with OpenBridge",
+    summary:
+      "A custom panel for Foxglove Studio that seamlessly integrates OpenBridge Web Components to provide advanced maritime visualization and control. The extension features interactive components such as the Azimuth Thruster, Main Engine, and Compass, each dynamically bound to live ROS2 robot data or a built-in demo mode for simulation and testing. The panel subscribes to relevant ROS2 topics, ensuring real-time updates and accurate representation of vessel state.",
+    technologies: ["React", "TypeScript", "ROS2", "OpenCV"],
+    githubUrl: "https://github.com/yourusername/project1",
+    videoUrl: null,
+  },
+  {
+    id: 2,
+    image: "/images/projects/project2.png",
+    date: "September 2025",
+    title: "Autonomous Lane Detection Pipeline",
+    summary:
+      "An end-to-end lane detection system built using deep learning and classical computer vision techniques, designed to operate in real-time on embedded hardware. The pipeline incorporates semantic segmentation with a lightweight encoder-decoder architecture, post-processing heuristics for lane fitting, and evaluation on standard benchmarks. Validated across diverse lighting and weather conditions with a strong emphasis on reproducibility and modular design.",
+    technologies: ["Python", "PyTorch", "OpenCV", "CUDA", "ROS2"],
+    githubUrl: "https://github.com/yourusername/project2",
+    videoUrl: null,
+  },
+  {
+    id: 3,
+    image: "/images/projects/project3.png",
+    date: "April 2025",
+    title: "3D Object Detection for Automotive Perception",
+    summary:
+      "Research project focused on 3D object detection from LiDAR point clouds for autonomous driving applications, completed as part of the master's thesis at IAV GmbH. Implemented and benchmarked multiple state-of-the-art architectures including PointPillars and VoxelNet, with custom data augmentation strategies to improve generalization. The system was integrated into an automotive software stack and evaluated on real-world test drives.",
+    technologies: ["Python", "PyTorch", "Deep Learning", "ROS2", "Linux"],
+    githubUrl: null,
+    videoUrl: null,
+  },
+];
 
-      {/* === MAIN CONTENT === */}
-      <div className="relative w-full py-20">
-        {/* Center timeline line (desktop only) */}
-        <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-[4px] bg-blue-800/40 transform -translate-x-1/2 z-0"></div>
-
-        <div className="space-y-32 relative z-10">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* === TIMELINE PROJECT CARD === */
+// ── Project Card ──────────────────────────────────────────────────────────────
 function ProjectCard({ project, index }) {
   const isReversed = index % 2 !== 0;
 
   return (
-    <div
-      className={`flex flex-col md:flex-row items-stretch relative min-h-[400px] md:min-h-[500px] ${
-        isReversed ? "md:flex-row-reverse" : ""
-      }`}
+    <motion.div
+      style={{
+        maxWidth: "1000px",
+        margin: "0 auto 3rem",
+        display: "flex",
+        flexDirection: isReversed ? "row-reverse" : "row",
+        minHeight: "340px",
+        borderRadius: "14px",
+        overflow: "hidden",
+        boxShadow: "0 4px 32px rgba(0,0,0,0.09)",
+        background: "#fff",
+      }}
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.55, delay: index * 0.08 }}
     >
-      {/* === IMAGE SIDE - Full Height === */}
-      <motion.div
-        className="md:w-1/2 relative"
-        initial={{ opacity: 0, x: isReversed ? 100 : -100 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+      {/* Screenshot side */}
+      <div
+        style={{
+          width: "50%",
+          flexShrink: 0,
+          overflow: "hidden",
+          background: "#e5e7eb",
+          position: "relative",
+        }}
       >
         {project.image ? (
           <img
             src={project.image}
-            alt={`Screenshot of ${project.title}`}
+            alt={project.title}
             loading="lazy"
-            className="w-full h-full object-cover"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center top",
+              display: "block",
+              transition: "transform 0.4s ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.03)")}
+            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
           />
         ) : (
-          <div className="hidden md:flex w-full h-full bg-blue-800/30 items-center justify-center text-gray-400 italic">
-            No image available
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#9ca3af",
+              fontSize: "0.85rem",
+              fontStyle: "italic",
+              background: "#f3f4f6",
+            }}
+          >
+            Screenshot coming soon
           </div>
         )}
-      </motion.div>
-
-      {/* === TIMELINE DOT (desktop only) === */}
-      <div className="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-        <div className="w-6 h-6 bg-gray-500 border-4 border-blue-400 rounded-full shadow-md"></div>
       </div>
 
-      {/* === TEXT SIDE === */}
-      <motion.div
-        className="md:w-1/2 text-center md:text-left space-y-4 flex flex-col justify-center px-6 md:px-12 py-8"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+      {/* Content side */}
+      <div
+        style={{
+          flex: 1,
+          padding: "2.4rem 2.8rem",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          gap: "0",
+        }}
       >
-        {project.date && (
-          <span className="text-sm font-semibold text-blue-300">
-            {project.date}
-          </span>
-        )}
-        <h3 className="text-2xl md:text-3xl font-bold text-white">
+        {/* Date */}
+        <p
+          style={{
+            fontSize: "0.78rem",
+            color: "#9ca3af",
+            fontWeight: 600,
+            letterSpacing: "0.04em",
+            margin: "0 0 0.5rem 0",
+          }}
+        >
+          {project.date}
+        </p>
+
+        {/* Title */}
+        <h3
+          style={{
+            fontSize: "1.25rem",
+            fontWeight: 800,
+            color: "#0d0f14",
+            margin: "0 0 0.4rem 0",
+            lineHeight: 1.25,
+          }}
+        >
           {project.title}
         </h3>
-        {project.subtitle && (
-          <p className="text-lg text-blue-300">{project.subtitle}</p>
-        )}
-        {/* DESCRIPTION */}
-        <div>{renderDescription(project)}</div>
-        {project.technologies && project.technologies.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-2">
-            {project.technologies.map((tech, idx) => (
+
+        {/* Blue accent */}
+        <div
+          style={{
+            width: "36px",
+            height: "2.5px",
+            background: "#4169e1",
+            borderRadius: "2px",
+            marginBottom: "1.1rem",
+          }}
+        />
+
+        {/* Summary paragraph */}
+        <p
+          style={{
+            fontSize: "0.88rem",
+            lineHeight: 1.85,
+            color: "#374151",
+            fontWeight: 400,
+            margin: "0 0 1.2rem 0",
+          }}
+        >
+          {project.summary}
+        </p>
+
+        {/* "Developed using:" badges */}
+        {project.technologies?.length > 0 && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "0.45rem",
+              marginBottom: project.githubUrl || project.videoUrl ? "1rem" : 0,
+            }}
+          >
+            <span
+              style={{
+                fontSize: "0.75rem",
+                fontWeight: 600,
+                color: "#6b7280",
+                marginRight: "0.15rem",
+              }}
+            >
+              Developed using:
+            </span>
+            {project.technologies.map((tech, ti) => (
               <span
-                key={idx}
-                className="text-xs px-3 py-1 rounded-full bg-blue-600/30 text-blue-200"
+                key={ti}
+                title={tech}
+                style={{
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  color: "#4169e1",
+                  background: "rgba(65,105,225,0.07)",
+                  border: "1px solid rgba(65,105,225,0.2)",
+                  borderRadius: "5px",
+                  padding: "0.18rem 0.55rem",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.28rem",
+                  whiteSpace: "nowrap",
+                }}
               >
+                <span role="img" aria-label={tech}>{getTechEmoji(tech)}</span>
                 {tech}
               </span>
             ))}
           </div>
         )}
-        
-        {/* ACTION BUTTONS */}
-        {(project.githubUrl || project.videoUrl) && (
-          <div className="flex flex-wrap gap-3 mt-4">
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors duration-300 text-sm font-medium"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-                </svg>
-                View Code
-              </a>
-            )}
-            {project.videoUrl && (
-              <a
-                href={project.videoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors duration-300 text-sm font-medium"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-                Watch Demo
-              </a>
-            )}
-          </div>
-        )}
-      </motion.div>
-    </div>
+
+        {/* Action buttons */}
+        <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap" }}>
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.4rem",
+                fontSize: "0.82rem",
+                fontWeight: 600,
+                color: "#4169e1",
+                border: "1px solid rgba(65,105,225,0.5)",
+                borderRadius: "6px",
+                padding: "0.4rem 1rem",
+                textDecoration: "none",
+                background: "transparent",
+                transition: "background 0.2s",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.background = "rgba(65,105,225,0.07)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.background = "transparent")
+              }
+            >
+              🔗 Code Repository
+            </a>
+          )}
+          {project.videoUrl && (
+            <a
+              href={project.videoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.4rem",
+                fontSize: "0.82rem",
+                fontWeight: 600,
+                color: "#6d28d9",
+                border: "1px solid rgba(109,40,217,0.4)",
+                borderRadius: "6px",
+                padding: "0.4rem 1rem",
+                textDecoration: "none",
+                background: "transparent",
+                transition: "background 0.2s",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.background = "rgba(109,40,217,0.07)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.background = "transparent")
+              }
+            >
+              ▶ Watch Demo
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// ── Section ───────────────────────────────────────────────────────────────────
+export default function Projects() {
+  return (
+    <section
+      id="projects"
+      style={{
+        background: "#f9fafb",   // very light grey — subtle contrast after white Experience
+        fontFamily: "'Raleway', sans-serif",
+        padding: "80px 2rem",
+      }}
+    >
+      {/* Section label */}
+      <p
+        style={{
+          fontSize: "0.75rem",
+          letterSpacing: "0.25em",
+          textTransform: "uppercase",
+          color: "#9ca3af",
+          fontWeight: 600,
+          textAlign: "center",
+          marginBottom: "2rem",
+        }}
+      >
+        Projects
+      </p>
+
+      {projects.map((project, i) => (
+        <ProjectCard key={project.id} project={project} index={i} />
+      ))}
+    </section>
   );
 }
