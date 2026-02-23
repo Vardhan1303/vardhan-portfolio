@@ -14,7 +14,7 @@ if (!document.head.querySelector('link[href*="Raleway"]')) {
 const educationData = [
   {
     id: 1,
-    logo: "/images/rwu_logo.jpg",
+    logo: "/images/rwu_logo.png",
     logoStyle: {
       width: "220px",
       height: "auto",
@@ -203,7 +203,7 @@ function EducationCard({ edu, index, onOpenCert }) {
             height: "100%",
             objectFit: "cover",
             objectPosition: "center",
-            ...edu.logoStyle,
+            
           }}
           loading="lazy"
         />
