@@ -5,7 +5,7 @@ import { FileText, X } from "lucide-react";
 const fontLink = document.createElement("link");
 fontLink.rel = "stylesheet";
 fontLink.href =
-  "https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&display=swap";
+  "https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Share+Tech+Mono&display=swap";
 document.head.appendChild(fontLink);
 
 // ─── Particle Canvas ────────────────────────────────────────────────────────
@@ -116,6 +116,94 @@ function ParticleCanvas() {
   );
 }
 
+// ─── Hacker Typewriter ───────────────────────────────────────────────────────
+const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*<>/\\|[]{}";
+
+function HackerTypewriter({ text, highlightWord, delay = 0 }) {
+  const [displayed, setDisplayed] = useState("");
+  const [scrambleMap, setScrambleMap] = useState({});
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      let i = 0;
+      const revealInterval = setInterval(() => {
+        if (i >= text.length) {
+          clearInterval(revealInterval);
+          setDone(true);
+          return;
+        }
+        let frame = 0;
+        const scramble = setInterval(() => {
+          setScrambleMap((prev) => ({
+            ...prev,
+            [i]: CHARS[Math.floor(Math.random() * CHARS.length)],
+          }));
+          frame++;
+          if (frame >= 4) {
+            clearInterval(scramble);
+            setDisplayed((prev) => prev + text[i]);
+            setScrambleMap((prev) => {
+              const next = { ...prev };
+              delete next[i];
+              return next;
+            });
+            i++;
+          }
+        }, 35);
+      }, 55);
+    }, delay);
+    return () => clearTimeout(timeout);
+  }, [text, delay]);
+
+  const fullText = displayed + (scrambleMap[displayed.length] || "");
+
+  return (
+    <span style={{ fontFamily: "'Share Tech Mono', monospace", letterSpacing: "0.04em" }}>
+      {fullText.split("").map((char, idx) => {
+        const isScrambled = idx >= displayed.length;
+        const isHighlight =
+          !isScrambled &&
+          idx >= text.indexOf(highlightWord) &&
+          idx < text.indexOf(highlightWord) + highlightWord.length;
+        return (
+          <span
+            key={idx}
+            style={{
+              color: isScrambled
+                ? "rgba(65,105,225,0.5)"
+                : isHighlight
+                ? "#4f8eff"
+                : "#e2e8f0",
+              textShadow: isScrambled
+                ? "0 0 8px rgba(65,105,225,0.8)"
+                : isHighlight
+                ? "0 0 12px rgba(79,142,255,0.7)"
+                : "none",
+            }}
+          >
+            {char}
+          </span>
+        );
+      })}
+      {!done && (
+        <span
+          style={{
+            display: "inline-block",
+            width: "2px",
+            height: "1em",
+            background: "#4169e1",
+            marginLeft: "3px",
+            verticalAlign: "middle",
+            animation: "blink 0.7s step-end infinite",
+          }}
+        />
+      )}
+      <style>{`@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }`}</style>
+    </span>
+  );
+}
+
 // ─── CV Modal ────────────────────────────────────────────────────────────────
 function CVModal({ onClose }) {
   return (
@@ -181,10 +269,7 @@ function CVModal({ onClose }) {
             </button>
           </div>
 
-          {/* PDF viewer
-              ─ src must be an absolute path from the public folder root.
-              ─ Place your file at:  /public/Resume_Vardhan_Mistry.pdf
-              ─ It will be served as: /Resume_Vardhan_Mistry.pdf             */}
+          {/* PDF viewer */}
           <iframe
             src="/Resume_Vardhan_Mistry.pdf"
             style={{ flex: 1, width: "100%", border: "none" }}
@@ -202,11 +287,6 @@ export default function Hero() {
 
   return (
     <>
-      {/*
-        Wrapper provides the background colour that shows through the SVG slant gap.
-        The section itself does NOT use clip-path (which caused the slant to disappear).
-        Instead we overlay an SVG at the bottom that masks/covers with the page bg colour.
-      */}
       <section
         id="hero"
         className="relative text-white bg-[#0d0f14]"
@@ -219,22 +299,23 @@ export default function Hero() {
           className="relative z-10 flex flex-col items-center justify-center text-center px-6"
           style={{ minHeight: "100vh", paddingBottom: "8vh" }}
         >
-          {/* Name */}
+          {/* Name with hacker typewriter */}
           <motion.h1
             style={{
-              fontFamily: "'Raleway', sans-serif",
               fontWeight: 800,
               fontSize: "clamp(2.4rem, 6vw, 4.2rem)",
               lineHeight: 1.15,
               marginBottom: "0.55rem",
-              letterSpacing: "-0.01em",
             }}
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
           >
-            Hi, I&apos;m{" "}
-            <span style={{ color: "#4169e1" }}>Vardhan</span>
+            <HackerTypewriter
+              text="Hi! I'm Vardhan"
+              highlightWord="Vardhan"
+              delay={400}
+            />
           </motion.h1>
 
           {/* Subtitle */}
@@ -290,13 +371,7 @@ export default function Hero() {
           </motion.button>
         </div>
 
-        {/*
-          ── Diagonal slant at the bottom ──────────────────────────────────────
-          An SVG placed absolutely at the bottom of the section.
-          The polygon is filled with your page's background colour (white / whatever
-          comes after the hero).  Adjust the fill colour to match your next section.
-          The slant goes from bottom-left corner to ~12% up on the right side.
-        */}
+        {/* Diagonal slant at the bottom */}
         <svg
           viewBox="0 0 100 12"
           preserveAspectRatio="none"
@@ -311,7 +386,6 @@ export default function Hero() {
             zIndex: 5,
           }}
         >
-          {/* Change fill to match the colour of the section below the hero */}
           <polygon points="0,12 100,0 100,12" fill="#ffffff" />
         </svg>
       </section>
