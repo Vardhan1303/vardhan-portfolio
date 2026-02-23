@@ -14,24 +14,24 @@ if (!document.head.querySelector('link[href*="Raleway"]')) {
 const educationData = [
   {
     id: 1,
-    logo: "/images/logos/rwu.png",           // ← university logo
-    date: "Oct 2023 – Feb 2026",
+    logo: "/images/rwu_logo.png",           // ← university logo
+    date: "September 2023 – January 2026",
     degree: "Master of Science (M.Sc.) in Mechatronics",
     institution: "Hochschule Ravensburg-Weingarten University of Applied Sciences (RWU), Germany",
-    gpa: "1.7 / 5.0 (Expected)",
+    gpa: "1,9 (Excellent)",
     thesis: "Flexible Soiling Detection on Automotive Cameras",
-    thesisGrade: "1.5 / 5.0 (Expected)",
+    thesisGrade: "1,0 (Excellent)",
     coursework: "Advanced Mathematics, Control Systems, Embedded Systems, AI for Mechatronics, Computer Vision, Deep Learning",
     certificateUrl: "/certificates/msc_certificate.pdf",  // ← your PDF
   },
   {
     id: 2,
-    logo: "/images/logos/msu.png",
-    date: "Jul 2018 – Jul 2022",
+    logo: "/images/Msu_baroda_logo.png",
+    date: "July 2018 – May 2022",
     degree: "Bachelor of Engineering (B.E.) in Mechanical Engineering",
     institution: "The Maharaja Sayajirao University of Baroda (MSU), India",
     accreditation: "NAAC Accredited A+ Grade",
-    gpa: "8.81 / 10.0 — First Class with Distinction",
+    gpa: "1,2 (Excellent)",
     coursework: "Thermodynamics, Fluid Mechanics, Material Science, CAD/CAM, Manufacturing Processes, Machine Design",
     certificateUrl: "/certificates/be_certificate.pdf",
   },
