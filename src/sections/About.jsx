@@ -121,7 +121,6 @@ export default function About() {
           <p
             style={{
               fontSize: "0.95rem",
-              lineHeight: 1.85,
               color: "#374151",
               fontWeight: 200,
               margin: 0,
