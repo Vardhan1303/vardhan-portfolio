@@ -27,7 +27,7 @@ const educationData = [
     gpa: "1,9 (Excellent)",
     thesis: "Flexible Soiling Detection on Automotive Cameras",
     thesisGrade: "1,0 (Excellent)",
-    certificateUrl: "/certificates/msc_certificate.pdf",
+    certificateUrl: "/msc_certificate.pdf",
   },
   {
     id: 2,
@@ -44,7 +44,7 @@ const educationData = [
     location: "Vadodara, Gujarat, India",
     accreditation: "NAAC Accredited A+ Grade",
     gpa: "1,2 (Excellent)",
-    certificateUrl: "/certificates/be_certificate.pdf",
+    certificateUrl: "/be_certificate.pdf",
   },
 ];
 
