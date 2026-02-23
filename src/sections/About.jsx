@@ -19,7 +19,7 @@ export default function About() {
       {/* Section label centered above */}
       <p
         style={{
-          fontSize: "0.75rem",
+          fontSize: "1.2rem",
           letterSpacing: "0.25em",
           textTransform: "uppercase",
           color: "#9ca3af",
@@ -36,7 +36,6 @@ export default function About() {
         style={{
           maxWidth: "820px",
           margin: "0 auto",
-          border: "1px solid #e5e7eb",
           borderRadius: "10px",
           overflow: "hidden",
           display: "flex",
