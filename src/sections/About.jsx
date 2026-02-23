@@ -106,6 +106,7 @@ export default function About() {
               color: "#374151",
               fontWeight: 400,
               margin: 0,
+              textAlign: "justify",
             }}
           >
             MSc Mechatronics graduate with a strong research-oriented and
