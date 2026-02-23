@@ -120,7 +120,7 @@ export default function About() {
           {/* Paragraph */}
           <p
             style={{
-              fontSize: "0.95rem",
+              fontSize: "0.75rem",
               lineHeight: 1.85,
               color: "#374151",
               fontWeight: 400,
