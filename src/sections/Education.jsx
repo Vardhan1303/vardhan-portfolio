@@ -15,7 +15,11 @@ const educationData = [
   {
     id: 1,
     logo: "/images/rwu_logo.png",
-    logoStyle: { width: "100%", height: "auto" },   // landscape 600×300 logo
+    logoStyle: {
+      width: "220px",
+      height: "auto",
+      objectFit: "cover",         // ← cover for RWU (landscape, fills nicely)
+    },
     date: "September 2023 – January 2026",
     degree: "Master of Science (M.Sc.) in Mechatronics",
     institution: "Hochschule Ravensburg-Weingarten University of Applied Sciences (RWU), Germany",
@@ -28,7 +32,12 @@ const educationData = [
   {
     id: 2,
     logo: "/images/Msu_baroda_logo.png",
-    logoStyle: { width: "100%", height: "auto", maxHeight: "180px" },  // circular logo
+    logoStyle: {
+      width: "160px",
+      height: "auto",
+      maxHeight: "180px",
+      objectFit: "contain",       // ← contain for MSU (circular, no cropping)
+    },
     date: "July 2018 – May 2022",
     degree: "Bachelor of Engineering (B.E.) in Mechanical Engineering",
     institution: "The Maharaja Sayajirao University of Baroda (MSU), India",
@@ -38,6 +47,79 @@ const educationData = [
     certificateUrl: "/certificates/be_certificate.pdf",
   },
 ];
+
+// ── Responsive style injection ────────────────────────────────────────────────
+const styleTag = document.createElement("style");
+styleTag.id = "edu-styles";
+styleTag.textContent = `
+  .edu-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .edu-logo-panel {
+    width: 280px;
+    flex-shrink: 0;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eff6ff;
+    border-right: 1px solid #dbeafe;
+    padding: 2.5rem 2rem;
+    box-sizing: border-box;
+  }
+  .edu-content {
+    flex: 1;
+    padding: 2rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Raleway', sans-serif;
+  }
+
+  /* ── Tablet (641px – 900px) ── */
+  @media (max-width: 900px) and (min-width: 641px) {
+    .edu-logo-panel {
+      width: 200px;
+      padding: 2rem 1.5rem;
+    }
+    .edu-logo-panel img {
+      max-width: 150px !important;
+      width: auto !important;
+    }
+    .edu-content {
+      padding: 1.75rem 2rem;
+    }
+  }
+
+  /* ── Mobile (≤640px) — stack vertically ── */
+  @media (max-width: 640px) {
+    .edu-card {
+      flex-direction: column !important;
+      align-items: stretch !important;
+    }
+    .edu-logo-panel {
+      width: 100% !important;
+      align-self: auto !important;
+      border-right: none !important;
+      border-bottom: 1px solid #dbeafe;
+      padding: 1.75rem 1.5rem !important;
+      min-height: 140px;
+    }
+    .edu-logo-panel img {
+      max-width: 140px !important;
+      max-height: 120px !important;
+      width: auto !important;
+    }
+    .edu-content {
+      padding: 1.5rem 1.25rem !important;
+    }
+  }
+`;
+if (!document.head.querySelector("#edu-styles")) {
+  document.head.appendChild(styleTag);
+}
 
 // ── Certificate Modal ─────────────────────────────────────────────────────────
 function CertificateModal({ url, title, onClose }) {
@@ -94,11 +176,10 @@ function CertificateModal({ url, title, onClose }) {
 function EducationCard({ edu, index, onOpenCert }) {
   return (
     <motion.div
+      className="edu-card"
       style={{
         maxWidth: "900px",
         margin: "0 auto 2rem",
-        display: "flex",
-        alignItems: "center",
         minHeight: "260px",
         borderRadius: "12px",
         overflow: "hidden",
@@ -111,56 +192,33 @@ function EducationCard({ edu, index, onOpenCert }) {
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       {/* LEFT — Logo panel */}
-      <div
-        style={{
-          width: "280px",
-          flexShrink: 0,
-          alignSelf: "stretch",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "#eff6ff",
-          borderRight: "1px solid #dbeafe",
-          padding: "2.5rem 2rem",
-          boxSizing: "border-box",
-        }}
-      >
+      <div className="edu-logo-panel">
         <img
           src={edu.logo}
           alt={edu.institution}
           style={{
-            objectFit: "cover",
-            objectPosition: "center",
             display: "block",
-            ...edu.logoStyle,   // per-logo size override
+            objectPosition: "center",
+            ...edu.logoStyle,
           }}
           loading="lazy"
         />
       </div>
 
       {/* RIGHT — Content */}
-      <div
-        style={{
-          flex: 1,
-          padding: "2rem 2.5rem",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          fontFamily: "'Raleway', sans-serif",
-        }}
-      >
+      <div className="edu-content">
         {/* Date */}
         <p style={{ fontSize: "0.78rem", color: "#9ca3af", fontWeight: 600, margin: "0 0 0.4rem", letterSpacing: "0.04em" }}>
           {edu.date}
         </p>
 
         {/* Degree */}
-        <h3 style={{ fontSize: "1.15rem", fontWeight: 800, color: "#0d0f14", margin: "0 0 0.25rem", lineHeight: 1.25 }}>
+        <h3 style={{ fontSize: "clamp(0.95rem, 2vw, 1.15rem)", fontWeight: 800, color: "#0d0f14", margin: "0 0 0.25rem", lineHeight: 1.25 }}>
           {edu.degree}
         </h3>
 
         {/* Institution */}
-        <p style={{ fontSize: "0.88rem", color: "#4169e1", fontWeight: 600, margin: "0 0 0.15rem" }}>
+        <p style={{ fontSize: "clamp(0.78rem, 1.5vw, 0.88rem)", color: "#4169e1", fontWeight: 600, margin: "0 0 0.15rem" }}>
           {edu.institution}
         </p>
 
@@ -239,7 +297,7 @@ export default function Education() {
         style={{
           background: "#eff6ff",
           fontFamily: "'Raleway', sans-serif",
-          padding: "80px 2rem",
+          padding: "80px 1rem",
         }}
       >
         {/* Section label */}
