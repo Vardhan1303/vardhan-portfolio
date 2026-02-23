@@ -125,9 +125,10 @@ function EducationCard({ edu, index, onOpenCert }) {
           alt={edu.institution}
           style={{
             width: "100%",       /* fills panel width — 600×300 logo becomes ~240px wide */
-            height: "100%",      /* natural ratio preserved */
-            /*maxHeight: "150px",  /* caps very tall logos */
-            objectFit: "cover",
+            /*height: "100%",      /* natural ratio preserved */
+            maxHeight: "200px",  /* caps very tall logos */
+            objectFit: "contain",
+            objectPosition: "center",
             display: "block",
           }}
           loading="lazy"
