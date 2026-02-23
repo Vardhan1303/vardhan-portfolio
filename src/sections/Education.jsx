@@ -21,13 +21,12 @@ const educationData = [
       objectFit: "cover",         // ← cover for RWU (landscape, fills nicely)
     },
     date: "September 2023 – January 2026",
-    degree: "Master of Science (M.Sc.) in Mechatronics",
+    degree: "Master of Science in Mechatronics",
     institution: "Ravensburg-Weingarten University of Applied Sciences (RWU)",
     location: "Weingarten, Baden-Württemberg, Germany",
     gpa: "1,9 (Excellent)",
     thesis: "Flexible Soiling Detection on Automotive Cameras",
     thesisGrade: "1,0 (Excellent)",
-    coursework: "Advanced Mathematics, Control Systems, Embedded Systems, AI for Mechatronics, Computer Vision, Deep Learning",
     certificateUrl: "/certificates/msc_certificate.pdf",
   },
   {
@@ -40,12 +39,11 @@ const educationData = [
       objectFit: "contain",       // ← contain for MSU (circular, no cropping)
     },
     date: "July 2018 – May 2022",
-    degree: "Bachelor of Engineering (B.E.) in Mechanical Engineering",
-    institution: "The Maharaja Sayajirao University of Baroda (MSU), India",
+    degree: "Bachelor of Engineering in Mechanical Engineering",
+    institution: "The Maharaja Sayajirao University of Baroda (MSU)",
     location: "Vadodara, Gujarat, India",
     accreditation: "NAAC Accredited A+ Grade",
     gpa: "1,2 (Excellent)",
-    coursework: "Thermodynamics, Fluid Mechanics, Material Science, CAD/CAM, Manufacturing Processes, Machine Design",
     certificateUrl: "/certificates/be_certificate.pdf",
   },
 ];
@@ -234,7 +232,7 @@ function EducationCard({ edu, index, onOpenCert }) {
             letterSpacing: "0.03em",
           }}
         >
-          📍 {exp.location}
+          📍 {edu.location}
         </p>
 
         {/* Accreditation */}
