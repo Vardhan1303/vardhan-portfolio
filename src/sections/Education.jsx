@@ -15,7 +15,7 @@ const educationData = [
   {
     id: 1,
     logo: "/images/rwu_logo.png",
-    logoStyle: { width: "220px", height: "auto" },   // landscape 600×300 logo
+    logoStyle: { width: "100%", height: "auto" },   // landscape 600×300 logo
     date: "September 2023 – January 2026",
     degree: "Master of Science (M.Sc.) in Mechatronics",
     institution: "Hochschule Ravensburg-Weingarten University of Applied Sciences (RWU), Germany",
@@ -28,7 +28,7 @@ const educationData = [
   {
     id: 2,
     logo: "/images/Msu_baroda_logo.png",
-    logoStyle: { width: "160px", height: "auto", maxHeight: "180px" },  // circular logo
+    logoStyle: { width: "100%", height: "auto", maxHeight: "180px" },  // circular logo
     date: "July 2018 – May 2022",
     degree: "Bachelor of Engineering (B.E.) in Mechanical Engineering",
     institution: "The Maharaja Sayajirao University of Baroda (MSU), India",
