@@ -295,7 +295,7 @@ function EducationCard({ edu, index, onOpenCert }) {
             onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(65,105,225,0.07)")}
             onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
           >
-            🎓 Degree Certificate
+          Degree Certificate
           </button>
         )}
       </div>
