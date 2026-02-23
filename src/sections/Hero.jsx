@@ -2,8 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FileText, X } from "lucide-react";
 
-// Load the same cursive/handwriting font used in the reference for the logo,
-// and a clean sans-serif matching the reference heading style.
 const fontLink = document.createElement("link");
 fontLink.rel = "stylesheet";
 fontLink.href =
@@ -32,10 +30,7 @@ function ParticleCanvas() {
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
     };
-    const clearMouse = () => {
-      mouse.x = null;
-      mouse.y = null;
-    };
+    const clearMouse = () => { mouse.x = null; mouse.y = null; };
     canvas.addEventListener("mousemove", handleMouse);
     canvas.addEventListener("mouseleave", clearMouse);
 
@@ -133,20 +128,34 @@ function CVModal({ onClose }) {
       >
         {/* Backdrop */}
         <div
-          className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+          className="absolute inset-0 bg-black/75 backdrop-blur-sm"
           onClick={onClose}
         />
 
         {/* Modal window */}
         <motion.div
-          className="relative z-10 w-[92vw] max-w-4xl h-[88vh] bg-[#1a1a2e] rounded-lg shadow-2xl overflow-hidden flex flex-col"
-          initial={{ scale: 0.92, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.92, opacity: 0 }}
+          className="relative z-10 flex flex-col rounded-lg shadow-2xl overflow-hidden"
+          style={{
+            width: "90vw",
+            maxWidth: "900px",
+            height: "88vh",
+            background: "#111827",
+            border: "1px solid rgba(255,255,255,0.08)",
+          }}
+          initial={{ scale: 0.93, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.93, opacity: 0, y: 20 }}
           transition={{ duration: 0.25 }}
         >
-          {/* Modal top bar */}
-          <div className="flex items-center justify-between px-5 py-3 bg-[#111827] border-b border-white/10">
+          {/* Top bar */}
+          <div
+            className="flex items-center justify-between px-5 py-3"
+            style={{
+              background: "#0d111a",
+              borderBottom: "1px solid rgba(255,255,255,0.08)",
+              flexShrink: 0,
+            }}
+          >
             <div className="flex items-center gap-2 text-gray-300 text-sm">
               <FileText size={15} />
               <span style={{ fontFamily: "'Raleway', sans-serif" }}>
@@ -155,18 +164,31 @@ function CVModal({ onClose }) {
             </div>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-white transition-colors p-1 rounded hover:bg-white/10"
+              style={{
+                color: "#9ca3af",
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                padding: "4px",
+                borderRadius: "4px",
+                display: "flex",
+                alignItems: "center",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#9ca3af")}
             >
               <X size={18} />
             </button>
           </div>
 
-          {/* PDF iframe */}
+          {/* PDF viewer
+              ─ src must be an absolute path from the public folder root.
+              ─ Place your file at:  /public/Resume_Vardhan_Mistry.pdf
+              ─ It will be served as: /Resume_Vardhan_Mistry.pdf             */}
           <iframe
-            src="public\images\Resume_Vardhan_Mistry.pdf"
-            className="flex-1 w-full"
+            src="/Resume_Vardhan_Mistry.pdf"
+            style={{ flex: 1, width: "100%", border: "none" }}
             title="Curriculum Vitae"
-            style={{ border: "none" }}
           />
         </motion.div>
       </motion.div>
@@ -180,22 +202,22 @@ export default function Hero() {
 
   return (
     <>
+      {/*
+        Wrapper provides the background colour that shows through the SVG slant gap.
+        The section itself does NOT use clip-path (which caused the slant to disappear).
+        Instead we overlay an SVG at the bottom that masks/covers with the page bg colour.
+      */}
       <section
         id="hero"
-        className="relative text-white overflow-hidden bg-[#0d0f14]"
-        style={{
-          minHeight: "100vh",
-          // Slanted bottom edge using clip-path — matches the reference diagonal cut
-          clipPath: "polygon(0 0, 100% 0, 100% 88%, 0 100%)",
-          paddingBottom: "12vh",
-        }}
+        className="relative text-white bg-[#0d0f14]"
+        style={{ minHeight: "100vh", overflow: "hidden" }}
       >
         <ParticleCanvas />
 
-        {/* Content — vertically centered in the visible area */}
+        {/* Centered content */}
         <div
           className="relative z-10 flex flex-col items-center justify-center text-center px-6"
-          style={{ minHeight: "100vh" }}
+          style={{ minHeight: "100vh", paddingBottom: "8vh" }}
         >
           {/* Name */}
           <motion.h1
@@ -204,7 +226,7 @@ export default function Hero() {
               fontWeight: 800,
               fontSize: "clamp(2.4rem, 6vw, 4.2rem)",
               lineHeight: 1.15,
-              marginBottom: "0.6rem",
+              marginBottom: "0.55rem",
               letterSpacing: "-0.01em",
             }}
             initial={{ opacity: 0, y: 22 }}
@@ -252,7 +274,7 @@ export default function Hero() {
               transition: "background 0.2s, border-color 0.2s",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(65,105,225,0.18)";
+              e.currentTarget.style.background = "rgba(65,105,225,0.2)";
               e.currentTarget.style.borderColor = "rgba(65,105,225,1)";
             }}
             onMouseLeave={(e) => {
@@ -267,9 +289,33 @@ export default function Hero() {
             Curriculum Vitae
           </motion.button>
         </div>
+
+        {/*
+          ── Diagonal slant at the bottom ──────────────────────────────────────
+          An SVG placed absolutely at the bottom of the section.
+          The polygon is filled with your page's background colour (white / whatever
+          comes after the hero).  Adjust the fill colour to match your next section.
+          The slant goes from bottom-left corner to ~12% up on the right side.
+        */}
+        <svg
+          viewBox="0 0 100 12"
+          preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            width: "100%",
+            height: "12vh",
+            display: "block",
+            zIndex: 5,
+          }}
+        >
+          {/* Change fill to match the colour of the section below the hero */}
+          <polygon points="0,12 100,0 100,12" fill="#ffffff" />
+        </svg>
       </section>
 
-      {/* CV Modal */}
       {showCV && <CVModal onClose={() => setShowCV(false)} />}
     </>
   );
