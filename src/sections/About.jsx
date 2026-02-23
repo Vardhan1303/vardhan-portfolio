@@ -74,7 +74,7 @@ export default function About() {
           color: "#9ca3af",
           fontWeight: 600,
           textAlign: "center",
-          marginBottom: "80px",
+          marginBottom: "2rem",
         }}
       >
         About Me
