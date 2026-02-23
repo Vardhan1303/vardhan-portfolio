@@ -36,10 +36,8 @@ export default function About() {
         style={{
           maxWidth: "820px",
           margin: "0 auto",
-          borderRadius: "10px",
           overflow: "hidden",
           display: "flex",
-          boxShadow: "0 2px 16px rgba(0,0,0,0.06)",
         }}
       >
         {/* LEFT — Photo */}
