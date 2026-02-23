@@ -121,8 +121,11 @@ function ExperienceCard({ exp, index }) {
       style={{
         maxWidth: "900px",
         margin: "0 auto 2rem",
+        border: "1px solid #e5e7eb",
+        borderRadius: "12px",
         overflow: "hidden",
         display: "flex",
+        boxShadow: "0 2px 20px rgba(0,0,0,0.07)",
         background: "#fff",
         minHeight: "260px",
       }}
@@ -140,6 +143,7 @@ function ExperienceCard({ exp, index }) {
           alignItems: "center",
           justifyContent: "center",
           background: "#f9fafb",
+          borderRight: "1px solid #e5e7eb",
           padding: "2rem 1.5rem",
         }}
       >
@@ -272,86 +276,6 @@ function ExperienceCard({ exp, index }) {
                   </li>
                 ))}
               </ul>
-
-              {/* "Developed using:" row — matching snapshot style */}
-              {pos.technologies?.length > 0 && (
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                    gap: "0.5rem",
-                    marginBottom: pos.link ? "1rem" : 0,
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: "0.78rem",
-                      fontWeight: 600,
-                      color: "#6b7280",
-                      marginRight: "0.25rem",
-                      letterSpacing: "0.02em",
-                    }}
-                  >
-                    Developed using:
-                  </span>
-                  {pos.technologies.map((tech, ti) => (
-                    <span
-                      key={ti}
-                      title={tech}
-                      style={{
-                        fontSize: "0.78rem",
-                        fontWeight: 600,
-                        color: "#4169e1",
-                        background: "rgba(65,105,225,0.07)",
-                        border: "1px solid rgba(65,105,225,0.2)",
-                        borderRadius: "5px",
-                        padding: "0.2rem 0.6rem",
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "0.3rem",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      <span role="img" aria-label={tech}>
-                        {getTechEmoji(tech)}
-                      </span>
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              )}
-
-              {/* Code Repository button */}
-              {pos.link && (
-                <a
-                  href={pos.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.4rem",
-                    fontSize: "0.82rem",
-                    fontWeight: 600,
-                    color: "#4169e1",
-                    border: "1px solid rgba(65,105,225,0.5)",
-                    borderRadius: "6px",
-                    padding: "0.4rem 1rem",
-                    textDecoration: "none",
-                    transition: "background 0.2s",
-                    marginTop: "0.25rem",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.background = "rgba(65,105,225,0.07)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.background = "transparent")
-                  }
-                >
-                  <span>🔗</span> Code Repository
-                </a>
-              )}
             </div>
           ))}
         </div>
