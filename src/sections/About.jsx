@@ -72,7 +72,7 @@ export default function About() {
           letterSpacing: "0.25em",
           textTransform: "uppercase",
           color: "#9ca3af",
-          fontWeight: 600,
+          fontWeight: 400,
           textAlign: "center",
           marginBottom: "2rem",
         }}
