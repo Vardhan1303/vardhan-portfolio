@@ -63,34 +63,82 @@ const experiences = [
     location: "Chemnitz, Germany",
     positions: [
       {
-        title: "Master's Thesis — Perception Engineering",
-        date: "Oct 2024 – Apr 2025",
+        title: "Master's Thesis",
+        date: "April 2025 – December 2025",
         bullets: [
+          "Title: Flexible Soiling Detection on Automotive Cameras | Grade: 1,0 (Excellent)",
           "Developed image-based data analysis pipelines for automotive perception systems.",
           "Applied **deep learning** and **computer vision** methods for real-world sensor data.",
           "Executed research-driven experiments with reproducible ML workflows.",
         ],
-        technologies: ["Python", "PyTorch", "OpenCV", "Computer Vision", "ROS2"],
-        link: "https://github.com/yourusername",
       },
     ],
   },
   {
     id: 2,
-    logo: "/images/logos/company2.png",
-    company: "Another Company",
-    location: "Berlin, Germany",
+    logo: "/images/logos_iav.png",
+    company: "IAV GmbH",
+    location: "Stollberg, Germany",
     positions: [
       {
-        title: "Working Student — Machine Learning",
-        date: "Mar 2023 – Sep 2024",
+        title: "Software Developer Intern",
+        date: "December 2024 – February 2025",
         bullets: [
           "Built and trained **deep learning** models for image classification tasks.",
           "Maintained reproducible experiment pipelines using **Docker** and Git.",
           "Collaborated with cross-functional teams on data annotation and QA.",
         ],
-        technologies: ["Python", "TensorFlow", "Docker", "Git", "Linux"],
-        link: null,
+      },
+    ],
+  },
+  {
+    id: 3,
+    logo: "/images/Adani_logo.png",
+    company: "Adani Group",
+    location: "Mundra, India",
+    positions: [
+      {
+        title: "Assistant Manager",
+        date: "August 2022 – August 2023",
+        bullets: [
+          "Built and trained **deep learning** models for image classification tasks.",
+          "Maintained reproducible experiment pipelines using **Docker** and Git.",
+          "Collaborated with cross-functional teams on data annotation and QA.",
+        ],
+      },
+    ],
+  },
+  {
+    id: 3,
+    logo: "/images/farmson_logo.png",
+    company: "Farmson Basic Drugs Private Limited",
+    location: "Vadodara, India",
+    positions: [
+      {
+        title: "Internship",
+        date: "August 2022 – August 2023",
+        bullets: [
+          "Built and trained **deep learning** models for image classification tasks.",
+          "Maintained reproducible experiment pipelines using **Docker** and Git.",
+          "Collaborated with cross-functional teams on data annotation and QA.",
+        ],
+      },
+    ],
+  },
+  {
+    id: 4,
+    logo: "/images/tapf_logo.jpg",
+    company: "The Akshaya Patra Foundation (TAPF)",
+    location: "Vadodara, India",
+    positions: [
+      {
+        title: "Internship",
+        date: "August 2022 – August 2023",
+        bullets: [
+          "Built and trained **deep learning** models for image classification tasks.",
+          "Maintained reproducible experiment pipelines using **Docker** and Git.",
+          "Collaborated with cross-functional teams on data annotation and QA.",
+        ],
       },
     ],
   },
