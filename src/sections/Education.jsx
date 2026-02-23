@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FileText, X } from "lucide-react";
+import { FileText, X, GraduationCap } from "lucide-react";
 
 const fontLink = document.createElement("link");
 fontLink.rel = "stylesheet";
@@ -295,6 +295,7 @@ function EducationCard({ edu, index, onOpenCert }) {
             onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(65,105,225,0.07)")}
             onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
           >
+          <GraduationCap size={15} style={{ flexShrink: 0 }} />
           Degree Certificate
           </button>
         )}
