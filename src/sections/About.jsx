@@ -128,14 +128,15 @@ export default function About() {
               textAlign: "justify",
             }}
           >
-            MSc Mechatronics graduate with a strong research-oriented and
-            computational background in{" "}
-            <strong style={{ fontWeight: 600, color: "#111827" }}>
-              machine learning, computer vision, and image-based data analysis
-            </strong>
-            . Experienced in designing reproducible pipelines, analyzing complex
-            visual data, and independently executing research-driven projects
-            with academic rigor.
+            MSc Mechatronics graduate with over two years of industrial experience and a 
+            strong research and computational background in AI, machine learning, deep learning, 
+            computer vision, and image processing. I design scalable and reproducible data pipelines, 
+            develop and fine tune models, and conduct rigorous experimental evaluation. My work involves 
+            analyzing complex visual data and translating research concepts into practical engineering 
+            solutions. I have hands on experience optimizing inference performance and deploying models 
+            on embedded and edge hardware. I work independently on research driven projects with academic 
+            rigor while maintaining production level reliability. I aim to build intelligent systems that 
+            are both technically sound and industrially scalable.
           </p>
         </div>
       </div>
