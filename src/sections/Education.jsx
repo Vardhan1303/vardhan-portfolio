@@ -66,8 +66,9 @@ styleTag.textContent = `
     justify-content: center;
     background: #eff6ff;
     border-right: 1px solid #dbeafe;
-    padding: 2.5rem 2rem;
+    padding: 0;
     box-sizing: border-box;
+    overflow: hidden;  
   }
   .edu-content {
     flex: 1;
@@ -198,6 +199,9 @@ function EducationCard({ edu, index, onOpenCert }) {
           alt={edu.institution}
           style={{
             display: "block",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
             objectPosition: "center",
             ...edu.logoStyle,
           }}
