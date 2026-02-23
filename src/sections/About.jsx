@@ -68,13 +68,12 @@ export default function About() {
       {/* Section label */}
       <p
         style={{
-          fontSize: "1.25rem",
+          fontSize: "1.2rem",
           letterSpacing: "0.25em",
           textTransform: "uppercase",
           color: "#9ca3af",
-          fontWeight: 800,
+          fontWeight: 600,
           textAlign: "center",
-          marginTop: 0,
           marginBottom: "80px",
         }}
       >
