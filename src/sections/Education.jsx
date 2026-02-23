@@ -236,7 +236,7 @@ function EducationCard({ edu, index, onOpenCert }) {
             letterSpacing: "0.03em",
           }}
         >
-          📍 {edu.location}
+          {edu.location}
         </p>
 
         {/* Accreditation */}
@@ -251,13 +251,13 @@ function EducationCard({ edu, index, onOpenCert }) {
 
         {/* GPA */}
         <p style={{ fontSize: "0.85rem", color: "#374151", margin: "0 0 0.35rem" }}>
-          <span style={{ fontWeight: 700, color: "#111827" }}>📊 GPA: </span>{edu.gpa}
+          <span style={{ fontWeight: 700, color: "#111827" }}>◈ GPA: </span>{edu.gpa}
         </p>
 
         {/* Thesis */}
         {edu.thesis && (
           <p style={{ fontSize: "0.85rem", color: "#374151", margin: "0 0 0.35rem" }}>
-            <span style={{ fontWeight: 700, color: "#111827" }}>🎓 Thesis: </span>
+            <span style={{ fontWeight: 700, color: "#111827" }}>✦ Thesis: </span>
             {edu.thesis}
             {edu.thesisGrade && (
               <span style={{ color: "#9ca3af", fontStyle: "italic" }}> — {edu.thesisGrade}</span>
