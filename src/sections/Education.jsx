@@ -31,8 +31,8 @@ const educationData = [
     degree: "Bachelor of Engineering (B.E.) in Mechanical Engineering",
     institution: "The Maharaja Sayajirao University of Baroda (MSU), India",
     accreditation: "NAAC Accredited A+ Grade",
-    cgpa: "8.81 / 10.0 — First Class with Distinction",
-    coursework: "Electronics, Electrical Engineering, CAD/CAM, Manufacturing Processes, Machine Design",
+    gpa: "1,2 (Excellent)",
+    coursework: "Electronics, Electrical Engineering, CAD/CAM, Manufacturing Processes, Machine Design, Thermodynamics, Fluid Mechanics, Control Systems",
     certificateUrl: "/certificates/be_certificate.pdf",
   },
 ];
