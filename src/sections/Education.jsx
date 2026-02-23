@@ -321,10 +321,10 @@ export default function Education() {
         {/* Section label */}
         <p
           style={{
-            fontSize: "1.2rem",
+            fontSize: "1.75rem",
             letterSpacing: "0.25em",
             textTransform: "uppercase",
-            color: "#1e90ff",
+            color: "#4169e1",  /*#1e90ff */
             fontWeight: 900,
             textAlign: "center",
             marginTop: 0,
