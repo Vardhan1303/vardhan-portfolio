@@ -16,7 +16,56 @@ export default function About() {
         padding: "80px 2rem",
       }}
     >
-      {/* Section label centered above */}
+      <style>{`
+        .about-card {
+          max-width: 820px;
+          margin: 0 auto;
+          overflow: hidden;
+          display: flex;
+          flex-direction: row;
+        }
+
+        .about-photo {
+          width: 220px;
+          flex-shrink: 0;
+          position: relative;
+          overflow: hidden;
+          background: #0d0f14;
+        }
+
+        .about-photo img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center top;
+          display: block;
+        }
+
+        .about-content {
+          flex: 1;
+          padding: 2.2rem 2.5rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        @media (max-width: 600px) {
+          .about-card {
+            flex-direction: column;
+          }
+
+          .about-photo {
+            width: 100%;
+            height: 260px;
+          }
+
+          .about-content {
+            padding: 1.6rem 1.4rem;
+          }
+        }
+      `}</style>
+
+      {/* Section label */}
       <p
         style={{
           fontSize: "1.2rem",
@@ -31,49 +80,19 @@ export default function About() {
         About Me
       </p>
 
-      {/* Small centered card */}
-      <div
-        style={{
-          maxWidth: "820px",
-          margin: "0 auto",
-          overflow: "hidden",
-          display: "flex",
-        }}
-      >
+      {/* Card */}
+      <div className="about-card">
         {/* LEFT — Photo */}
-        <div
-          style={{
-            width: "220px",
-            flexShrink: 0,
-            position: "relative",
-            overflow: "hidden",
-            background: "#0d0f14",
-          }}
-        >
+        <div className="about-photo">
           <img
             src="/images/about_me.png"
             alt="Vardhan Mistry"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center top",
-              display: "block",
-            }}
             loading="lazy"
           />
         </div>
 
         {/* RIGHT — Content */}
-        <div
-          style={{
-            flex: 1,
-            padding: "2.2rem 2.5rem",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
+        <div className="about-content">
           {/* Name */}
           <h2
             style={{
@@ -98,7 +117,7 @@ export default function About() {
             }}
           />
 
-          {/* Single paragraph */}
+          {/* Paragraph */}
           <p
             style={{
               fontSize: "0.95rem",
