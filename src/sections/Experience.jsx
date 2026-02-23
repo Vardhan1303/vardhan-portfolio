@@ -349,7 +349,7 @@ export default function Experience() {
           fontSize: "1.2rem",
           letterSpacing: "0.25em",
           textTransform: "uppercase",
-          color: "#9ca3af",
+          color: "#696969",
           fontWeight: 600,
           textAlign: "center",
           marginBottom: "2rem",
