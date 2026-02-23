@@ -68,13 +68,14 @@ export default function About() {
       {/* Section label */}
       <p
         style={{
-          fontSize: "1.2rem",
+          fontSize: "1.25rem",
           letterSpacing: "0.25em",
           textTransform: "uppercase",
           color: "#9ca3af",
-          fontWeight: 600,
+          fontWeight: 800,
           textAlign: "center",
-          marginBottom: "2rem",
+          marginTop: 0,
+          marginBottom: "80px",
         }}
       >
         About Me
