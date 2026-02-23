@@ -163,7 +163,7 @@ function CVModal({ onClose }) {
 
           {/* PDF iframe */}
           <iframe
-            src="/resume.pdf"
+            src="public/images/Resume_Vardhan_Mistry.pdf"
             className="flex-1 w-full"
             title="Curriculum Vitae"
             style={{ border: "none" }}
