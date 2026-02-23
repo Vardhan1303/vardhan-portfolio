@@ -18,7 +18,7 @@ export default function About() {
     >
       <style>{`
         .about-card {
-          max-width: 900px;
+          max-width: 800px;
           margin: 0 auto;
           overflow: hidden;
           display: flex;
