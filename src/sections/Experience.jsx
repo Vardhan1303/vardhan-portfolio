@@ -121,11 +121,8 @@ function ExperienceCard({ exp, index }) {
       style={{
         maxWidth: "900px",
         margin: "0 auto 2rem",
-        border: "1px solid #e5e7eb",
-        borderRadius: "12px",
         overflow: "hidden",
         display: "flex",
-        boxShadow: "0 2px 20px rgba(0,0,0,0.07)",
         background: "#fff",
         minHeight: "260px",
       }}
@@ -143,7 +140,6 @@ function ExperienceCard({ exp, index }) {
           alignItems: "center",
           justifyContent: "center",
           background: "#f9fafb",
-          borderRight: "1px solid #e5e7eb",
           padding: "2rem 1.5rem",
         }}
       >
@@ -378,7 +374,7 @@ export default function Experience() {
       {/* Section label */}
       <p
         style={{
-          fontSize: "0.75rem",
+          fontSize: "1.2rem",
           letterSpacing: "0.25em",
           textTransform: "uppercase",
           color: "#9ca3af",
