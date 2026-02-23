@@ -123,7 +123,7 @@ export default function About() {
               fontSize: "0.95rem",
               lineHeight: 1.85,
               color: "#374151",
-              fontWeight: 400,
+              fontWeight: 200,
               margin: 0,
               textAlign: "justify",
             }}
