@@ -58,7 +58,7 @@ function getTechEmoji(tech) {
 const experiences = [
   {
     id: 1,
-    logo: "/images/logos/iav.png",
+    logo: "/images/logos_iav.png",
     company: "IAV GmbH",
     location: "Chemnitz, Germany",
     positions: [
