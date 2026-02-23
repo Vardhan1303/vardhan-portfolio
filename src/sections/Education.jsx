@@ -14,7 +14,7 @@ if (!document.head.querySelector('link[href*="Raleway"]')) {
 const educationData = [
   {
     id: 1,
-    logo: "/images/rwu_logo.jpeg",
+    logo: "/images/rwu_logo.jpg",
     logoStyle: {
       width: "220px",
       height: "auto",
