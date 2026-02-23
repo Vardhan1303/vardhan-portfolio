@@ -31,7 +31,7 @@ const educationData = [
   },
   {
     id: 2,
-    logo: "/images/Msu_baroda_logo.png",
+    logo: "/images/msu_logo.jpg",
     logoStyle: {
       width: "160px",
       height: "auto",
