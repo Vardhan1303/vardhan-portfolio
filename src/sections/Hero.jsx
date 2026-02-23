@@ -31,8 +31,8 @@ function ParticleCanvas() {
       mouse.y = e.clientY - rect.top;
     };
     const clearMouse = () => { mouse.x = null; mouse.y = null; };
-    canvas.addEventListener("mousemove", handleMouse);
-    canvas.addEventListener("mouseleave", clearMouse);
+    window.addEventListener("mousemove", handleMouse);
+    window.addEventListener("mouseleave", clearMouse);
 
     const COUNT = 85;
     const particles = Array.from({ length: COUNT }, () => ({
@@ -102,8 +102,8 @@ function ParticleCanvas() {
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", resize);
-      canvas.removeEventListener("mousemove", handleMouse);
-      canvas.removeEventListener("mouseleave", clearMouse);
+      window.removeEventListener("mousemove", handleMouse);
+      window.removeEventListener("mouseleave", clearMouse);
     };
   }, []);
 
