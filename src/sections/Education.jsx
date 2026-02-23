@@ -297,13 +297,13 @@ export default function Education() {
         style={{
           background: "#eff6ff",
           fontFamily: "'Raleway', sans-serif",
-          padding: "80px 1rem",
+          padding: "80px 2rem",
         }}
       >
         {/* Section label */}
         <p
           style={{
-            fontSize: "0.75rem",
+            fontSize: "1.2rem",
             letterSpacing: "0.25em",
             textTransform: "uppercase",
             color: "#93c5fd",
