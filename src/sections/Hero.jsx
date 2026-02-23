@@ -133,22 +133,23 @@ function HackerTypewriter({ text, highlightWord, delay = 0 }) {
           setDone(true);
           return;
         }
+        const currentIndex = i; // ← capture before async scramble runs
+        i++;
         let frame = 0;
         const scramble = setInterval(() => {
           setScrambleMap((prev) => ({
             ...prev,
-            [i]: CHARS[Math.floor(Math.random() * CHARS.length)],
+            [currentIndex]: CHARS[Math.floor(Math.random() * CHARS.length)],
           }));
           frame++;
           if (frame >= 4) {
             clearInterval(scramble);
-            setDisplayed((prev) => prev + text[i]);
+            setDisplayed((prev) => prev + text[currentIndex]);
             setScrambleMap((prev) => {
               const next = { ...prev };
-              delete next[i];
+              delete next[currentIndex];
               return next;
             });
-            i++;
           }
         }, 35);
       }, 55);
