@@ -94,7 +94,7 @@ export default function Navbar() {
       {/* Mobile Navigation */}
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-gray-200 shadow-lg px-8 py-4 space-y-3">
-          {sections.slice(1, -1).map((section) => (
+          {sections.slice(1).map((section) => (
             <a
               key={section.id}
               href={`#${section.id}`}
