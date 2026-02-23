@@ -13,21 +13,40 @@ export default function About() {
       style={{
         background: "#ffffff",
         fontFamily: "'Raleway', sans-serif",
-        overflow: "hidden",
+        padding: "80px 2rem",
       }}
     >
-      {/* ── Two rectangles edge-to-edge, full viewport height ── */}
-      <div
+      {/* Section label centered above */}
+      <p
         style={{
-          display: "flex",
-          minHeight: "100vh",
-          alignItems: "stretch",
+          fontSize: "0.75rem",
+          letterSpacing: "0.25em",
+          textTransform: "uppercase",
+          color: "#9ca3af",
+          fontWeight: 600,
+          textAlign: "center",
+          marginBottom: "2rem",
         }}
       >
-        {/* ── LEFT: Photo panel ─────────────────────────────────── */}
+        About Me
+      </p>
+
+      {/* Small centered card */}
+      <div
+        style={{
+          maxWidth: "820px",
+          margin: "0 auto",
+          border: "1px solid #e5e7eb",
+          borderRadius: "10px",
+          overflow: "hidden",
+          display: "flex",
+          boxShadow: "0 2px 16px rgba(0,0,0,0.06)",
+        }}
+      >
+        {/* LEFT — Photo */}
         <div
           style={{
-            width: "42%",
+            width: "220px",
             flexShrink: 0,
             position: "relative",
             overflow: "hidden",
@@ -46,121 +65,61 @@ export default function About() {
             }}
             loading="lazy"
           />
-          {/* Subtle dark fade at the bottom edge */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: "20%",
-              background:
-                "linear-gradient(to top, rgba(13,15,20,0.45), transparent)",
-              pointerEvents: "none",
-            }}
-          />
         </div>
 
-        {/* ── RIGHT: Content panel ──────────────────────────────── */}
+        {/* RIGHT — Content */}
         <div
           style={{
             flex: 1,
+            padding: "2.2rem 2.5rem",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            padding: "4rem 5rem",
-            background: "#ffffff",
           }}
         >
-          {/* Section label */}
-          <p
-            style={{
-              fontSize: "0.75rem",
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              color: "#9ca3af",
-              marginBottom: "1.6rem",
-              fontWeight: 600,
-            }}
-          >
-            About Me
-          </p>
-
           {/* Name */}
           <h2
             style={{
-              fontSize: "clamp(1.7rem, 3vw, 2.4rem)",
+              fontSize: "1.6rem",
               fontWeight: 800,
               color: "#0d0f14",
-              marginBottom: "0.4rem",
+              marginBottom: "0.35rem",
               lineHeight: 1.15,
             }}
           >
             Vardhan Mistry
           </h2>
 
-          {/* Accent line */}
+          {/* Blue accent line */}
           <div
             style={{
-              width: "40px",
+              width: "36px",
               height: "3px",
               background: "#4169e1",
               borderRadius: "2px",
-              marginBottom: "1.6rem",
+              marginBottom: "1.2rem",
             }}
           />
 
-          {/* Bio */}
-          <div
+          {/* Single paragraph */}
+          <p
             style={{
-              fontSize: "1rem",
+              fontSize: "0.95rem",
               lineHeight: 1.85,
               color: "#374151",
               fontWeight: 400,
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.75rem",
-              maxWidth: "500px",
+              margin: 0,
             }}
           >
-            <p>
-              I hold a Bachelor&apos;s in{" "}
-              <strong style={{ fontWeight: 600, color: "#111827" }}>
-                Mechanical Engineering
-              </strong>{" "}
-              and a Master&apos;s in{" "}
-              <strong style={{ fontWeight: 600, color: "#111827" }}>
-                Mechatronics
-              </strong>{" "}
-              from TU Chemnitz, Germany.
-            </p>
-            <p>
-              My work spans{" "}
-              <strong style={{ fontWeight: 600, color: "#111827" }}>
-                computer vision, deep learning, robotics, and automation
-              </strong>{" "}
-              — combining mechanical foundations with intelligent software systems.
-            </p>
-            <p>
-              I completed my thesis at{" "}
-              <strong style={{ fontWeight: 600, color: "#111827" }}>
-                IAV GmbH
-              </strong>
-              , contributing to automotive software and perception engineering in
-              an industrial setting.
-            </p>
-            <p>
-              I thrive in interdisciplinary teams and enjoy building applied
-              solutions where hardware and AI intersect.
-            </p>
-            <p>
-              Currently seeking a{" "}
-              <strong style={{ fontWeight: 600, color: "#111827" }}>
-                full-time role in Germany
-              </strong>{" "}
-              in AI/ML, computer vision, or mechatronics.
-            </p>
-          </div>
+            MSc Mechatronics graduate with a strong research-oriented and
+            computational background in{" "}
+            <strong style={{ fontWeight: 600, color: "#111827" }}>
+              machine learning, computer vision, and image-based data analysis
+            </strong>
+            . Experienced in designing reproducible pipelines, analyzing complex
+            visual data, and independently executing research-driven projects
+            with academic rigor.
+          </p>
         </div>
       </div>
     </section>
