@@ -72,7 +72,7 @@ export default function About() {
           letterSpacing: "0.25em",
           textTransform: "uppercase",
           color: "#9ca3af",
-          fontWeight: 400,
+          fontWeight: 600,
           textAlign: "center",
           marginBottom: "2rem",
         }}
@@ -121,8 +121,9 @@ export default function About() {
           <p
             style={{
               fontSize: "0.95rem",
+              lineHeight: 1.85,
               color: "#374151",
-              fontWeight: 200,
+              fontWeight: 400,
               margin: 0,
               textAlign: "justify",
             }}
