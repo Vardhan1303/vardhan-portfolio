@@ -138,6 +138,7 @@ function ExperienceCard({ exp, index }) {
       <div
         style={{
           width: "180px",
+          height: "180px",
           flexShrink: 0,
           display: "flex",
           alignItems: "center",
