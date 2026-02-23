@@ -323,7 +323,7 @@ export default function Education() {
             fontSize: "1.2rem",
             letterSpacing: "0.25em",
             textTransform: "uppercase",
-            color: "#93c5fd",
+            color: "#9ca3af",
             fontWeight: 600,
             textAlign: "center",
             marginBottom: "2rem",
