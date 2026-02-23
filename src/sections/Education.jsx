@@ -14,25 +14,25 @@ if (!document.head.querySelector('link[href*="Raleway"]')) {
 const educationData = [
   {
     id: 1,
-    logo: "/images/rwu_logo.png",           // ← university logo
-    date: "Septemebr 2023 – January 2026",
+    logo: "/images/logos/rwu.png",           // ← university logo
+    date: "Oct 2023 – Feb 2026",
     degree: "Master of Science (M.Sc.) in Mechatronics",
     institution: "Hochschule Ravensburg-Weingarten University of Applied Sciences (RWU), Germany",
-    gpa: "1,9 (Excellent)",
+    gpa: "1.7 / 5.0 (Expected)",
     thesis: "Flexible Soiling Detection on Automotive Cameras",
-    thesisGrade: "1,0 (Excellent)",
-    coursework: "Advanced Mathematics, Advanced Control Systems, Computer Vision, Robotics, Automation, System Simulation, Autonomous Driving",
+    thesisGrade: "1.5 / 5.0 (Expected)",
+    coursework: "Advanced Mathematics, Control Systems, Embedded Systems, AI for Mechatronics, Computer Vision, Deep Learning",
     certificateUrl: "/certificates/msc_certificate.pdf",  // ← your PDF
   },
   {
     id: 2,
-    logo: "/images/Msu_baroda_logo.png",
-    date: "July 2018 – May 2022",
+    logo: "/images/logos/msu.png",
+    date: "Jul 2018 – Jul 2022",
     degree: "Bachelor of Engineering (B.E.) in Mechanical Engineering",
     institution: "The Maharaja Sayajirao University of Baroda (MSU), India",
     accreditation: "NAAC Accredited A+ Grade",
-    gpa: "1,2 (Excellent)",
-    coursework: "Electronics, Electrical Engineering, CAD/CAM, Manufacturing Processes, Machine Design, Thermodynamics, Fluid Mechanics, Control Systems",
+    gpa: "8.81 / 10.0 — First Class with Distinction",
+    coursework: "Thermodynamics, Fluid Mechanics, Material Science, CAD/CAM, Manufacturing Processes, Machine Design",
     certificateUrl: "/certificates/be_certificate.pdf",
   },
 ];
@@ -107,25 +107,26 @@ function EducationCard({ edu, index, onOpenCert }) {
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      {/* LEFT — Square logo panel */}
+      {/* LEFT — Wide logo panel, stretches edge-to-edge on left */}
       <div
         style={{
-          width: "200px",
+          width: "280px",
           flexShrink: 0,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           background: "#eff6ff",
           borderRight: "1px solid #dbeafe",
-          padding: "2rem",
+          padding: "2.5rem 2rem",
         }}
       >
         <img
           src={edu.logo}
           alt={edu.institution}
           style={{
-            width: "120px",
-            height: "120px",
+            width: "100%",       /* fills panel width — 600×300 logo becomes ~240px wide */
+            height: "auto",      /* natural ratio preserved */
+            maxHeight: "150px",  /* caps very tall logos */
             objectFit: "contain",
             display: "block",
           }}
