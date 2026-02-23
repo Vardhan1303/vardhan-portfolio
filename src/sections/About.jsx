@@ -53,7 +53,7 @@ export default function About() {
             }}
           >
             <img
-              src="/images/about_me.jpg"
+              src="/images/about_me.png"
               alt="Vardhan Mistry"
               style={{
                 width: "168px",
