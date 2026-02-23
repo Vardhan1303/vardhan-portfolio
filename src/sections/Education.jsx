@@ -326,7 +326,8 @@ export default function Education() {
             color: "#9ca3af",
             fontWeight: 600,
             textAlign: "center",
-            marginBottom: "2rem",
+            marginTop: 0,
+            marginBottom: "80px",
           }}
         >
           Education
