@@ -26,7 +26,7 @@ export default function About() {
         }
 
         .about-photo {
-          width: 350px;
+          width: 330px;
           flex-shrink: 0;
           position: relative;
           overflow: hidden;
