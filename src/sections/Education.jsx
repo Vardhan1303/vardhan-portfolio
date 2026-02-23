@@ -129,7 +129,7 @@ function EducationCard({ edu, index, onOpenCert }) {
           src={edu.logo}
           alt={edu.institution}
           style={{
-            objectFit: "contain",
+            objectFit: "cover",
             objectPosition: "center",
             display: "block",
             ...edu.logoStyle,   // per-logo size override
