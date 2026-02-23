@@ -18,7 +18,7 @@ export default function About() {
     >
       <style>{`
         .about-card {
-          max-width: 910px;
+          max-width: 90px;
           margin: 0 auto;
           overflow: hidden;
           display: flex;
@@ -26,7 +26,7 @@ export default function About() {
         }
 
         .about-photo {
-          width: 310px;
+          width: 300px;
           flex-shrink: 0;
           position: relative;
           overflow: hidden;
@@ -120,10 +120,10 @@ export default function About() {
           {/* Paragraph */}
           <p
             style={{
-              fontSize: "0.75rem",
+              fontSize: "0.95rem",
               lineHeight: 1.85,
               color: "#374151",
-              fontWeight: 200,
+              fontWeight: 400,
               margin: 0,
               textAlign: "justify",
             }}
@@ -135,3 +135,4 @@ export default function About() {
     </section>
   );
 }
+
