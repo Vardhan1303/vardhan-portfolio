@@ -152,7 +152,7 @@ function HackerTypewriter({ text, highlightWord, delay = 0 }) {
             });
           }
         }, 35);
-      }, 55);
+      }, 120);
     }, delay);
     return () => clearTimeout(timeout);
   }, [text, delay]);
