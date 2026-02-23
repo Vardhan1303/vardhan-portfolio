@@ -55,7 +55,7 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8 text-sm font-medium">
-          {sections.slice(1, -1).map((section) => (
+          {sections.slice(1).map((section) => (
             <a
               key={section.id}
               href={`#${section.id}`}
