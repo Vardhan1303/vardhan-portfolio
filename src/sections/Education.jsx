@@ -1,167 +1,274 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FileText, X } from "lucide-react";
 
+const fontLink = document.createElement("link");
+fontLink.rel = "stylesheet";
+fontLink.href =
+  "https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap";
+if (!document.head.querySelector('link[href*="Raleway"]')) {
+  document.head.appendChild(fontLink);
+}
+
+// ── Data ─────────────────────────────────────────────────────────────────────
+const educationData = [
+  {
+    id: 1,
+    logo: "/images/logos/rwu.png",           // ← university logo
+    date: "Oct 2023 – Feb 2026",
+    degree: "Master of Science (M.Sc.) in Mechatronics",
+    institution: "Hochschule Ravensburg-Weingarten University of Applied Sciences (RWU), Germany",
+    gpa: "1.7 / 5.0 (Expected)",
+    thesis: "Flexible Soiling Detection on Automotive Cameras",
+    thesisGrade: "1.5 / 5.0 (Expected)",
+    coursework: "Advanced Mathematics, Control Systems, Embedded Systems, AI for Mechatronics, Computer Vision, Deep Learning",
+    certificateUrl: "/certificates/msc_certificate.pdf",  // ← your PDF
+  },
+  {
+    id: 2,
+    logo: "/images/logos/msu.png",
+    date: "Jul 2018 – Jul 2022",
+    degree: "Bachelor of Engineering (B.E.) in Mechanical Engineering",
+    institution: "The Maharaja Sayajirao University of Baroda (MSU), India",
+    accreditation: "NAAC Accredited A+ Grade",
+    gpa: "8.81 / 10.0 — First Class with Distinction",
+    coursework: "Thermodynamics, Fluid Mechanics, Material Science, CAD/CAM, Manufacturing Processes, Machine Design",
+    certificateUrl: "/certificates/be_certificate.pdf",
+  },
+];
+
+// ── Certificate Modal (same pattern as CV modal) ─────────────────────────────
+function CertificateModal({ url, title, onClose }) {
+  return (
+    <AnimatePresence>
+      <motion.div
+        style={{ position: "fixed", inset: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <div
+          style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.72)", backdropFilter: "blur(4px)" }}
+          onClick={onClose}
+        />
+        <motion.div
+          style={{
+            position: "relative", zIndex: 10, width: "90vw", maxWidth: "860px",
+            height: "88vh", background: "#111827", borderRadius: "10px",
+            overflow: "hidden", display: "flex", flexDirection: "column",
+            border: "1px solid rgba(255,255,255,0.08)",
+          }}
+          initial={{ scale: 0.93, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.93, opacity: 0, y: 20 }}
+          transition={{ duration: 0.22 }}
+        >
+          <div style={{
+            display: "flex", alignItems: "center", justifyContent: "space-between",
+            padding: "0.75rem 1.25rem", background: "#0d111a",
+            borderBottom: "1px solid rgba(255,255,255,0.08)", flexShrink: 0,
+          }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#d1d5db", fontSize: "0.85rem", fontFamily: "'Raleway', sans-serif" }}>
+              <FileText size={14} />
+              {title}
+            </div>
+            <button
+              onClick={onClose}
+              style={{ background: "none", border: "none", cursor: "pointer", color: "#9ca3af", display: "flex", padding: "2px" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#9ca3af")}
+            >
+              <X size={17} />
+            </button>
+          </div>
+          <iframe src={url} style={{ flex: 1, width: "100%", border: "none" }} title={title} />
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+// ── Single Education Card ─────────────────────────────────────────────────────
+function EducationCard({ edu, index, onOpenCert }) {
+  return (
+    <motion.div
+      style={{
+        maxWidth: "900px",
+        margin: "0 auto 2rem",
+        display: "flex",
+        minHeight: "260px",
+        borderRadius: "12px",
+        overflow: "hidden",
+        boxShadow: "0 2px 20px rgba(0,0,0,0.07)",
+        background: "#fff",
+      }}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      {/* LEFT — Square logo panel */}
+      <div
+        style={{
+          width: "200px",
+          flexShrink: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#eff6ff",
+          borderRight: "1px solid #dbeafe",
+          padding: "2rem",
+        }}
+      >
+        <img
+          src={edu.logo}
+          alt={edu.institution}
+          style={{
+            width: "120px",
+            height: "120px",
+            objectFit: "contain",
+            display: "block",
+          }}
+          loading="lazy"
+        />
+      </div>
+
+      {/* RIGHT — Content */}
+      <div
+        style={{
+          flex: 1,
+          padding: "2rem 2.5rem",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          fontFamily: "'Raleway', sans-serif",
+        }}
+      >
+        {/* Date */}
+        <p style={{ fontSize: "0.78rem", color: "#9ca3af", fontWeight: 600, margin: "0 0 0.4rem", letterSpacing: "0.04em" }}>
+          {edu.date}
+        </p>
+
+        {/* Degree */}
+        <h3 style={{ fontSize: "1.15rem", fontWeight: 800, color: "#0d0f14", margin: "0 0 0.25rem", lineHeight: 1.25 }}>
+          {edu.degree}
+        </h3>
+
+        {/* Institution */}
+        <p style={{ fontSize: "0.88rem", color: "#4169e1", fontWeight: 600, margin: "0 0 0.15rem" }}>
+          {edu.institution}
+        </p>
+
+        {/* Accreditation */}
+        {edu.accreditation && (
+          <p style={{ fontSize: "0.78rem", color: "#6b7280", fontStyle: "italic", margin: "0 0 0.4rem" }}>
+            {edu.accreditation}
+          </p>
+        )}
+
+        {/* Blue accent */}
+        <div style={{ width: "34px", height: "2.5px", background: "#4169e1", borderRadius: "2px", margin: "0.5rem 0 0.9rem" }} />
+
+        {/* GPA */}
+        <p style={{ fontSize: "0.85rem", color: "#374151", margin: "0 0 0.35rem" }}>
+          <span style={{ fontWeight: 700, color: "#111827" }}>📊 GPA: </span>{edu.gpa}
+        </p>
+
+        {/* Thesis */}
+        {edu.thesis && (
+          <p style={{ fontSize: "0.85rem", color: "#374151", margin: "0 0 0.35rem" }}>
+            <span style={{ fontWeight: 700, color: "#111827" }}>🎓 Thesis: </span>
+            {edu.thesis}
+            {edu.thesisGrade && (
+              <span style={{ color: "#9ca3af", fontStyle: "italic" }}> — {edu.thesisGrade}</span>
+            )}
+          </p>
+        )}
+
+        {/* Coursework */}
+        {edu.coursework && (
+          <p style={{ fontSize: "0.82rem", color: "#6b7280", margin: "0 0 1rem", lineHeight: 1.65 }}>
+            <span style={{ fontWeight: 700, color: "#374151" }}>Coursework: </span>{edu.coursework}
+          </p>
+        )}
+
+        {/* Degree Certificate button */}
+        {edu.certificateUrl && (
+          <button
+            onClick={() => onOpenCert(edu.certificateUrl, `Degree Certificate — ${edu.degree}`)}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.4rem",
+              fontSize: "0.82rem",
+              fontWeight: 600,
+              color: "#4169e1",
+              border: "1px solid rgba(65,105,225,0.5)",
+              borderRadius: "6px",
+              padding: "0.4rem 1rem",
+              background: "transparent",
+              cursor: "pointer",
+              width: "fit-content",
+              fontFamily: "'Raleway', sans-serif",
+              transition: "background 0.2s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(65,105,225,0.07)")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+          >
+            🎓 Degree Certificate
+          </button>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
+// ── Section ───────────────────────────────────────────────────────────────────
 export default function Education() {
-  // === EDIT YOUR DEGREES HERE ===
-  const educationData = [
-    {
-      id: 1,
-      date: "Oct 2023 – Feb 2026",
-      degree: "Master of Science (M.Sc.) in Mechatronics",
-      institution: "Hochschule Ravensburg-Weingarten University of Applied Sciences (RWU), Germany",
-      description:
-        "Specialized in Automation, Robotics, Embedded Systems, Control Theory, and Computer Vision with focus on AI/ML applications in automotive systems.",
-      gpa: "1.7/5.0 (Expected)",
-      thesis: "Master Thesis: 1.5/5.0 (Expected) | Topic: \"Flexible Soiling Detection on Automotive Cameras\"",
-      coursework: "Advanced Mathematics, Advanced Control Systems, Embedded Systems, AI for Mechatronics, Computer Vision, Deep Learning",
-      image: "/images/edu_rwu.jpg",
-      bullets: ["Machine Learning", "Computer Vision", "Deep Learning", "PyTorch", "MATLAB", "Control Systems", "Robotics", "ROS", "Autonomous Systems", "Embedded Systems"],
-    },
-    {
-      id: 2,
-      date: "Jul 2018 – Jul 2022",
-      degree: "Bachelor of Engineering (B.E.) in Mechanical Engineering",
-      institution: "The Maharaja Sayajirao University of Baroda (MSU), India",
-      accreditation: "NAAC Accredited A+ Grade",
-      description:
-        "Graduated with First Class with Distinction, ranking in Top 10% of class. Strong foundation in core mechanical engineering principles with hands-on experience in design, manufacturing, and industrial systems.",
-      gpa: "CGPA: 8.81/10.0 | First Class with Distinction",
-      coursework: "Thermodynamics, Fluid Mechanics, Material Science, CAD/CAM, Manufacturing Processes, Strength of Materials, Machine Design",
-      image: "/images/edu_msu.jpg",
-      bullets: ["SolidWorks", "Siemens NX", "ANSYS", "CAD/CAM", "MATLAB", "FEA", "Manufacturing", "Design"],
-    },
-  ];
+  const [modal, setModal] = useState(null); // { url, title }
 
   return (
-    <section id="education" className="bg-blue-50 text-gray-800 relative overflow-hidden">
-      {/* HEADING BAR */}
-      <div className="relative w-full bg-blue-100 py-12">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-wide">
-            Education
-          </h2>
-        </div>
-      </div>
+    <>
+      <section
+        id="education"
+        style={{
+          background: "#eff6ff",   // light blue — matches original
+          fontFamily: "'Raleway', sans-serif",
+          padding: "80px 2rem",
+        }}
+      >
+        {/* Section label */}
+        <p
+          style={{
+            fontSize: "0.75rem",
+            letterSpacing: "0.25em",
+            textTransform: "uppercase",
+            color: "#93c5fd",
+            fontWeight: 600,
+            textAlign: "center",
+            marginBottom: "2rem",
+          }}
+        >
+          Education
+        </p>
 
-      {/* MAIN CONTENT */}
-      <div className="relative w-full py-20">
-        {/* CENTER TIMELINE LINE - HIDDEN ON MOBILE */}
-        <div className="hidden md:block absolute top-0 bottom-0 left-1/2 w-[4px] bg-blue-200 transform -translate-x-1/2 z-0"></div>
+        {educationData.map((edu, i) => (
+          <EducationCard
+            key={edu.id}
+            edu={edu}
+            index={i}
+            onOpenCert={(url, title) => setModal({ url, title })}
+          />
+        ))}
+      </section>
 
-        <div className="space-y-32 relative z-10">
-          {educationData.map((edu, index) => {
-            const isReversed = index % 2 !== 0;
-            return (
-              <div
-                key={edu.id}
-                className={`flex flex-col md:flex-row items-stretch relative min-h-[400px] md:min-h-[500px] ${
-                  isReversed ? "md:flex-row-reverse" : ""
-                }`}
-              >
-                {/* IMAGE SIDE - VISIBLE ON BOTH MOBILE AND DESKTOP */}
-                <motion.div
-                  className="md:w-1/2 relative"
-                  initial={{ opacity: 0, x: isReversed ? 100 : -100 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                >
-                  {edu.image ? (
-                    <img
-                      src={edu.image}
-                      alt={`${edu.institution} campus`}
-                      loading="lazy"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="hidden md:flex w-full h-full bg-blue-100 items-center justify-center text-gray-500 italic">
-                      No image available
-                    </div>
-                  )}
-                </motion.div>
-
-                {/* CENTER DOT - DESKTOP ONLY */}
-                <div className="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-                  <div className="w-6 h-6 bg-gray-500 border-4 border-blue-400 rounded-full shadow-md"></div>
-                </div>
-
-                {/* TEXT SIDE */}
-                <motion.div
-                  className="md:w-1/2 text-center md:text-left space-y-4 flex flex-col justify-center px-6 md:px-12 py-8"
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                > 
-                  {/* DATE */}
-                  <span className="text-sm font-semibold text-gray-500">
-                    {edu.date}
-                  </span>
-
-                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
-                    {edu.degree}
-                  </h3>
-
-                  {edu.institution && (
-                    <p className="text-lg text-blue-700 font-medium">{edu.institution}</p>
-                  )}
-
-                  {edu.accreditation && (
-                    <p className="text-sm text-gray-600 italic">{edu.accreditation}</p>
-                  )}
-
-                  {edu.description && (
-                    <p className="text-gray-700 leading-relaxed">{edu.description}</p>
-                  )}
-
-                  {/* GPA */}
-                  {edu.gpa && (
-                    <p className="text-sm font-semibold text-gray-800">
-                      <span className="text-blue-600">📊 </span>{edu.gpa}
-                    </p>
-                  )}
-
-                  {/* Thesis */}
-                  {edu.thesis && (
-                    <p className="text-sm text-gray-700">
-                      <span className="font-semibold text-blue-600">🎓 </span>{edu.thesis}
-                    </p>
-                  )}
-
-                  {/* Coursework */}
-                  {edu.coursework && (
-                    <div className="text-sm text-gray-600">
-                      <span className="font-semibold">Relevant Coursework:</span> {edu.coursework}
-                    </div>
-                  )}
-
-                  {/* Tech Badges */}
-                  {edu.bullets && edu.bullets.length > 0 && (
-                    <div className="pt-4 border-t border-blue-200">
-                      <p className="text-xs font-semibold text-gray-500 mb-3 uppercase tracking-wide">
-                        Technical Skills
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {edu.bullets.map((b, i) => (
-                          <motion.span
-                            key={i}
-                            className="text-xs px-3 py-1.5 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-sm hover:shadow-md transition-all duration-300 cursor-default"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.3, delay: i * 0.05 }}
-                            whileHover={{ scale: 1.05 }}
-                          >
-                            {b}
-                          </motion.span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </motion.div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
+      {modal && (
+        <CertificateModal
+          url={modal.url}
+          title={modal.title}
+          onClose={() => setModal(null)}
+        />
+      )}
+    </>
   );
 }
