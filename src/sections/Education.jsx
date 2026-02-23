@@ -325,7 +325,7 @@ export default function Education() {
             letterSpacing: "0.25em",
             textTransform: "uppercase",
             color: "#4169e1",  /*#1e90ff */
-            fontWeight: 900,
+            fontWeight: 600,
             textAlign: "center",
             marginTop: 0,
             marginBottom: "80px",
