@@ -14,7 +14,8 @@ if (!document.head.querySelector('link[href*="Raleway"]')) {
 const educationData = [
   {
     id: 1,
-    logo: "/images/rwu_logo.png",           // ← university logo
+    logo: "/images/rwu_logo.png",
+    logoStyle: { width: "220px", height: "auto" },   // landscape 600×300 logo
     date: "September 2023 – January 2026",
     degree: "Master of Science (M.Sc.) in Mechatronics",
     institution: "Hochschule Ravensburg-Weingarten University of Applied Sciences (RWU), Germany",
@@ -22,11 +23,12 @@ const educationData = [
     thesis: "Flexible Soiling Detection on Automotive Cameras",
     thesisGrade: "1,0 (Excellent)",
     coursework: "Advanced Mathematics, Control Systems, Embedded Systems, AI for Mechatronics, Computer Vision, Deep Learning",
-    certificateUrl: "/certificates/msc_certificate.pdf",  // ← your PDF
+    certificateUrl: "/certificates/msc_certificate.pdf",
   },
   {
     id: 2,
     logo: "/images/Msu_baroda_logo.png",
+    logoStyle: { width: "160px", height: "auto", maxHeight: "180px" },  // circular logo
     date: "July 2018 – May 2022",
     degree: "Bachelor of Engineering (B.E.) in Mechanical Engineering",
     institution: "The Maharaja Sayajirao University of Baroda (MSU), India",
@@ -37,7 +39,7 @@ const educationData = [
   },
 ];
 
-// ── Certificate Modal (same pattern as CV modal) ─────────────────────────────
+// ── Certificate Modal ─────────────────────────────────────────────────────────
 function CertificateModal({ url, title, onClose }) {
   return (
     <AnimatePresence>
@@ -96,6 +98,7 @@ function EducationCard({ edu, index, onOpenCert }) {
         maxWidth: "900px",
         margin: "0 auto 2rem",
         display: "flex",
+        alignItems: "center",
         minHeight: "260px",
         borderRadius: "12px",
         overflow: "hidden",
@@ -107,29 +110,29 @@ function EducationCard({ edu, index, onOpenCert }) {
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      {/* LEFT — Wide logo panel, stretches edge-to-edge on left */}
+      {/* LEFT — Logo panel */}
       <div
         style={{
           width: "280px",
           flexShrink: 0,
+          alignSelf: "stretch",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           background: "#eff6ff",
           borderRight: "1px solid #dbeafe",
           padding: "2.5rem 2rem",
+          boxSizing: "border-box",
         }}
       >
         <img
           src={edu.logo}
           alt={edu.institution}
           style={{
-            width: "100%",       /* fills panel width — 600×300 logo becomes ~240px wide */
-            /*height: "100%",      /* natural ratio preserved */
-            maxHeight: "200px",  /* caps very tall logos */
             objectFit: "contain",
             objectPosition: "center",
             display: "block",
+            ...edu.logoStyle,   // per-logo size override
           }}
           loading="lazy"
         />
@@ -227,14 +230,14 @@ function EducationCard({ edu, index, onOpenCert }) {
 
 // ── Section ───────────────────────────────────────────────────────────────────
 export default function Education() {
-  const [modal, setModal] = useState(null); // { url, title }
+  const [modal, setModal] = useState(null);
 
   return (
     <>
       <section
         id="education"
         style={{
-          background: "#eff6ff",   // light blue — matches original
+          background: "#eff6ff",
           fontFamily: "'Raleway', sans-serif",
           padding: "80px 2rem",
         }}
