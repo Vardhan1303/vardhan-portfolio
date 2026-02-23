@@ -51,8 +51,8 @@ function ScrollToTopButton() {
       }}
     >
       <svg
-        width="22"
-        height="22"
+        width="50"
+        height="50"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
