@@ -11,6 +11,7 @@ export default function Navbar() {
     { id: "experience", title: "Experience" },
     { id: "projects", title: "Projects" },
     { id: "education", title: "Education" },
+    { id: "skills-section",     title: "Skills" },
     { id: "hobbies", title: "Hobbies" },
     { id: "contact", title: "Contact" },
   ];

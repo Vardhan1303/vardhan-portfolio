@@ -313,9 +313,9 @@ export default function Education() {
       <section
         id="education"
         style={{
-          background: "#eff6ff",
+          background: "#ffffff",
           fontFamily: "'Raleway', sans-serif",
-          padding: "80px 2rem",
+          padding: "50px 2rem",
         }}
       >
         {/* Section label */}
@@ -324,15 +324,25 @@ export default function Education() {
             fontSize: "1.25rem",
             letterSpacing: "0.25em",
             textTransform: "uppercase",
-            color: "#4169e1",  /*#1e90ff */
+            color: "#696969", 
             fontWeight: 800,
             textAlign: "center",
             marginTop: 0,
-            marginBottom: "80px",
+            marginBottom: "8px",
           }}
         >
           Education
         </p>
+        {/* Blue underline — same as Technical Skills */}
+        <div
+          style={{
+            width: "56px",
+            height: "2px",
+            background: "#4f8eff",
+            borderRadius: "2px",
+            margin: "0 auto 40px",  // centered, then 50px gap before card
+          }}
+        />
 
         {educationData.map((edu, i) => (
           <EducationCard

@@ -311,23 +311,34 @@ export default function Projects() {
       style={{
         background: "#f9fafb",   // very light grey — subtle contrast after white Experience
         fontFamily: "'Raleway', sans-serif",
-        padding: "80px 2rem",
+        padding: "50px 2rem",
       }}
     >
       {/* Section label */}
       <p
         style={{
-          fontSize: "0.75rem",
+          fontSize: "1.25rem",
           letterSpacing: "0.25em",
           textTransform: "uppercase",
-          color: "#9ca3af",
-          fontWeight: 600,
+          color: "#696969",
+          fontWeight: 800,
           textAlign: "center",
-          marginBottom: "2rem",
+          marginTop: 0,
+          marginBottom: "10px",
         }}
       >
         Projects
       </p>
+      {/* Blue underline — same as Technical Skills */}
+      <div
+        style={{
+          width: "56px",
+          height: "2px",
+          background: "#4f8eff",
+          borderRadius: "2px",
+          margin: "0 auto 40px",  // centered, then 50px gap before card
+        }}
+      />
 
       {projects.map((project, i) => (
         <ProjectCard key={project.id} project={project} index={i} />

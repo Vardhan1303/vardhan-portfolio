@@ -13,7 +13,8 @@ export default function About() {
       style={{
         background: "#ffffff",
         fontFamily: "'Raleway', sans-serif",
-        padding: "80px 2rem",
+        padding: "50px 2rem",
+         marginTop: "-2px",
       }}
     >
       <style>{`
@@ -26,11 +27,11 @@ export default function About() {
         }
 
         .about-photo {
-          width: 330px;
+          width: 310px;
           flex-shrink: 0;
           position: relative;
           overflow: hidden;
-          background: #0d0f14;
+          background: #ffffff;
         }
 
         .about-photo img {
@@ -66,19 +67,31 @@ export default function About() {
       `}</style>
 
       {/* Section label */}
+      
       <p
         style={{
-          fontSize: "1.2rem",
+          fontSize: "1.25rem",
           letterSpacing: "0.25em",
           textTransform: "uppercase",
-          color: "#9ca3af",
-          fontWeight: 600,
+          color: "#696969",
+          fontWeight: 800,
           textAlign: "center",
-          marginBottom: "2rem",
+          marginTop: 0,
+          marginBottom: "10px",
         }}
       >
         About Me
       </p>
+      {/* Blue underline — same as Technical Skills */}
+      <div
+        style={{
+          width: "56px",
+          height: "2px",
+          background: "#4f8eff",
+          borderRadius: "2px",
+          margin: "0 auto 40px",  // centered, then 50px gap before card
+        }}
+      />
 
       {/* Card */}
       <div className="about-card">
@@ -120,15 +133,22 @@ export default function About() {
           {/* Paragraph */}
           <p
             style={{
-              fontSize: "0.95rem",
+              fontSize: "1.0rem",
               lineHeight: 1.85,
               color: "#374151",
-              fontWeight: 50,
+              fontWeight: 200,
               margin: 0,
               textAlign: "justify",
             }}
           >
-            MSc Mechatronics graduate with over two years of industrial experience and a strong research driven computational background in AI, machine learning, deep learning, computer vision, and image processing. I design scalable and reproducible data pipelines, develop and fine tune models, and perform rigorous experimental evaluation. I have hands on experience optimizing inference and deploying models on embedded and edge hardware, transforming research concepts into reliable production ready systems. I work independently on complex technical problems with both academic rigor and industrial focus. Vardhan
+            MSc Mechatronics graduate with over two years of industrial experience and 
+            a strong research driven computational background in AI, machine learning, 
+            deep learning, computer vision, and image processing. I design scalable and 
+            reproducible data pipelines, develop and fine tune models, and perform rigorous 
+            experimental evaluation. I have hands on experience optimizing inference and 
+            deploying models on embedded and edge hardware, transforming research concepts 
+            into reliable production ready systems. I work independently on complex technical 
+            problems with both academic rigor and industrial focus.
           </p>
         </div>
       </div>
