@@ -18,8 +18,17 @@ function ParticleCanvas() {
     let animId;
     let mouse = { x: null, y: null };
 
+    // Detect mobile once on mount
+    const isMobile = window.innerWidth < 768;
+
+    // Mobile config: fewer particles, shorter connect distance, NO glow
+    const COUNT        = isMobile ? 30  : 85;
+    const CONNECT_DIST = isMobile ? 100 : 150;
+    const MOUSE_DIST   = isMobile ? 0   : 170; // disable mouse lines on mobile
+    const USE_GLOW     = !isMobile;             // shadowBlur is the #1 perf killer on mobile
+
     const resize = () => {
-      canvas.width = canvas.offsetWidth;
+      canvas.width  = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
     };
     resize();
@@ -34,74 +43,70 @@ function ParticleCanvas() {
     window.addEventListener("mousemove", handleMouse);
     window.addEventListener("mouseleave", clearMouse);
 
-    const COUNT = 85;
     const particles = Array.from({ length: COUNT }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
+      x:  Math.random() * canvas.width,
+      y:  Math.random() * canvas.height,
       vx: (Math.random() - 0.5) * 0.45,
       vy: (Math.random() - 0.5) * 0.45,
-      r: Math.random() * 1.4 + 0.7,
+      r:  Math.random() * 1.4 + 0.7,
     }));
-
-    const CONNECT_DIST = 150;
-    const MOUSE_DIST = 170;
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      // Move particles
       for (const p of particles) {
         p.x += p.vx;
         p.y += p.vy;
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.x < 0 || p.x > canvas.width)  p.vx *= -1;
         if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
       }
 
+      // Draw connecting lines between nearby particles
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
+          const dx   = particles[i].x - particles[j].x;
+          const dy   = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < CONNECT_DIST) {
             const alpha = (1 - dist / CONNECT_DIST) * 0.6;
             ctx.beginPath();
-
-            ctx.shadowColor = "rgba(255,255,255,0.8)";
-            ctx.shadowBlur = 6;
-
+            if (USE_GLOW) {
+              ctx.shadowColor = "rgba(255,255,255,0.8)";
+              ctx.shadowBlur  = 6;
+            }
             ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
-            ctx.lineWidth = 1.2;
-
+            ctx.lineWidth   = 1.2;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
-
-            ctx.shadowBlur = 0; // reset
+            if (USE_GLOW) ctx.shadowBlur = 0;
           }
         }
 
-        if (mouse.x !== null) {
-          const dx = particles[i].x - mouse.x;
-          const dy = particles[i].y - mouse.y;
+        // Mouse attraction lines — desktop only
+        if (MOUSE_DIST > 0 && mouse.x !== null) {
+          const dx   = particles[i].x - mouse.x;
+          const dy   = particles[i].y - mouse.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < MOUSE_DIST) {
             const alpha = (1 - dist / MOUSE_DIST) * 0.9;
             ctx.beginPath();
-
-            ctx.shadowColor = "rgba(255,255,255,0.9)";
-            ctx.shadowBlur = 10;
-
+            if (USE_GLOW) {
+              ctx.shadowColor = "rgba(255,255,255,0.9)";
+              ctx.shadowBlur  = 10;
+            }
             ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
-            ctx.lineWidth = 1.3;
-
+            ctx.lineWidth   = 1.3;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(mouse.x, mouse.y);
             ctx.stroke();
-
-            ctx.shadowBlur = 0; // reset
+            if (USE_GLOW) ctx.shadowBlur = 0;
           }
         }
       }
 
+      // Draw dots
       for (const p of particles) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
@@ -147,7 +152,7 @@ function HackerTypewriter({ text, highlightWord, delay = 0 }) {
           setDone(true);
           return;
         }
-        const currentIndex = i; // ← capture before async scramble runs
+        const currentIndex = i;
         i++;
         let frame = 0;
         const scramble = setInterval(() => {
