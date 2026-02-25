@@ -47,7 +47,7 @@ function SocialSidebar() {
           <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
         </svg>
       ),
-      href: "mailto:mistryvardhan@gmail.com",
+      href: "mailto:mistryvardhan133@gmail.com",
       bg: "#2563eb",
       label: "Email",
     },
@@ -113,10 +113,10 @@ export default function Contact() {
         SERVICE_ID,
         TEMPLATE_ID,
         {
-          from_name:    form.name,
-          from_email:   form.email,
-          message:      form.message,
-          to_email:     "mistryvardhan@gmail.com",
+          from_name:  form.name,
+          name:       form.name,
+          email:      form.email,
+          message:    form.message,
         },
         PUBLIC_KEY
       );
