@@ -400,7 +400,7 @@ export default function Projects() {
           fontWeight: 800,
           textAlign: "center",
           marginTop: 0,
-          marginBottom: "10px",
+          marginBottom: "8px",
         }}
       >
         Projects

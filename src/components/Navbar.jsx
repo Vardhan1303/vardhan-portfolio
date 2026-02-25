@@ -8,7 +8,7 @@ export default function Navbar() {
   const sections = [
     { id: "hero", title: "Home" },
     { id: "about", title: "About Me" },
-    { id: "experience", title: "Experience" },
+    { id: "experience", title: "Work Experience" },
     { id: "projects", title: "Projects" },
     { id: "education", title: "Education" },
     { id: "skills-section",     title: "Skills" },
