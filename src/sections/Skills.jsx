@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 // ─── Local logo imports ───────────────────────────────────────────────────────
-import pythonLogo    from "/skill_logo/python_logo.png";
+import pythonLogo     from "/skill_logo/python_logo.png";
 import arduinoLogo    from "/skill_logo/arduino_logo.png";
 import cudaLogo       from "/skill_logo/cuda_logo.svg";
 import dockerLogo     from "/skill_logo/docker_logo.jpg";
@@ -18,7 +18,7 @@ import opencvLogo     from "/skill_logo/opencv_logo.svg";
 import pandasLogo     from "/skill_logo/pandas_logo.svg";
 import raspberryLogo  from "/skill_logo/raspberrypi_logo.svg";
 import tensorrtLogo   from "/skill_logo/TensorRT_logo.png";
-import rosLogo        from "/skill_logo/Ros_logo.svg"; // add your ROS logo file
+import rosLogo        from "/skill_logo/Ros_logo.svg";
 
 // ─── Inject fonts + Devicon CSS ───────────────────────────────────────────────
 if (typeof document !== "undefined") {
@@ -41,42 +41,39 @@ if (typeof document !== "undefined") {
 }
 
 // ─── Skill definitions ────────────────────────────────────────────────────────
-// rect: true → wide rectangular tile (used for TensorRT and ROS/ROS2)
 const skills = [
-  // Row 1
-  { name: "Python",       logo: pythonLogo,                                color: "#3776AB" },
-  { name: "C++",          devicon: "devicon-cplusplus-plain colored",      color: "#00599C" },
-  { name: "NumPy",        logo: numpyLogo,                                 color: "#4DABCF" },
-  { name: "Pandas",       logo: pandasLogo,                                color: "#8B77D8" },
-  { name: "OpenCV",       logo: opencvLogo,                                color: "#5C3EE8" },
-  { name: "TensorFlow",   devicon: "devicon-tensorflow-original colored",  color: "#FF6F00" },
-  // Row 2
-  { name: "Keras",        logo: kerasLogo,                                 color: "#D00000" },
-  { name: "Scikit",       devicon: "devicon-scikitlearn-plain colored",    color: "#F7931E" },
-  { name: "PyTorch",      devicon: "devicon-pytorch-original colored",     color: "#EE4C2C" },
-  { name: "ONNX",         logo: onnxLogo,                                  color: "#005CED" },
-  { name: "CUDA",         logo: cudaLogo,                                  color: "#76B900" },
-  { name: "Raspberry Pi", logo: raspberryLogo,                             color: "#C51A4A" },
-  // Row 3
-  { name: "Arduino",      logo: arduinoLogo,                               color: "#00979D" },
-  { name: "Git",          logo: gitLogo,                                   color: "#F05032" },
-  { name: "GitHub",       logo: githubLogo,                                color: "#E6EDF3" },
-  { name: "Linux",        logo: linuxLogo,                                 color: "#FCC624" },
-  { name: "Docker",       logo: dockerLogo,                                color: "#2496ED" },
-  { name: "Kubernetes",   logo: kubernetesLogo,                            color: "#326CE5" },
-  // Row 4 — last row: Azure + SQL (square) + TensorRT & ROS (rect)
-  { name: "Azure",        logo: azureLogo,                                 color: "#0078D4" },
-  { name: "SQL",          devicon: "devicon-postgresql-plain colored",     color: "#336791" },
-  { name: "TensorRT",     logo: tensorrtLogo,                              color: "#76B900",  rect: true },
-  { name: "ROS/ROS2",     logo: rosLogo,                                   color: "#22314E",  rect: true },
+  { name: "Python",       logo: pythonLogo,                               color: "#3776AB" },
+  { name: "C++",          devicon: "devicon-cplusplus-plain colored",     color: "#00599C" },
+  { name: "NumPy",        logo: numpyLogo,                                color: "#4DABCF" },
+  { name: "Pandas",       logo: pandasLogo,                               color: "#8B77D8" },
+  { name: "OpenCV",       logo: opencvLogo,                               color: "#5C3EE8" },
+  { name: "TensorFlow",   devicon: "devicon-tensorflow-original colored", color: "#FF6F00" },
+  { name: "Keras",        logo: kerasLogo,                                color: "#D00000" },
+  { name: "Scikit",       devicon: "devicon-scikitlearn-plain colored",   color: "#F7931E" },
+  { name: "PyTorch",      devicon: "devicon-pytorch-original colored",    color: "#EE4C2C" },
+  { name: "ONNX",         logo: onnxLogo,                                 color: "#005CED" },
+  { name: "CUDA",         logo: cudaLogo,                                 color: "#76B900" },
+  { name: "Raspberry Pi", logo: raspberryLogo,                            color: "#C51A4A" },
+  { name: "Arduino",      logo: arduinoLogo,                              color: "#00979D" },
+  { name: "Git",          logo: gitLogo,                                  color: "#F05032" },
+  { name: "GitHub",       logo: githubLogo,                               color: "#E6EDF3" },
+  { name: "Linux",        logo: linuxLogo,                                color: "#FCC624" },
+  { name: "Docker",       logo: dockerLogo,                               color: "#2496ED" },
+  { name: "Kubernetes",   logo: kubernetesLogo,                           color: "#326CE5" },
+  { name: "Azure",        logo: azureLogo,                                color: "#0078D4" },
+  { name: "SQL",          devicon: "devicon-postgresql-plain colored",    color: "#336791" },
+  { name: "TensorRT",     logo: tensorrtLogo,                             color: "#76B900", rect: true },
+  { name: "ROS/ROS2",     logo: rosLogo,                                  color: "#22314E", rect: true },
 ];
 
-// ─── Particle Canvas ──────────────────────────────────────────────────────────
-function SkillsParticleCanvas() {
+// ─── Particle Canvas — disabled on mobile for performance ────────────────────
+function SkillsParticleCanvas({ isMobile }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    if (isMobile) return;
     const canvas = canvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
     let animId;
     const mouse = { x: null, y: null };
@@ -96,7 +93,7 @@ function SkillsParticleCanvas() {
     const clearMouse = () => { mouse.x = null; mouse.y = null; };
     window.addEventListener("mousemove", handleMouseMove);
     const section = canvas.parentElement;
-    section.addEventListener("mouseleave", clearMouse);
+    section?.addEventListener("mouseleave", clearMouse);
 
     const COUNT = 85;
     const particles = Array.from({ length: COUNT }, () => ({
@@ -163,9 +160,11 @@ function SkillsParticleCanvas() {
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", handleMouseMove);
-      section.removeEventListener("mouseleave", clearMouse);
+      section?.removeEventListener("mouseleave", clearMouse);
     };
-  }, []);
+  }, [isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <canvas
@@ -180,7 +179,7 @@ function SkillsParticleCanvas() {
 }
 
 // ─── Square Skill Tile ────────────────────────────────────────────────────────
-function SkillTile({ skill, index }) {
+function SkillTile({ skill, index, isMobile }) {
   const [hovered, setHovered] = useState(false);
 
   const hex = skill.color;
@@ -193,17 +192,21 @@ function SkillTile({ skill, index }) {
     ? `drop-shadow(0 0 10px rgba(${rgb},0.9)) drop-shadow(0 0 24px rgba(${rgb},0.5))`
     : "none";
 
+  const tileSize  = isMobile ? 52 : 68;
+  const iconSize  = isMobile ? 40 : 58;
+  const tileWidth = isMobile ? 72 : 110;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 22, scale: 0.9 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay: 0.04 * index, duration: 0.4, ease: "easeOut" }}
+      transition={{ delay: 0.03 * index, duration: 0.4, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.1 }}
       style={{
         display: "flex", flexDirection: "column",
-        alignItems: "center", gap: 12,
+        alignItems: "center", gap: isMobile ? 8 : 12,
         zIndex: 2, position: "relative",
-        width: 110,
+        width: tileWidth,
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -212,14 +215,14 @@ function SkillTile({ skill, index }) {
         animate={{ y: hovered ? -7 : 0 }}
         transition={{ duration: 0.2, ease: "easeOut" }}
         style={{
-          width: 68, height: 68,
+          width: tileSize, height: tileSize,
           display: "flex", alignItems: "center",
           justifyContent: "center", cursor: "default",
         }}
       >
         {skill.logo && (
           <img src={skill.logo} alt={skill.name} style={{
-            width: 58, height: 58, objectFit: "contain",
+            width: iconSize, height: iconSize, objectFit: "contain",
             filter: glowFilter, opacity: hovered ? 1 : 0.75,
             transform: hovered ? "scale(1.15)" : "scale(1)",
             transition: "filter 0.25s, transform 0.25s, opacity 0.25s",
@@ -227,7 +230,7 @@ function SkillTile({ skill, index }) {
         )}
         {skill.devicon && (
           <i className={skill.devicon} style={{
-            fontSize: 58,
+            fontSize: iconSize,
             filter: glowFilter, opacity: hovered ? 1 : 0.75,
             transform: hovered ? "scale(1.15)" : "scale(1)",
             transition: "filter 0.25s, transform 0.25s, opacity 0.25s",
@@ -236,7 +239,7 @@ function SkillTile({ skill, index }) {
       </motion.div>
       <span style={{
         fontFamily: "'Raleway', sans-serif", fontWeight: 600,
-        fontSize: 11, letterSpacing: "0.07em",
+        fontSize: isMobile ? 9 : 11, letterSpacing: "0.07em",
         color: hovered ? "#e2e8f0" : "rgba(255,255,255,0.38)",
         transition: "color 0.2s", textAlign: "center",
         textTransform: "uppercase", whiteSpace: "nowrap",
@@ -248,7 +251,7 @@ function SkillTile({ skill, index }) {
 }
 
 // ─── Rectangular Skill Tile ───────────────────────────────────────────────────
-function RectSkillTile({ skill, index }) {
+function RectSkillTile({ skill, index, isMobile }) {
   const [hovered, setHovered] = useState(false);
 
   const hex = skill.color;
@@ -261,17 +264,22 @@ function RectSkillTile({ skill, index }) {
     ? `drop-shadow(0 0 10px rgba(${rgb},0.9)) drop-shadow(0 0 24px rgba(${rgb},0.5))`
     : "none";
 
+  const rectW     = isMobile ? 120 : 180;
+  const rectH     = isMobile ? 52  : 68;
+  const imgH      = isMobile ? 40  : 58;
+  const tileWidth = isMobile ? 130 : 180;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 22, scale: 0.9 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay: 0.04 * index, duration: 0.4, ease: "easeOut" }}
+      transition={{ delay: 0.03 * index, duration: 0.4, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.1 }}
       style={{
         display: "flex", flexDirection: "column",
-        alignItems: "center", gap: 12,
+        alignItems: "center", gap: isMobile ? 8 : 12,
         zIndex: 2, position: "relative",
-        width: 180, // wider rect tile
+        width: tileWidth,
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -280,13 +288,13 @@ function RectSkillTile({ skill, index }) {
         animate={{ y: hovered ? -7 : 0 }}
         transition={{ duration: 0.2, ease: "easeOut" }}
         style={{
-          width: 170, height: 68,
+          width: rectW, height: rectH,
           display: "flex", alignItems: "center",
           justifyContent: "center", cursor: "default",
         }}
       >
         <img src={skill.logo} alt={skill.name} style={{
-          width: "100%", height: 58, objectFit: "contain",
+          width: "100%", height: imgH, objectFit: "contain",
           filter: glowFilter, opacity: hovered ? 1 : 0.75,
           transform: hovered ? "scale(1.08)" : "scale(1)",
           transition: "filter 0.25s, transform 0.25s, opacity 0.25s",
@@ -294,7 +302,7 @@ function RectSkillTile({ skill, index }) {
       </motion.div>
       <span style={{
         fontFamily: "'Raleway', sans-serif", fontWeight: 600,
-        fontSize: 11, letterSpacing: "0.07em",
+        fontSize: isMobile ? 9 : 11, letterSpacing: "0.07em",
         color: hovered ? "#e2e8f0" : "rgba(255,255,255,0.38)",
         transition: "color 0.2s", textAlign: "center",
         textTransform: "uppercase", whiteSpace: "nowrap",
@@ -307,15 +315,28 @@ function RectSkillTile({ skill, index }) {
 
 // ─── Skills Section ───────────────────────────────────────────────────────────
 export default function Skills() {
-  // Separate rect tiles from square tiles
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" && window.innerWidth < 640
+  );
+
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 640);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+
   const squareSkills = skills.filter(s => !s.rect);
   const rectSkills   = skills.filter(s => s.rect);
 
-  // Split square skills into rows of 6
+  // Desktop: rows of 6 | Mobile: rows of 4
+  const rowSize = isMobile ? 4 : 6;
   const rows = [];
-  for (let i = 0; i < squareSkills.length - 2; i += 6) {
-    rows.push(squareSkills.slice(i, i + 6));
+  for (let i = 0; i < squareSkills.length; i += rowSize) {
+    rows.push(squareSkills.slice(i, i + rowSize));
   }
+
+  const gap = isMobile ? 16 : 32;
+  const rowGap = isMobile ? 32 : 48;
 
   return (
     <>
@@ -323,25 +344,26 @@ export default function Skills() {
         #skills-section {
           position: relative;
           background: #0d0f14;
-          padding-top: 6rem;
-          padding-bottom: 6rem;
+          padding-top: 5rem;
+          padding-bottom: 5rem;
           overflow: hidden;
         }
       `}</style>
 
       <section id="skills-section">
-        <SkillsParticleCanvas />
+        <SkillsParticleCanvas isMobile={isMobile} />
 
         <div style={{
           position: "relative", zIndex: 2,
           display: "flex", flexDirection: "column",
           alignItems: "center",
-          paddingLeft: "5vw", paddingRight: "5vw",
+          paddingLeft: isMobile ? "1rem" : "5vw",
+          paddingRight: isMobile ? "1rem" : "5vw",
         }}>
 
           {/* Header */}
           <motion.div
-            style={{ textAlign: "center", marginBottom: 52 }}
+            style={{ textAlign: "center", marginBottom: isMobile ? 36 : 52 }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -349,9 +371,10 @@ export default function Skills() {
           >
             <h2 style={{
               fontFamily: "'Raleway', sans-serif", fontWeight: 800,
-              fontSize: "1.25rem", letterSpacing: "0.25em",
+              fontSize: isMobile ? "1rem" : "1.25rem",
+              letterSpacing: "0.25em",
               textTransform: "uppercase", color: "#e2e8f0",
-              margin: 0, lineHeight: 1.1, 
+              margin: 0, lineHeight: 1.1,
               marginTop: -20, marginBottom: "20px",
             }}>
               Technical Skills
@@ -369,57 +392,56 @@ export default function Skills() {
             />
           </motion.div>
 
-          {/* Square icon rows — first 18 skills in rows of 6 */}
+          {/* Icon grid */}
           <div style={{
             display: "flex", flexDirection: "column",
-            alignItems: "center", gap: 48,
+            alignItems: "center", gap: rowGap,
+            width: "100%",
           }}>
             {rows.map((row, rowIdx) => (
               <div key={rowIdx} style={{
-                display: "flex", gap: "0px 32px",
-                justifyContent: "center", flexWrap: "nowrap",
+                display: "flex",
+                gap: `0px ${gap}px`,
+                justifyContent: "center",
+                flexWrap: "nowrap",
               }}>
                 {row.map((skill, colIdx) => (
                   <SkillTile
                     key={skill.name}
                     skill={skill}
-                    index={rowIdx * 6 + colIdx}
+                    index={rowIdx * rowSize + colIdx}
+                    isMobile={isMobile}
                   />
                 ))}
               </div>
             ))}
 
-            {/* Last row — Azure, SQL (square) + TensorRT, ROS/ROS2 (rect) side by side */}
+            {/* Last row — rect tiles (TensorRT, ROS) alongside any leftover square tiles */}
             <div style={{
-              display: "flex", gap: "0px 32px",
-              justifyContent: "center", alignItems: "flex-start",
-              flexWrap: "nowrap",
+              display: "flex",
+              gap: `0px ${gap}px`,
+              justifyContent: "center",
+              alignItems: "flex-start",
+              flexWrap: isMobile ? "wrap" : "nowrap",
             }}>
-              {/* Azure and SQL as normal square tiles */}
-              {squareSkills.slice(-2).map((skill, i) => (
-                <SkillTile
-                  key={skill.name}
-                  skill={skill}
-                  index={squareSkills.length - 2 + i}
-                />
-              ))}
-
-              {/* TensorRT and ROS/ROS2 as rect tiles */}
               {rectSkills.map((skill, i) => (
                 <RectSkillTile
                   key={skill.name}
                   skill={skill}
                   index={squareSkills.length + i}
+                  isMobile={isMobile}
                 />
               ))}
             </div>
           </div>
 
-          {/* Footer */}
+          {/* Footer note */}
           <motion.p
             style={{
-              fontFamily: "'Raleway', sans-serif", fontSize: 12,
-              color: "rgba(255,255,255,0.28)", marginTop: 52,
+              fontFamily: "'Raleway', sans-serif",
+              fontSize: isMobile ? 10 : 12,
+              color: "rgba(255,255,255,0.28)",
+              marginTop: isMobile ? 36 : 52,
               letterSpacing: "0.07em", textAlign: "center",
             }}
             initial={{ opacity: 0 }}

@@ -142,8 +142,9 @@ export default function About() {
             }}
           >
             MSc Mechatronics graduate with over two years of industrial experience and 
-            a strong research driven computational background in AI, machine learning, 
-            deep learning, computer vision, and image processing. I design scalable and 
+            a strong research driven computational background in {" "}
+            <strong style={{ fontWeight: 700, color: "#111827" }}> AI/ML, 
+            deep learning, computer vision, and image processing.</strong> I design scalable and 
             reproducible data pipelines, develop and fine tune models, and perform rigorous 
             experimental evaluation. I have hands on experience optimizing inference and 
             deploying models on embedded and edge hardware, transforming research concepts 

@@ -21,16 +21,18 @@ const experiences = [
     thesisOverview: true,
     positions: [
       {
-        title: "Master's Thesis",
+        title: "Master's Thesis | Grade: 1.0 (Excellent)",
         date: "April 2025 – December 2025",
         bullets: [
           "Title: **Flexible Soiling Detection on Automotive Cameras** | Department: Vehicle Solutions & Automated Driving, Automated Driving Functions",
-          "Designed and implemented a flexible framework for **data-driven generation of camera soiling** (dirt, water, fog, etc.) to produce realistic training and evaluation datasets.",
+          "Designed and implemented a flexible framework for **data-driven generation of camera soiling** (dirt, water, etc.) to produce realistic training and evaluation datasets.",
           "Built and trained **GAN-based models** (CycleGAN, MudGAN) for realistic synthetic soiling data generation across diverse camera configurations.",
           "Implemented, trained, and evaluated modern **deep learning models** using Python, OpenCV, and PyTorch — including CNN architectures (DeepLabv3+), Vision Transformers (SegFormer), and hybrid CNNs (PIDNet).",
-          "Conducted systematic **benchmarks** to evaluate model robustness and cross-domain generalization across different soiling types and camera setups.",
+          "Conducted systematic **benchmarks** to evaluate model robustness and cross-domain generalisation across different soiling types and camera setups.",
           "Worked with various **camera models and geometries**, including Pinhole and Fisheye cameras, to ensure broad applicability of detection methods.",
           "Built a comprehensive **evaluation protocol** using objective metrics (KID, LPIPS) and structured human studies (Mean Opinion Score, Visual Turing Test).",
+          "Exported trained models to **ONNX** and validated **7 ms inference on NVIDIA RTX A1000** (6 GB, 29.5 MB model size), demonstrating embedded-ready performance for production deployment.",
+          "Deployed a **real-time prototype** and presented results to automotive and defence customers, showcasing end-to-end capability from training to live inference.",
           "Managed version control and collaborative development throughout the research workflow using **Git**.",
         ],
       },
@@ -44,16 +46,16 @@ const experiences = [
     certificate: "/certificates/iav_intern_certificate.pdf",
     positions: [
       {
-        title: "Software Developer Intern",
-        date: "December 2024 – February 2025",
-        bullets: [
-          "Researched **augmentation of clean camera images with virtual soiling** to create training and test data for camera blindness detection in automotive perception systems.",
-          "Developed a **tool for generating virtual camera soiling** (dirt, water droplets, fog) on real camera images, enabling scalable dataset creation without physical soiling setups.",
-          "Built a **GUI application using Python (Tkinter)** for interactive raindrop simulation — supporting both single images and **temporal sequences** for video-like generation.",
-          "Benchmarked soiling generation quality against **Stable Diffusion 2.1** using objective perceptual and statistical metrics.",
-          "Conducted systematic **experiments and tests**, followed by structured analysis and evaluation of results to validate the effectiveness of generated soiling patterns.",
-        ],
-      },
+      title: "Software Developer Intern",
+      date: "December 2024 – February 2025",
+      bullets: [
+        "Researched **data augmentation of clean camera images with virtual soiling** to generate training and test datasets for camera blindness detection in automotive perception systems.",
+        "Conducted structured **literature research** on synthetic image corruption and robustness validation methodologies.",
+        "Designed and implemented a **procedural raindrop generation pipeline** for controllable virtual soiling simulation on real camera images.",
+        "Developed a **Python-based GUI application (Tkinter)** supporting both single-image processing and **temporally consistent frame sequence simulation**.",
+        "Performed systematic **experiments, quantitative evaluation, and result analysis** to validate realism and suitability for scalable dataset generation.",
+      ],
+    },
     ],
   },
   {
@@ -67,11 +69,11 @@ const experiences = [
         title: "Assistant Manager",
         date: "August 2022 – August 2023",
         bullets: [
-          "Contributed to **Kutch Copper Limited's 1.5 MTPA greenfield project** as part of the Mechanical Department, managing the **M1A package end-to-end** — from civil works completion through equipment installation, commissioning preparation, and handover.",
-          "Served as the primary coordination point across **Electrical, Civil, Instrumentation, Metallurgy, Finance, and Project Management** departments, resolving cross-functional dependencies and maintaining critical path schedules.",
-          "Led **Fanuc 400i robotic system installation** in the refinery plant — conducting technical drawing verification, design reviews, and integration troubleshooting across multiple engineering disciplines.",
-          "Administered **SAP MM/FM module operations** including PR/PO creation, material clearance, billing, and contractor payment processing, ensuring procurement and financial workflows remained aligned with project timelines.",
-          "Developed custom **PowerBI dashboards** for real-time project progress tracking and HOD-level reporting, enabling data-driven visibility across all M1A package milestones.",
+          "Managed the **M1A package execution** for Kutch Copper Limited’s **1.5 MTPA greenfield refinery project**, overseeing installation, commissioning preparation, and final handover.",
+          "Coordinated cross-functionally with **Electrical, Civil, Instrumentation, Metallurgy, Finance, and PMO teams** to resolve technical dependencies and maintain critical project timelines.",
+          "Led installation and integration of the **Fanuc 400i industrial robotic system**, performing drawing verification, technical reviews, and multi-disciplinary troubleshooting.",
+          "Administered **SAP MM/FM operations** including PR/PO processing, material clearance, contractor billing, and financial workflow alignment.",
+          "Designed **PowerBI dashboards** for real-time milestone tracking and executive-level project reporting."
         ],
       },
     ],
@@ -87,9 +89,9 @@ const experiences = [
         title: "Mechanical Intern – Maintenance Department",
         date: "May 2021 – July 2021",
         bullets: [
-          "Studied plant operations across **12+ facilities** (Paracetamol Production, HVAC, Boilers, ETP, MEE, Distillation) and mastered SOPs for each unit within a pharmaceutical manufacturing environment.",
-          "Performed hands-on **maintenance of industrial pump systems, gearboxes, and boilers** — covering both preventive maintenance schedules and breakdown troubleshooting across critical equipment.",
-          "Implemented **5S methodology** in Engineering Store management, organizing inventory of mechanical components and learning industrial spare parts management systems.",
+          "Gained operational exposure across **12+ pharmaceutical production and utility units** including Paracetamol Production, HVAC, Boilers, ETP, MEE, and Distillation systems.",
+          "Performed **preventive and breakdown maintenance** on industrial pump systems, gearboxes, and boiler assemblies in a continuous manufacturing environment.",
+          "Implemented **5S methodology** within Engineering Store operations, optimizing mechanical inventory organization and spare part traceability."
         ],
       },
     ],
@@ -97,7 +99,7 @@ const experiences = [
   {
     id: 5,
     logo: "/images/tapf_logo.jpg",
-    company: "The Akshaya Patra Foundation (TAPF)",
+    company: "The Akshaya Patra Foundation",
     location: "Vadodara, India",
     certificate: "/certificates/tapf_certificate.pdf",
     positions: [
@@ -105,9 +107,9 @@ const experiences = [
         title: "Mechanical Design Intern",
         date: "April 2019 – June 2019",
         bullets: [
-          "Led technical documentation of **Roti Machine and Biogas Plant equipment** — conducting component analysis, operational workflow mapping, and structured documentation for large-scale food production systems.",
-          "Completed professional training in **Six Sigma, 7 QC Tools, and Food Safety Management**, applying quality assurance frameworks within one of India's largest NGO operations.",
-          "Awarded the **Best Intern Runner-Up** recognition for outstanding technical contributions and cross-functional engagement across Water Treatment, Boiler Operations, and Vehicle Maintenance departments.",
+          "Documented and analyzed **Roti Machine and Biogas Plant systems**, mapping component structures and operational workflows for large-scale food production.",
+          "Applied **Six Sigma, 7 QC Tools, and Food Safety Management principles** within a high-throughput NGO manufacturing environment.",
+          "Recognized as **Best Intern Runner-Up** for technical contribution and cross-department collaboration."
         ],
       },
     ],

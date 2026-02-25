@@ -1,5 +1,11 @@
-import { motion } from "framer-motion";
-import { Send } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Send, CheckCircle } from "lucide-react";
+import emailjs from "@emailjs/browser";
+
+const SERVICE_ID  = "service_8wmkf85";
+const TEMPLATE_ID = "template_72c7rim";
+const PUBLIC_KEY  = "KbE5Vx0MukPvRZBxT";
 
 // ─── Fixed Social Sidebar ─────────────────────────────────────────────────────
 function SocialSidebar() {
@@ -91,13 +97,35 @@ function SocialSidebar() {
 
 // ─── Contact Section ──────────────────────────────────────────────────────────
 export default function Contact() {
-  const handleSubmit = (e) => {
+  const [status, setStatus]   = useState("idle"); // "idle" | "sending" | "success" | "error"
+  const [form, setForm]       = useState({ name: "", email: "", message: "" });
+
+  const handleChange = (e) => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const name    = e.target.name.value;
-    const email   = e.target.email.value;
-    const message = e.target.message.value;
-    const mailto  = `mailto:mistryvardhan@gmail.com?subject=Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
-    window.location.href = mailto;
+    setStatus("sending");
+
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name:    form.name,
+          from_email:   form.email,
+          message:      form.message,
+          to_email:     "mistryvardhan@gmail.com",
+        },
+        PUBLIC_KEY
+      );
+      setStatus("success");
+      setForm({ name: "", email: "", message: "" });
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setStatus("error");
+    }
   };
 
   return (
@@ -158,37 +186,169 @@ export default function Contact() {
             border: "1px solid rgba(255,255,255,0.09)",
             borderRadius: 16,
             padding: "2rem",
+            minHeight: 340,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
           }}
         >
-          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-            <input
-              name="name"
-              type="text"
-              placeholder="Name"
-              required
-              style={inputStyle}
-            />
-            <input
-              name="email"
-              type="email"
-              placeholder="Email address"
-              required
-              style={inputStyle}
-            />
-            <textarea
-              name="message"
-              placeholder="Message"
-              required
-              rows={6}
-              style={{ ...inputStyle, resize: "vertical", lineHeight: 1.6 }}
-            />
-            <div style={{ display: "flex", justifyContent: "flex-start" }}>
-              <button type="submit" style={btnStyle}>
-                <Send size={15} />
-                Send
-              </button>
-            </div>
-          </form>
+          <AnimatePresence mode="wait">
+
+            {/* ── Success state ── */}
+            {status === "success" ? (
+              <motion.div
+                key="success"
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.35 }}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: 16,
+                  textAlign: "center",
+                  padding: "1.5rem 0",
+                }}
+              >
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
+                >
+                  <CheckCircle size={52} color="#22c55e" strokeWidth={1.5} />
+                </motion.div>
+                <h3 style={{
+                  fontFamily: "'Raleway', sans-serif",
+                  fontWeight: 800,
+                  fontSize: "1.15rem",
+                  color: "#f1f5f9",
+                  margin: 0,
+                }}>
+                  Message Sent!
+                </h3>
+                <p style={{
+                  fontFamily: "'Raleway', sans-serif",
+                  fontSize: "0.9rem",
+                  color: "rgba(255,255,255,0.5)",
+                  lineHeight: 1.7,
+                  margin: 0,
+                  maxWidth: 300,
+                }}>
+                  Thank you for reaching out. I will get back to you as soon as possible.
+                </p>
+                <button
+                  onClick={() => setStatus("idle")}
+                  style={{
+                    marginTop: 8,
+                    background: "transparent",
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    borderRadius: 7,
+                    color: "rgba(255,255,255,0.45)",
+                    padding: "6px 18px",
+                    fontSize: 13,
+                    fontFamily: "inherit",
+                    cursor: "pointer",
+                    transition: "border-color 0.2s, color 0.2s",
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)";
+                    e.currentTarget.style.color = "rgba(255,255,255,0.75)";
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
+                    e.currentTarget.style.color = "rgba(255,255,255,0.45)";
+                  }}
+                >
+                  Send another message
+                </button>
+              </motion.div>
+
+            ) : (
+
+              /* ── Form state ── */
+              <motion.form
+                key="form"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onSubmit={handleSubmit}
+                style={{ display: "flex", flexDirection: "column", gap: 16 }}
+              >
+                <input
+                  name="name"
+                  type="text"
+                  placeholder="Name"
+                  required
+                  value={form.name}
+                  onChange={handleChange}
+                  style={inputStyle}
+                  onFocus={e => e.target.style.borderColor = "rgba(79,142,255,0.6)"}
+                  onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.12)"}
+                />
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="Email address"
+                  required
+                  value={form.email}
+                  onChange={handleChange}
+                  style={inputStyle}
+                  onFocus={e => e.target.style.borderColor = "rgba(79,142,255,0.6)"}
+                  onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.12)"}
+                />
+                <textarea
+                  name="message"
+                  placeholder="Message"
+                  required
+                  rows={6}
+                  value={form.message}
+                  onChange={handleChange}
+                  style={{ ...inputStyle, resize: "vertical", lineHeight: 1.6 }}
+                  onFocus={e => e.target.style.borderColor = "rgba(79,142,255,0.6)"}
+                  onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.12)"}
+                />
+
+                {/* Error message */}
+                {status === "error" && (
+                  <p style={{
+                    margin: 0,
+                    fontSize: 13,
+                    color: "#f87171",
+                    fontFamily: "'Raleway', sans-serif",
+                  }}>
+                    Something went wrong. Please try again or email me directly at mistryvardhan@gmail.com.
+                  </p>
+                )}
+
+                <div style={{ display: "flex", justifyContent: "flex-start" }}>
+                  <button
+                    type="submit"
+                    disabled={status === "sending"}
+                    style={{
+                      ...btnStyle,
+                      opacity: status === "sending" ? 0.6 : 1,
+                      cursor: status === "sending" ? "not-allowed" : "pointer",
+                    }}
+                    onMouseEnter={e => {
+                      if (status !== "sending") {
+                        e.currentTarget.style.background = "#3b82f6";
+                        e.currentTarget.style.color = "#fff";
+                      }
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.background = "transparent";
+                      e.currentTarget.style.color = "#3b82f6";
+                    }}
+                  >
+                    <Send size={15} />
+                    {status === "sending" ? "Sending…" : "Send"}
+                  </button>
+                </div>
+              </motion.form>
+            )}
+
+          </AnimatePresence>
         </motion.div>
       </section>
     </>
@@ -221,6 +381,5 @@ const btnStyle = {
   padding: "8px 20px",
   fontSize: 14,
   fontFamily: "inherit",
-  cursor: "pointer",
   transition: "background 0.2s, color 0.2s",
 };
