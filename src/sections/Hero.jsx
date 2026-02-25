@@ -62,13 +62,20 @@ function ParticleCanvas() {
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < CONNECT_DIST) {
-            const alpha = (1 - dist / CONNECT_DIST) * 0.22;
+            const alpha = (1 - dist / CONNECT_DIST) * 0.6;
             ctx.beginPath();
+
+            ctx.shadowColor = "rgba(255,255,255,0.8)";
+            ctx.shadowBlur = 6;
+
             ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
-            ctx.lineWidth = 0.6;
+            ctx.lineWidth = 1.2;
+
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
+
+            ctx.shadowBlur = 0; // reset
           }
         }
 
@@ -77,13 +84,20 @@ function ParticleCanvas() {
           const dy = particles[i].y - mouse.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < MOUSE_DIST) {
-            const alpha = (1 - dist / MOUSE_DIST) * 0.55;
+            const alpha = (1 - dist / MOUSE_DIST) * 0.9;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(100,160,255,${alpha})`;
-            ctx.lineWidth = 0.8;
+
+            ctx.shadowColor = "rgba(255,255,255,0.9)";
+            ctx.shadowBlur = 10;
+
+            ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+            ctx.lineWidth = 1.3;
+
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(mouse.x, mouse.y);
             ctx.stroke();
+
+            ctx.shadowBlur = 0; // reset
           }
         }
       }
