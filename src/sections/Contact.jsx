@@ -4,7 +4,7 @@ import { Send, CheckCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
 const SERVICE_ID  = "service_8wmkf85";
-const TEMPLATE_ID = "template_72c7rim";
+const TEMPLATE_ID = "template_w6bqub3";
 const PUBLIC_KEY  = "KbE5Vx0MukPvRZBxT";
 
 // ─── Fixed Social Sidebar ─────────────────────────────────────────────────────
@@ -47,7 +47,7 @@ function SocialSidebar() {
           <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
         </svg>
       ),
-      href: "mailto:mistryvardhan133@gmail.com",
+      href: "mailto:mistryvardhan@gmail.com",
       bg: "#2563eb",
       label: "Email",
     },
@@ -116,6 +116,7 @@ export default function Contact() {
           from_name:  form.name,
           name:       form.name,
           email:      form.email,
+          from_email: form.email,
           message:    form.message,
         },
         PUBLIC_KEY
@@ -317,7 +318,7 @@ export default function Contact() {
                     color: "#f87171",
                     fontFamily: "'Raleway', sans-serif",
                   }}>
-                    Something went wrong. Please try again or email me directly at mistryvardhan@gmail.com.
+                    Something went wrong. Please try again or email me directly at mistryvardhan133@gmail.com.
                   </p>
                 )}
 
