@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FileText, X, ExternalLink } from "lucide-react";
+import { FileText, X, ExternalLink, BookOpen, ChevronRight } from "lucide-react";
 
 const fontLink = document.createElement("link");
 fontLink.rel = "stylesheet";
@@ -17,16 +17,21 @@ const experiences = [
     logo: "/images/logos_iav.png",
     company: "IAV GmbH",
     location: "Chemnitz, Germany",
-    certificate: "/certificates/iav_thesis_certificate.pdf", // set null if none
+    certificate: "/certificates/iav_thesis_certificate.pdf",
+    thesisOverview: true,
     positions: [
       {
         title: "Master's Thesis",
         date: "April 2025 – December 2025",
         bullets: [
-          "Title: Flexible Soiling Detection on Automotive Cameras | Grade: 1,0 (Excellent)",
-          "Developed image-based data analysis pipelines for automotive perception systems.",
-          "Applied **deep learning** and **computer vision** methods for real-world sensor data.",
-          "Executed research-driven experiments with reproducible ML workflows.",
+          "Title: **Flexible Soiling Detection on Automotive Cameras** | Department: Vehicle Solutions & Automated Driving, Automated Driving Functions",
+          "Designed and implemented a flexible framework for **data-driven generation of camera soiling** (dirt, water, fog, etc.) to produce realistic training and evaluation datasets.",
+          "Built and trained **GAN-based models** (CycleGAN, MudGAN) for realistic synthetic soiling data generation across diverse camera configurations.",
+          "Implemented, trained, and evaluated modern **deep learning models** using Python, OpenCV, and PyTorch — including CNN architectures (DeepLabv3+), Vision Transformers (SegFormer), and hybrid CNNs (PIDNet).",
+          "Conducted systematic **benchmarks** to evaluate model robustness and cross-domain generalization across different soiling types and camera setups.",
+          "Worked with various **camera models and geometries**, including Pinhole and Fisheye cameras, to ensure broad applicability of detection methods.",
+          "Built a comprehensive **evaluation protocol** using objective metrics (KID, LPIPS) and structured human studies (Mean Opinion Score, Visual Turing Test).",
+          "Managed version control and collaborative development throughout the research workflow using **Git**.",
         ],
       },
     ],
@@ -35,16 +40,18 @@ const experiences = [
     id: 2,
     logo: "/images/logos_iav.png",
     company: "IAV GmbH",
-    location: "Stollberg, Germany",
+    location: "Chemnitz, Germany",
     certificate: "/certificates/iav_intern_certificate.pdf",
     positions: [
       {
         title: "Software Developer Intern",
         date: "December 2024 – February 2025",
         bullets: [
-          "Built and trained **deep learning** models for image classification tasks.",
-          "Maintained reproducible experiment pipelines using **Docker** and Git.",
-          "Collaborated with cross-functional teams on data annotation and QA.",
+          "Researched **augmentation of clean camera images with virtual soiling** to create training and test data for camera blindness detection in automotive perception systems.",
+          "Developed a **tool for generating virtual camera soiling** (dirt, water droplets, fog) on real camera images, enabling scalable dataset creation without physical soiling setups.",
+          "Built a **GUI application using Python (Tkinter)** for interactive raindrop simulation — supporting both single images and **temporal sequences** for video-like generation.",
+          "Benchmarked soiling generation quality against **Stable Diffusion 2.1** using objective perceptual and statistical metrics.",
+          "Conducted systematic **experiments and tests**, followed by structured analysis and evaluation of results to validate the effectiveness of generated soiling patterns.",
         ],
       },
     ],
@@ -60,9 +67,11 @@ const experiences = [
         title: "Assistant Manager",
         date: "August 2022 – August 2023",
         bullets: [
-          "Built and trained **deep learning** models for image classification tasks.",
-          "Maintained reproducible experiment pipelines using **Docker** and Git.",
-          "Collaborated with cross-functional teams on data annotation and QA.",
+          "Contributed to **Kutch Copper Limited's 1.5 MTPA greenfield project** as part of the Mechanical Department, managing the **M1A package end-to-end** — from civil works completion through equipment installation, commissioning preparation, and handover.",
+          "Served as the primary coordination point across **Electrical, Civil, Instrumentation, Metallurgy, Finance, and Project Management** departments, resolving cross-functional dependencies and maintaining critical path schedules.",
+          "Led **Fanuc 400i robotic system installation** in the refinery plant — conducting technical drawing verification, design reviews, and integration troubleshooting across multiple engineering disciplines.",
+          "Administered **SAP MM/FM module operations** including PR/PO creation, material clearance, billing, and contractor payment processing, ensuring procurement and financial workflows remained aligned with project timelines.",
+          "Developed custom **PowerBI dashboards** for real-time project progress tracking and HOD-level reporting, enabling data-driven visibility across all M1A package milestones.",
         ],
       },
     ],
@@ -72,15 +81,15 @@ const experiences = [
     logo: "/images/farmson_logo.png",
     company: "Farmson Basic Drugs Private Limited",
     location: "Vadodara, India",
-    certificate: null, // no certificate — button won't appear
+    certificate: null,
     positions: [
       {
-        title: "Internship",
-        date: "August 2022 – August 2023",
+        title: "Mechanical Intern – Maintenance Department",
+        date: "May 2021 – July 2021",
         bullets: [
-          "Built and trained **deep learning** models for image classification tasks.",
-          "Maintained reproducible experiment pipelines using **Docker** and Git.",
-          "Collaborated with cross-functional teams on data annotation and QA.",
+          "Studied plant operations across **12+ facilities** (Paracetamol Production, HVAC, Boilers, ETP, MEE, Distillation) and mastered SOPs for each unit within a pharmaceutical manufacturing environment.",
+          "Performed hands-on **maintenance of industrial pump systems, gearboxes, and boilers** — covering both preventive maintenance schedules and breakdown troubleshooting across critical equipment.",
+          "Implemented **5S methodology** in Engineering Store management, organizing inventory of mechanical components and learning industrial spare parts management systems.",
         ],
       },
     ],
@@ -93,17 +102,51 @@ const experiences = [
     certificate: "/certificates/tapf_certificate.pdf",
     positions: [
       {
-        title: "Internship",
-        date: "August 2022 – August 2023",
+        title: "Mechanical Design Intern",
+        date: "April 2019 – June 2019",
         bullets: [
-          "Built and trained **deep learning** models for image classification tasks.",
-          "Maintained reproducible experiment pipelines using **Docker** and Git.",
-          "Collaborated with cross-functional teams on data annotation and QA.",
+          "Led technical documentation of **Roti Machine and Biogas Plant equipment** — conducting component analysis, operational workflow mapping, and structured documentation for large-scale food production systems.",
+          "Completed professional training in **Six Sigma, 7 QC Tools, and Food Safety Management**, applying quality assurance frameworks within one of India's largest NGO operations.",
+          "Awarded the **Best Intern Runner-Up** recognition for outstanding technical contributions and cross-functional engagement across Water Treatment, Boiler Operations, and Vehicle Maintenance departments.",
         ],
       },
     ],
   },
 ];
+
+// ── Thesis overview content ────────────────────────────────────────────────────
+const thesisOverviewContent = {
+  title: "Flexible Soiling Detection on Automotive Cameras",
+  grade: "1.0 (Excellent)",
+  period: "April 2025 – December 2025",
+  department: "Vehicle Solutions & Automated Driving — Automated Driving Functions, IAV GmbH",
+  sections: [
+    {
+      heading: "Motivation & Problem Statement",
+      text: "Camera-based perception systems are central to modern autonomous and assisted driving. However, environmental soiling — including dirt, water droplets, mud, and fog — can severely degrade image quality and compromise detection accuracy. This thesis addresses the challenge of building robust, flexible soiling detection systems that generalise across diverse soiling types and camera geometries in real-world automotive conditions.",
+    },
+    {
+      heading: "Framework for Synthetic Soiling Generation",
+      text: "A data-driven framework was designed and implemented to generate realistic synthetic camera soiling for training and evaluation. The framework supports multiple soiling categories and is adaptable to different camera models including Pinhole and Fisheye geometries. This approach enables scalable dataset creation without requiring costly physical soiling experiments.",
+    },
+    {
+      heading: "Generative Models — GANs",
+      text: "GAN-based architectures, specifically CycleGAN and MudGAN, were trained to synthesise photorealistic soiling patterns on clean camera images. These models learn the visual distribution of real soiling and transfer it convincingly to synthetic data, closing the domain gap between simulated and real-world inputs.",
+    },
+    {
+      heading: "Deep Learning Detection Models",
+      text: "Several state-of-the-art deep learning architectures were implemented, trained, and evaluated for soiling detection: CNN-based models (DeepLabv3+), Vision Transformer models (SegFormer), and hybrid CNN architectures (PIDNet). All models were developed in Python using PyTorch and OpenCV, with additional experiments conducted using TensorFlow.",
+    },
+    {
+      heading: "Evaluation & Benchmarking",
+      text: "A rigorous evaluation protocol was established combining objective perceptual metrics — Kernel Inception Distance (KID) and Learned Perceptual Image Patch Similarity (LPIPS) — with structured human studies including Mean Opinion Score (MOS) and the Visual Turing Test. Systematic benchmarks assessed cross-domain generalisation and model robustness across varied soiling conditions.",
+    },
+    {
+      heading: "Outcome",
+      text: "The thesis was awarded a grade of 1.0 (Excellent), the highest possible distinction in the German grading system. The work contributes a flexible, reproducible pipeline for soiling simulation and detection that is directly applicable to production-level automotive camera perception systems.",
+    },
+  ],
+};
 
 // ── Bold markdown renderer ─────────────────────────────────────────────────────
 function Bold({ text }) {
@@ -136,7 +179,6 @@ function CertModal({ url, company, onClose }) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        {/* Backdrop */}
         <div
           style={{
             position: "absolute", inset: 0,
@@ -145,8 +187,6 @@ function CertModal({ url, company, onClose }) {
           }}
           onClick={onClose}
         />
-
-        {/* Modal window */}
         <motion.div
           style={{
             position: "relative", zIndex: 10,
@@ -163,7 +203,6 @@ function CertModal({ url, company, onClose }) {
           exit={{ scale: 0.93, opacity: 0, y: 20 }}
           transition={{ duration: 0.25 }}
         >
-          {/* Top bar */}
           <div style={{
             display: "flex", alignItems: "center",
             justifyContent: "space-between",
@@ -211,8 +250,6 @@ function CertModal({ url, company, onClose }) {
               </button>
             </div>
           </div>
-
-          {/* PDF viewer */}
           <iframe
             src={url}
             style={{ flex: 1, width: "100%", border: "none" }}
@@ -224,23 +261,224 @@ function CertModal({ url, company, onClose }) {
   );
 }
 
+// ── Thesis Overview Modal ──────────────────────────────────────────────────────
+function ThesisModal({ onClose }) {
+  const t = thesisOverviewContent;
+  return (
+    <AnimatePresence>
+      <motion.div
+        style={{
+          position: "fixed", inset: 0, zIndex: 50,
+          display: "flex", alignItems: "center", justifyContent: "center",
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        {/* Backdrop */}
+        <div
+          style={{
+            position: "absolute", inset: 0,
+            background: "rgba(0,0,0,0.80)",
+            backdropFilter: "blur(6px)",
+          }}
+          onClick={onClose}
+        />
+
+        {/* Modal */}
+        <motion.div
+          style={{
+            position: "relative", zIndex: 10,
+            width: "90vw", maxWidth: "780px",
+            maxHeight: "88vh",
+            background: "#0d111a",
+            border: "1px solid rgba(65,105,225,0.25)",
+            borderRadius: "14px",
+            overflow: "hidden",
+            display: "flex", flexDirection: "column",
+            boxShadow: "0 25px 60px rgba(0,0,0,0.6)",
+            fontFamily: "'Raleway', sans-serif",
+          }}
+          initial={{ scale: 0.93, opacity: 0, y: 24 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.93, opacity: 0, y: 24 }}
+          transition={{ duration: 0.28 }}
+        >
+          {/* Header */}
+          <div style={{
+            padding: "20px 24px 16px",
+            background: "linear-gradient(135deg, #0d111a 0%, #111827 100%)",
+            borderBottom: "1px solid rgba(65,105,225,0.2)",
+            flexShrink: 0,
+          }}>
+            <div style={{
+              display: "flex", alignItems: "flex-start",
+              justifyContent: "space-between", gap: 12,
+            }}>
+              <div style={{ flex: 1 }}>
+                <div style={{
+                  display: "flex", alignItems: "center", gap: 8,
+                  marginBottom: 8,
+                }}>
+                  <div style={{
+                    background: "rgba(65,105,225,0.15)",
+                    border: "1px solid rgba(65,105,225,0.35)",
+                    borderRadius: 6,
+                    padding: "4px 8px",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: "#7b9ff5",
+                    letterSpacing: "0.06em",
+                    textTransform: "uppercase",
+                  }}>
+                    Master's Thesis
+                  </div>
+                  <div style={{
+                    background: "rgba(34,197,94,0.12)",
+                    border: "1px solid rgba(34,197,94,0.3)",
+                    borderRadius: 6,
+                    padding: "4px 8px",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: "#4ade80",
+                    letterSpacing: "0.06em",
+                  }}>
+                    Grade: {t.grade}
+                  </div>
+                </div>
+                <h2 style={{
+                  margin: 0,
+                  fontSize: "1.15rem",
+                  fontWeight: 800,
+                  color: "#f9fafb",
+                  lineHeight: 1.4,
+                }}>
+                  {t.title}
+                </h2>
+                <p style={{
+                  margin: "6px 0 0",
+                  fontSize: "0.78rem",
+                  color: "#6b7280",
+                  fontWeight: 500,
+                }}>
+                  {t.department}
+                </p>
+              </div>
+              <button
+                onClick={onClose}
+                style={{
+                  color: "#6b7280", background: "transparent",
+                  border: "none", cursor: "pointer", padding: 4,
+                  borderRadius: 6, display: "flex", alignItems: "center",
+                  flexShrink: 0,
+                  transition: "color 0.2s",
+                }}
+                onMouseEnter={e => e.currentTarget.style.color = "#fff"}
+                onMouseLeave={e => e.currentTarget.style.color = "#6b7280"}
+              >
+                <X size={20} />
+              </button>
+            </div>
+          </div>
+
+          {/* Scrollable body */}
+          <div style={{
+            overflowY: "auto",
+            padding: "24px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+          }}>
+            {t.sections.map((section, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.06, duration: 0.3 }}
+                style={{
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                  borderRadius: "10px",
+                  padding: "16px 20px",
+                }}
+              >
+                <div style={{
+                  display: "flex", alignItems: "center", gap: 8,
+                  marginBottom: 10,
+                }}>
+                  <ChevronRight size={13} color="#4169e1" strokeWidth={2.5} />
+                  <h4 style={{
+                    margin: 0,
+                    fontSize: "0.85rem",
+                    fontWeight: 800,
+                    color: "#7b9ff5",
+                    letterSpacing: "0.02em",
+                    textTransform: "uppercase",
+                  }}>
+                    {section.heading}
+                  </h4>
+                </div>
+                <p style={{
+                  margin: 0,
+                  fontSize: "0.88rem",
+                  color: "#d1d5db",
+                  lineHeight: 1.8,
+                  textAlign: "justify",
+                }}>
+                  {section.text}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
 // ── Single Card ────────────────────────────────────────────────────────────────
 function ExperienceCard({ exp, index }) {
   const [showCert, setShowCert] = useState(false);
+  const [showThesis, setShowThesis] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" && window.innerWidth < 640
+  );
+
+  useState(() => {
+    const handler = () => setIsMobile(window.innerWidth < 640);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  });
+
+  const btnBase = {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 6,
+    padding: "7px 14px",
+    fontSize: "0.75rem",
+    fontWeight: 600,
+    fontFamily: "'Raleway', sans-serif",
+    letterSpacing: "0.04em",
+    borderRadius: "6px",
+    cursor: "pointer",
+    transition: "background 0.2s, border-color 0.2s",
+    border: "1px solid",
+  };
 
   return (
     <>
       <motion.div
         style={{
-          maxWidth: "900px",
+          maxWidth: "1100px",
           margin: "0 auto 2rem",
           border: "1px solid #e5e7eb",
           borderRadius: "12px",
           overflow: "hidden",
           display: "flex",
+          flexDirection: isMobile ? "column" : "row",
           boxShadow: "0 2px 20px rgba(0,0,0,0.07)",
           background: "#fff",
-          minHeight: "260px",
+          minHeight: isMobile ? "auto" : "260px",
         }}
         initial={{ opacity: 0, y: 28 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -250,22 +488,24 @@ function ExperienceCard({ exp, index }) {
         {/* LEFT — Logo panel */}
         <div
           style={{
-            width: "180px",
+            width: isMobile ? "100%" : "220px",
+            height: isMobile ? "140px" : "auto",
             flexShrink: 0,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             background: "#f9fafb",
-            borderRight: "1px solid #e5e7eb",
-            padding: "2rem 1.5rem",
+            borderRight: isMobile ? "none" : "1px solid #e5e7eb",
+            borderBottom: isMobile ? "1px solid #e5e7eb" : "none",
+            padding: isMobile ? "1.5rem" : "2rem 1.5rem",
           }}
         >
           <img
             src={exp.logo}
             alt={exp.company}
             style={{
-              width: "110px",
-              height: "110px",
+              width: isMobile ? "80px" : "110px",
+              height: isMobile ? "80px" : "110px",
               objectFit: "contain",
               display: "block",
             }}
@@ -277,7 +517,7 @@ function ExperienceCard({ exp, index }) {
         <div
           style={{
             flex: 1,
-            padding: "2rem 2.5rem",
+            padding: isMobile ? "1.5rem" : "2rem 2.5rem",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -286,7 +526,7 @@ function ExperienceCard({ exp, index }) {
           {/* Company name */}
           <h3
             style={{
-              fontSize: "1.25rem",
+              fontSize: isMobile ? "1.1rem" : "1.25rem",
               fontWeight: 800,
               color: "#0d0f14",
               margin: "0 0 0.1rem 0",
@@ -335,9 +575,9 @@ function ExperienceCard({ exp, index }) {
                 <div
                   style={{
                     display: "flex",
-                    alignItems: "baseline",
+                    alignItems: isMobile ? "flex-start" : "baseline",
                     justifyContent: "space-between",
-                    flexWrap: "wrap",
+                    flexDirection: isMobile ? "column" : "row",
                     gap: "0.4rem",
                     marginBottom: "0.7rem",
                   }}
@@ -364,7 +604,7 @@ function ExperienceCard({ exp, index }) {
                   </span>
                 </div>
 
-                {/* Bullets */}
+                {/* Bullets — justified */}
                 <ul
                   style={{
                     margin: "0 0 0.5rem 1.1rem",
@@ -378,10 +618,11 @@ function ExperienceCard({ exp, index }) {
                     <li
                       key={bi}
                       style={{
-                        fontSize: "0.9rem",
+                        fontSize: isMobile ? "0.85rem" : "0.9rem",
                         color: "#374151",
                         lineHeight: 1.75,
                         listStyleType: "disc",
+                        textAlign: "justify",
                       }}
                     >
                       <Bold text={b} />
@@ -392,51 +633,77 @@ function ExperienceCard({ exp, index }) {
             ))}
           </div>
 
-          {/* Certificate button — bottom of right panel */}
-          {exp.certificate && (
-            <div style={{ marginTop: "1.2rem" }}>
-              <button
-                onClick={() => setShowCert(true)}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 6,
-                  padding: "7px 14px",
-                  fontSize: "0.75rem",
-                  fontWeight: 600,
-                  fontFamily: "'Raleway', sans-serif",
-                  letterSpacing: "0.04em",
-                  color: "#4169e1",
-                  background: "rgba(65,105,225,0.07)",
-                  border: "1px solid rgba(65,105,225,0.35)",
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                  transition: "background 0.2s, border-color 0.2s",
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.background = "rgba(65,105,225,0.15)";
-                  e.currentTarget.style.borderColor = "rgba(65,105,225,0.7)";
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.background = "rgba(65,105,225,0.07)";
-                  e.currentTarget.style.borderColor = "rgba(65,105,225,0.35)";
-                }}
-              >
-                <FileText size={13} />
-                View Certificate
-              </button>
+          {/* Bottom action buttons */}
+          {(exp.certificate || exp.thesisOverview) && (
+            <div style={{
+              marginTop: "1.2rem",
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "8px",
+              alignItems: "center",
+            }}>
+              {/* Certificate button */}
+              {exp.certificate && (
+                <button
+                  onClick={() => setShowCert(true)}
+                  style={{
+                    ...btnBase,
+                    color: "#4169e1",
+                    background: "rgba(65,105,225,0.07)",
+                    borderColor: "rgba(65,105,225,0.35)",
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.background = "rgba(65,105,225,0.15)";
+                    e.currentTarget.style.borderColor = "rgba(65,105,225,0.7)";
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.background = "rgba(65,105,225,0.07)";
+                    e.currentTarget.style.borderColor = "rgba(65,105,225,0.35)";
+                  }}
+                >
+                  <FileText size={13} />
+                  View Certificate
+                </button>
+              )}
+
+              {/* Thesis Overview button — only on thesis card */}
+              {exp.thesisOverview && (
+                <button
+                  onClick={() => setShowThesis(true)}
+                  style={{
+                    ...btnBase,
+                    color: "#059669",
+                    background: "rgba(5,150,105,0.07)",
+                    borderColor: "rgba(5,150,105,0.35)",
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.background = "rgba(5,150,105,0.15)";
+                    e.currentTarget.style.borderColor = "rgba(5,150,105,0.7)";
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.background = "rgba(5,150,105,0.07)";
+                    e.currentTarget.style.borderColor = "rgba(5,150,105,0.35)";
+                  }}
+                >
+                  <BookOpen size={13} />
+                  Thesis Overview
+                </button>
+              )}
             </div>
           )}
         </div>
       </motion.div>
 
-      {/* Certificate modal */}
       {showCert && (
         <CertModal
           url={exp.certificate}
           company={exp.company}
           onClose={() => setShowCert(false)}
         />
+      )}
+
+      {showThesis && (
+        <ThesisModal onClose={() => setShowThesis(false)} />
       )}
     </>
   );

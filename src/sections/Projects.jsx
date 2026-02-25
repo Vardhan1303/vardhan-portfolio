@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const fontLink = document.createElement("link");
@@ -8,73 +9,127 @@ if (!document.head.querySelector('link[href*="Raleway"]')) {
   document.head.appendChild(fontLink);
 }
 
-// ── Tech → emoji map ─────────────────────────────────────────────────────────
-const techEmoji = {
-  Python: "🐍", PyTorch: "🔥", TensorFlow: "🧠", OpenCV: "👁️",
-  "Computer Vision": "📷", "Deep Learning": "🤖", "Machine Learning": "📊",
-  ROS2: "🤖", ROS: "🤖", Docker: "🐳", Git: "🔧", "C++": "⚙️", C: "⚙️",
-  Linux: "🐧", CUDA: "⚡", NumPy: "🔢", Pandas: "🐼", Matplotlib: "📈",
-  "Scikit-learn": "🔬", JavaScript: "🌐", TypeScript: "🌐", React: "⚛️",
-  "Node.js": "🟢", Azure: "☁️", AWS: "☁️", SQL: "🗄️", MATLAB: "📐",
-  Keras: "🧬", "Image Processing": "🖼️", Robotics: "🦾",
-};
-function getTechEmoji(tech) {
-  if (techEmoji[tech]) return techEmoji[tech];
-  const key = Object.keys(techEmoji).find((k) =>
-    tech.toLowerCase().includes(k.toLowerCase())
-  );
-  return key ? techEmoji[key] : "🔹";
-}
-
-// ── Data — replace with your real projects ───────────────────────────────────
+// ── Projects data — reverse chronological ────────────────────────────────────
 const projects = [
   {
     id: 1,
-    image: "/images/projects/project1.png",   // ← screenshot of your project
-    date: "January 2026",
-    title: "Foxglove Extension with OpenBridge",
+    image: "/images/proj_med.png",
+    date: "August 2025",
+    title: "Brain Tumor Detection Using CNN and Transfer Learning",
+    subtitle: "Extracurricular Project",
     summary:
-      "A custom panel for Foxglove Studio that seamlessly integrates OpenBridge Web Components to provide advanced maritime visualization and control. The extension features interactive components such as the Azimuth Thruster, Main Engine, and Compass, each dynamically bound to live ROS2 robot data or a built-in demo mode for simulation and testing. The panel subscribes to relevant ROS2 topics, ensuring real-time updates and accurate representation of vessel state.",
-    technologies: ["React", "TypeScript", "ROS2", "OpenCV"],
-    githubUrl: "https://github.com/yourusername/project1",
+      "A binary classification system for brain MRI scans built using a custom CNN and MobileNet-based transfer learning. The transfer learning model achieved 97.24% test accuracy, significantly outperforming the CNN trained from scratch (91.74%). The project covers a complete ML pipeline including data splitting, model optimisation with EarlyStopping and ModelCheckpoint callbacks, and comprehensive performance visualisation.",
+    technologies: ["Python", "TensorFlow", "Keras", "CNN", "MobileNet", "Transfer Learning", "OpenCV", "Medical Imaging"],
+    githubUrl: "https://github.com/Vardhan1303/MedVisionAI",
     videoUrl: null,
   },
   {
     id: 2,
-    image: "/images/projects/project2.png",
-    date: "September 2025",
-    title: "Autonomous Lane Detection Pipeline",
+    image: "/images/proj_food.png",
+    date: "March 2025",
+    title: "Food Classification Using EfficientNetB0",
+    subtitle: "Extracurricular Project — TensorFlow Deep Learning Bootcamp",
     summary:
-      "An end-to-end lane detection system built using deep learning and classical computer vision techniques, designed to operate in real-time on embedded hardware. The pipeline incorporates semantic segmentation with a lightweight encoder-decoder architecture, post-processing heuristics for lane fitting, and evaluation on standard benchmarks. Validated across diverse lighting and weather conditions with a strong emphasis on reproducibility and modular design.",
-    technologies: ["Python", "PyTorch", "OpenCV", "CUDA", "ROS2"],
-    githubUrl: "https://github.com/yourusername/project2",
+      "An end-to-end deep learning pipeline for the Food-101 dataset (101 food categories) built with TensorFlow 2.8 and EfficientNetB0 transfer learning. The workflow covers feature extraction with frozen base layers and a custom classification head, followed by fine-tuning with a reduced learning rate (0.0001) to push accuracy beyond the initial extraction results. A TensorFlow Dataset (tfds) integration handles efficient batch processing with image resizing and float32 casting, and mixed precision training optimises inference for a deployment-ready system.",
+    technologies: ["Python", "TensorFlow", "Keras", "EfficientNetB0", "Transfer Learning", "NumPy", "Matplotlib"],
+    githubUrl: "https://github.com/Vardhan1303/tensorflow/tree/main/1-food-vision",
     videoUrl: null,
   },
   {
     id: 3,
-    image: "/images/projects/project3.png",
-    date: "April 2025",
-    title: "3D Object Detection for Automotive Perception",
+    image: "/images/rcrc.png",
+    date: "December 2024 – January 2025",
+    title: "Robot Car Racing Competition",
+    subtitle: "Course Project — GPA: 1.3",
     summary:
-      "Research project focused on 3D object detection from LiDAR point clouds for autonomous driving applications, completed as part of the master's thesis at IAV GmbH. Implemented and benchmarked multiple state-of-the-art architectures including PointPillars and VoxelNet, with custom data augmentation strategies to improve generalization. The system was integrated into an automotive software stack and evaluated on real-world test drives.",
-    technologies: ["Python", "PyTorch", "Deep Learning", "ROS2", "Linux"],
-    githubUrl: null,
+      "An autonomous robot car integrating computer vision and sensor fusion to complete four navigation tasks: line following, LiDAR-based obstacle avoidance, colour cube detection, and ArUco marker recognition. A Pi Camera with adaptive thresholding enables precise line following, while RPLidar detects obstacles at defined distance thresholds (20 cm and 40 cm). An intelligent prioritisation algorithm selects the closest detected target in multi-object scenarios, and a GPIO-interfaced motor control system provides responsive autonomous navigation throughout all tasks.",
+    technologies: ["Python", "OpenCV", "Raspberry Pi 4", "RPLidar", "Pi Camera", "ArUco Markers", "Computer Vision", "Image Processing"],
+    githubUrl: "https://github.com/Vardhan1303/Robot-Car-Racing-Competition",
+    videoUrl: null,
+  },
+  {
+    id: 4,
+    image: "/images/platooning.jpeg",
+    date: "March 2024 – August 2024",
+    title: "Platooning Autonomous Following Robot",
+    subtitle: "Master's Scientific Project — GPA: 1.4",
+    summary:
+      "A cost-effective autonomous following robot built on Raspberry Pi 4 using ArUco marker detection, eliminating the need for expensive LiDAR systems. A comprehensive camera calibration pipeline using checkerboard patterns corrects lens distortions for precise pose estimation. A multi-marker detection system with cv2.solvePnP() enables real-time position tracking, and Kalman filtering reduces sensor noise to achieve a distance estimation error below 2 cm across varied lighting and surface conditions. Dynamic PID-based motor control provides smooth following behaviour with intelligent recovery for marker loss situations.",
+    technologies: ["Python", "OpenCV", "Raspberry Pi 4", "ArUco Markers", "Kalman Filter", "PID Control", "Computer Vision", "Pose Estimation"],
+    githubUrl: "https://github.com/Vardhan1303/Scientific_project/blob/main/docs/details.md",
+    videoUrl: null,
+  },
+  {
+    id: 5,
+    image: "/images/cv_2.png",
+    date: "May 2024 – June 2024",
+    title: "Object Detection and Depth Estimation",
+    subtitle: "Computer Vision — Task 2",
+    summary:
+      "A YOLOv8-based object detection pipeline evaluated on the KITTI dataset, with IoU-based bounding box filtering above a 0.5 threshold for ground truth validation. Depth estimation is computed from camera calibration matrices and bounding box geometry, achieving 85% accuracy within a 5-metre range. Results are visualised through Bird's Eye View (BEV) representations with annotated bounding boxes, distance measurements, and precision/recall metrics for comprehensive performance analysis.",
+    technologies: ["Python", "OpenCV", "YOLOv8", "NumPy", "KITTI Dataset", "Object Detection", "Camera Calibration"],
+    githubUrl: "https://github.com/Vardhan1303/Computer_Vision/tree/main/Task_2_Object_Detection_and_Depth_Estimation",
+    videoUrl: null,
+  },
+  {
+    id: 6,
+    image: "/images/cv_1.png",
+    date: "March 2024 – April 2024",
+    title: "Augmented Reality with ArUco Markers",
+    subtitle: "Computer Vision — Task 1",
+    summary:
+      "An augmented reality system that detects ArUco markers in real-world scenes and overlays custom poster images with perspective-correct homography transformation. The pipeline uses OpenCV for marker detection, computes the homography matrix between the marker corners and the target poster, and applies warp perspective with masking and blending for photorealistic integration. The system successfully processed 10 out of 11 test images with seamless AR placement.",
+    technologies: ["Python", "OpenCV", "ArUco Markers", "NumPy", "Homography", "Computer Vision"],
+    githubUrl: "https://github.com/Vardhan1303/Computer_Vision/tree/main/Task_1_Augmented_Reality",
+    videoUrl: null,
+  },
+  {
+    id: 7,
+    image: "/images/lidar_radar_2.png",
+    date: "December 2023 – January 2024",
+    title: "Object Detector Evaluation on KITTI Dataset",
+    subtitle: "LiDAR & Radar Systems — Task 2",
+    summary:
+      "An evaluation framework for a YOLOv8 object detection model applied to the KITTI dataset, focusing on precision, recall, and IoU-based bounding box assessment. The pipeline generates Bird's Eye View (BEV) visualisations with annotated detections, overlaying estimated versus ground truth bounding boxes for spatial accuracy analysis. Comprehensive histogram distributions and scatter plots quantify detection performance across diverse driving scenes, providing detailed insights into the model's real-world reliability.",
+    technologies: ["Python", "YOLOv8", "OpenCV", "NumPy", "Matplotlib", "KITTI Dataset", "Object Detection"],
+    githubUrl: "https://github.com/Vardhan1303/Lidar_Radar/tree/main/Task_2_Evaluation_of_an_object_detector",
+    videoUrl: null,
+  },
+  {
+    id: 8,
+    image: "/images/lidar_radar_1.png",
+    date: "October 2023 – November 2023",
+    title: "Influence of Fog on LiDAR and Radar Sensors",
+    subtitle: "LiDAR & Radar Systems — Task 1",
+    summary:
+      "A sensor performance study evaluating three sensors — Blickfeld Cube LiDAR, Velodyne Puck LiDAR, and MMWAVCAS-RF-EVM Radar — under clear and simulated foggy conditions using over 500 CSV files per scenario. An automated pipeline merges and preprocesses large-scale sensor datasets, computing RMS values to statistically quantify fog-induced signal degradation. Analysis reveals that the Velodyne Puck reliably detects objects up to 5 metres in fog with performance challenges beyond 10 metres, while the Blickfeld Cube shows a wider RMS distribution due to scattered laser reflections.",
+    technologies: ["Python", "NumPy", "Matplotlib", "Pandas", "LiDAR", "Radar", "Sensor Fusion", "Statistical Analysis"],
+    githubUrl: "https://github.com/Vardhan1303/Lidar_Radar/tree/main/Task_1_Influence_of_Fog_on_the_Sensors",
     videoUrl: null,
   },
 ];
 
 // ── Project Card ──────────────────────────────────────────────────────────────
 function ProjectCard({ project, index }) {
-  const isReversed = index % 2 !== 0;
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" && window.innerWidth < 768
+  );
+
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+
+  const isReversed = !isMobile && index % 2 !== 0;
 
   return (
     <motion.div
       style={{
-        maxWidth: "1000px",
-        margin: "0 auto 3rem",
+        maxWidth: "1200px",
+        margin: "0 auto 2.5rem",
         display: "flex",
-        flexDirection: isReversed ? "row-reverse" : "row",
-        minHeight: "340px",
+        flexDirection: isMobile ? "column" : isReversed ? "row-reverse" : "row",
         borderRadius: "14px",
         overflow: "hidden",
         boxShadow: "0 4px 32px rgba(0,0,0,0.09)",
@@ -82,17 +137,25 @@ function ProjectCard({ project, index }) {
       }}
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.55, delay: index * 0.08 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.55, delay: index * 0.06 }}
     >
       {/* Screenshot side */}
       <div
         style={{
-          width: "50%",
+          width: isMobile ? "100%" : "48%",
+          height: isMobile ? "220px" : "auto",
           flexShrink: 0,
-          overflow: "hidden",
-          background: "#e5e7eb",
-          position: "relative",
+          background: "#f3f4f6",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          alignSelf: "stretch",
+          padding: isMobile ? "12px" : "16px",
+          boxSizing: "border-box",
+          borderBottom: isMobile ? "1px solid #e5e7eb" : "none",
+          borderRight: !isMobile && !isReversed ? "1px solid #e5e7eb" : "none",
+          borderLeft: !isMobile && isReversed ? "1px solid #e5e7eb" : "none",
         }}
       >
         {project.image ? (
@@ -103,10 +166,11 @@ function ProjectCard({ project, index }) {
             style={{
               width: "100%",
               height: "100%",
-              objectFit: "cover",
-              objectPosition: "center top",
+              objectFit: "contain",
+              objectPosition: "center center",
               display: "block",
               transition: "transform 0.4s ease",
+              borderRadius: "6px",
             }}
             onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.03)")}
             onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
@@ -122,7 +186,6 @@ function ProjectCard({ project, index }) {
               color: "#9ca3af",
               fontSize: "0.85rem",
               fontStyle: "italic",
-              background: "#f3f4f6",
             }}
           >
             Screenshot coming soon
@@ -134,34 +197,56 @@ function ProjectCard({ project, index }) {
       <div
         style={{
           flex: 1,
-          padding: "2.4rem 2.8rem",
+          padding: isMobile ? "1.5rem" : "2.2rem 2.6rem",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          gap: "0",
         }}
       >
-        {/* Date */}
-        <p
-          style={{
+        {/* Date + subtitle row */}
+        <div style={{
+          display: "flex",
+          alignItems: isMobile ? "flex-start" : "center",
+          flexDirection: isMobile ? "column" : "row",
+          flexWrap: "wrap",
+          gap: isMobile ? "0.2rem" : "0.5rem",
+          marginBottom: "0.5rem",
+        }}>
+          <p style={{
             fontSize: "0.78rem",
             color: "#9ca3af",
             fontWeight: 600,
             letterSpacing: "0.04em",
-            margin: "0 0 0.5rem 0",
-          }}
-        >
-          {project.date}
-        </p>
+            margin: 0,
+          }}>
+            {project.date}
+          </p>
+          {project.subtitle && (
+            <>
+              {!isMobile && (
+                <span style={{ color: "#d1d5db", fontSize: "0.75rem" }}>·</span>
+              )}
+              <p style={{
+                fontSize: "0.75rem",
+                color: "#6b7280",
+                fontWeight: 600,
+                fontStyle: "italic",
+                margin: 0,
+              }}>
+                {project.subtitle}
+              </p>
+            </>
+          )}
+        </div>
 
         {/* Title */}
         <h3
           style={{
-            fontSize: "1.25rem",
+            fontSize: isMobile ? "1rem" : "1.15rem",
             fontWeight: 800,
             color: "#0d0f14",
             margin: "0 0 0.4rem 0",
-            lineHeight: 1.25,
+            lineHeight: 1.3,
           }}
         >
           {project.title}
@@ -174,63 +259,57 @@ function ProjectCard({ project, index }) {
             height: "2.5px",
             background: "#4169e1",
             borderRadius: "2px",
-            marginBottom: "1.1rem",
+            marginBottom: "1rem",
           }}
         />
 
-        {/* Summary paragraph */}
+        {/* Summary */}
         <p
           style={{
-            fontSize: "0.88rem",
+            fontSize: isMobile ? "0.84rem" : "0.875rem",
             lineHeight: 1.85,
             color: "#374151",
             fontWeight: 400,
-            margin: "0 0 1.2rem 0",
+            margin: "0 0 1.1rem 0",
+            textAlign: "justify",
           }}
         >
           {project.summary}
         </p>
 
-        {/* "Developed using:" badges */}
+        {/* Tech badges */}
         {project.technologies?.length > 0 && (
           <div
             style={{
               display: "flex",
               alignItems: "center",
               flexWrap: "wrap",
-              gap: "0.45rem",
+              gap: "0.4rem",
               marginBottom: project.githubUrl || project.videoUrl ? "1rem" : 0,
             }}
           >
-            <span
-              style={{
-                fontSize: "0.75rem",
-                fontWeight: 600,
-                color: "#6b7280",
-                marginRight: "0.15rem",
-              }}
-            >
+            <span style={{
+              fontSize: "0.74rem",
+              fontWeight: 600,
+              color: "#6b7280",
+              marginRight: "0.1rem",
+            }}>
               Developed using:
             </span>
             {project.technologies.map((tech, ti) => (
               <span
                 key={ti}
-                title={tech}
                 style={{
-                  fontSize: "0.75rem",
+                  fontSize: "0.72rem",
                   fontWeight: 600,
                   color: "#4169e1",
                   background: "rgba(65,105,225,0.07)",
                   border: "1px solid rgba(65,105,225,0.2)",
                   borderRadius: "5px",
                   padding: "0.18rem 0.55rem",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.28rem",
                   whiteSpace: "nowrap",
                 }}
               >
-                <span role="img" aria-label={tech}>{getTechEmoji(tech)}</span>
                 {tech}
               </span>
             ))}
@@ -247,7 +326,6 @@ function ProjectCard({ project, index }) {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "0.4rem",
                 fontSize: "0.82rem",
                 fontWeight: 600,
                 color: "#4169e1",
@@ -265,7 +343,7 @@ function ProjectCard({ project, index }) {
                 (e.currentTarget.style.background = "transparent")
               }
             >
-              🔗 Code Repository
+              Code Repository
             </a>
           )}
           {project.videoUrl && (
@@ -276,7 +354,6 @@ function ProjectCard({ project, index }) {
               style={{
                 display: "inline-flex",
                 alignItems: "center",
-                gap: "0.4rem",
                 fontSize: "0.82rem",
                 fontWeight: 600,
                 color: "#6d28d9",
@@ -294,7 +371,7 @@ function ProjectCard({ project, index }) {
                 (e.currentTarget.style.background = "transparent")
               }
             >
-              ▶ Watch Demo
+              Watch Demo
             </a>
           )}
         </div>
@@ -309,12 +386,11 @@ export default function Projects() {
     <section
       id="projects"
       style={{
-        background: "#f9fafb",   // very light grey — subtle contrast after white Experience
+        background: "#f9fafb",
         fontFamily: "'Raleway', sans-serif",
         padding: "50px 2rem",
       }}
     >
-      {/* Section label */}
       <p
         style={{
           fontSize: "1.25rem",
@@ -329,14 +405,13 @@ export default function Projects() {
       >
         Projects
       </p>
-      {/* Blue underline — same as Technical Skills */}
       <div
         style={{
           width: "56px",
           height: "2px",
           background: "#4f8eff",
           borderRadius: "2px",
-          margin: "0 auto 40px",  // centered, then 50px gap before card
+          margin: "0 auto 40px",
         }}
       />
 
