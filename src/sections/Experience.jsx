@@ -83,7 +83,7 @@ const experiences = [
     logo: "/images/farmson_logo.png",
     company: "Farmson Basic Drugs Private Limited",
     location: "Vadodara, India",
-    certificate: null,
+    certificate: "/certificates/farmson_certificate.pdf",
     positions: [
       {
         title: "Mechanical Intern – Maintenance Department",
