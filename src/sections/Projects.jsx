@@ -112,9 +112,9 @@ const projects = [
     image: "/images/gold_medal.png",
     date: "April 2022",
     title: "In-House Design Review & Modernization of the MSU Gold Medal",
-    subtitle: "Mechanical Engineering — Bachelor's Thesis",
+    subtitle: "Mechanical Engineering — Bachelor's Final Year Project | Grade: 85/100",
     summary:
-      "A modernization project transitioning the Maharaja Sayajirao University gold medal production from traditional hand-engraving to an advanced, CAD-driven manufacturing pipeline[cite: 20, 21]. [cite_start]The process involved extensive reverse engineering of existing medals using 3-axis Coordinate Measuring Machines (CMM) and MSU 3-D Pro software to generate precise digital blueprints[cite: 138, 143]. [cite_start]I developed high-fidelity 3D models in Siemens NX CAD, which served as the foundation for designing high-pressure coining dies made from WPS-HCHC (Grade D2) tool steel[cite: 146, 147]. [cite_start]The project integrated laser die cutting for intricate artistic features and a rigorous heat treatment cycle—including case hardening and tempering—to achieve a tool hardness of 65 HRC[cite: 148, 157, 173]. [cite_start]Final validation was achieved through a successful 30-ton hydraulic press coining operation, establishing a cost-effective, high-precision in-house manufacturing standard[cite: 180, 182].",
+      "A modernization project transitioning the Maharaja Sayajirao University gold medal production from traditional hand-engraving to an advanced, CAD-driven manufacturing pipeline. The process involved extensive reverse engineering of existing medals using 3-axis Coordinate Measuring Machines (CMM) and MSU 3-D Pro software to generate precise digital blueprints. I developed high-fidelity 3D models in Siemens NX CAD, which served as the foundation for designing high-pressure coining dies made from WPS-HCHC (Grade D2) tool steel. The project integrated laser die cutting for intricate artistic features and a rigorous heat treatment cycle—including case hardening and tempering—to achieve a tool hardness of 65 HRC. Final validation was achieved through a successful 30-ton hydraulic press coining operation, establishing a cost-effective, high-precision in-house manufacturing standard.",
     technologies: [
       "Siemens NX CAD",
       "AutoCAD",
