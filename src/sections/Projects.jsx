@@ -125,7 +125,7 @@ const projects = [
       "Vickers Hardness Testing",
       "Hydraulic Press"
     ],
-    githubUrl:"https://drive.google.com/file/d/10sc2JEvuU3QrebwoIAsMC-JvwyQ8J5Mm/view?usp=sharing",
+    githubUrl:"https://drive.google.com/file/d/176Kc7YwMNr2M58SsDRE1gbJMUWomm-qB/view?usp=drive_link",
     videoUrl: null,
   },
 ];
