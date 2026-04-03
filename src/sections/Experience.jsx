@@ -24,16 +24,27 @@ const experiences = [
         title: "Master's Thesis | Grade: 1.0 (Excellent)",
         date: "April 2025 – December 2025",
         bullets: [
-          "Title: **Flexible Soiling Detection on Automotive Cameras** | Department: Vehicle Solutions & Automated Driving, Automated Driving Functions",
-          "Designed and implemented a flexible framework for **data-driven generation of camera soiling** (dirt, water, etc.) to produce realistic training and evaluation datasets.",
-          "Built and trained **GAN-based models** (CycleGAN, MudGAN) for realistic synthetic soiling data generation across diverse camera configurations.",
-          "Implemented, trained, and evaluated modern **deep learning models** using Python, OpenCV, and PyTorch — including CNN architectures (DeepLabv3+), Vision Transformers (SegFormer), and hybrid CNNs (PIDNet).",
-          "Conducted systematic **benchmarks** to evaluate model robustness and cross-domain generalisation across different soiling types and camera setups.",
-          "Worked with various **camera models and geometries**, including Pinhole and Fisheye cameras, to ensure broad applicability of detection methods.",
-          "Built a comprehensive **evaluation protocol** using objective metrics (KID, LPIPS) and structured human studies (Mean Opinion Score, Visual Turing Test).",
-          "Exported trained models to **ONNX** and validated **7 ms inference on NVIDIA RTX A1000** (6 GB, 29.5 MB model size), demonstrating embedded-ready performance for production deployment.",
-          "Deployed a **real-time prototype** and presented results to automotive and defence customers, showcasing end-to-end capability from training to live inference.",
-          "Managed version control and collaborative development throughout the research workflow using **Git**.",
+          "Title: Flexible Soiling Detection on Automotive Cameras (Grade: 1.0)",
+
+          "Developed a mask-guided GAN pipeline (CycleGAN + VAE) for realistic mud and soiling generation (MudGAN).",
+          
+          "Evaluated synthetic data quality using KID, LPIPS, and human studies (MOS, Visual Turing Test).",
+          
+          "Trained DeepLabV3+, SegFormer, and PIDNet on 7 datasets including KITTI, Cityscapes, Woodscape, and internal datasets.",
+          
+          "Designed training strategies combining real, synthetic, and clean data to improve cross-domain generalisation.",
+          
+          "Identified domain gap in synthetic-only training causing recall drops (0.17–0.39) and mitigated it effectively.",
+          
+          "Benchmarked models across datasets, achieving Dice scores up to 0.94 with reduced false positives (4.03% → 0.17%).",
+          
+          "Exported PIDNet to ONNX and validated real-time inference (~7 ms) on NVIDIA RTX A1000.",
+          
+          "Contributed to development of a camera cleaning prototype triggering water spray and air pressure based on detection.",
+          
+          "Tested integrated perception + cleaning pipeline in a real vehicle prototype for end-to-end validation.",
+          
+          "Maintained reproducible workflows and version control using Git."
         ],
       },
     ],
@@ -49,11 +60,15 @@ const experiences = [
       title: "Software Developer Intern",
       date: "December 2024 – February 2025",
       bullets: [
-        "Researched **data augmentation of clean camera images with virtual soiling** to generate training and test datasets for camera blindness detection in automotive perception systems.",
-        "Conducted structured **literature research** on synthetic image corruption and robustness validation methodologies.",
-        "Designed and implemented a **procedural raindrop generation pipeline** for controllable virtual soiling simulation on real camera images.",
-        "Developed a **Python-based GUI application (Tkinter)** supporting both single-image processing and **temporally consistent frame sequence simulation**.",
-        "Performed systematic **experiments, quantitative evaluation, and result analysis** to validate realism and suitability for scalable dataset generation.",
+        "Developed physics-based raindrop simulation pipeline for realistic synthetic soiling generation.",
+        
+        "Automated RGB and mask dataset creation, eliminating manual annotation effort entirely (100%).",
+        
+        "Built Python GUI tool (Tkinter) supporting single-image and temporally consistent sequence (video) generation.",
+        
+        "Conducted literature research on synthetic corruption and robustness validation techniques.",
+        
+        "Evaluated realism using perceptual metrics and human studies; benchmarked against Stable Diffusion 2.1."
       ],
     },
     ],
@@ -66,14 +81,20 @@ const experiences = [
     certificate: "/certificates/adani_certificate.pdf",
     positions: [
       {
-        title: "Assistant Manager",
+        title: "Machine Vision | Project Management (Assistant Manager)",
         date: "August 2022 – August 2023",
         bullets: [
-          "Managed the **M1A package execution** for Kutch Copper Limited’s **1.5 MTPA greenfield refinery project**, overseeing installation, commissioning preparation, and final handover.",
-          "Coordinated cross-functionally with **Electrical, Civil, Instrumentation, Metallurgy, Finance, and PMO teams** to resolve technical dependencies and maintain critical project timelines.",
-          "Led installation and integration of the **Fanuc 400i industrial robotic system**, performing drawing verification, technical reviews, and multi-disciplinary troubleshooting.",
-          "Administered **SAP MM/FM operations** including PR/PO processing, material clearance, contractor billing, and financial workflow alignment.",
-          "Designed **PowerBI dashboards** for real-time milestone tracking and executive-level project reporting."
+          "Developed OpenCV-based defect detection prototypes, reducing manual inspection time by ~35%.",
+          
+          "Optimised camera calibration and lighting setups, lowering false-reject rates by ~12%.",
+          
+          "Supported machine vision integration within large-scale industrial automation systems.",
+          
+          "Project Management: Contributed to execution of M1A package for a 1.5 MTPA greenfield refinery project.",
+          
+          "Project Management: Assisted in integration and commissioning activities of FANUC 400i industrial robotic system.",
+          
+          "Project Management: Built PowerBI dashboards for milestone tracking, improving reporting visibility across teams (~20–30% faster updates)."
         ],
       },
     ],
