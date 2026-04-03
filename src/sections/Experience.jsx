@@ -116,40 +116,6 @@ const experiences = [
   },
 ];
 
-// ── Thesis overview content ────────────────────────────────────────────────────
-const thesisOverviewContent = {
-  title: "Flexible Soiling Detection on Automotive Cameras",
-  grade: "1.0 (Excellent)",
-  period: "April 2025 – December 2025",
-  department: "Vehicle Solutions & Automated Driving — Automated Driving Functions, IAV GmbH",
-  sections: [
-    {
-      heading: "Motivation & Problem Statement",
-      text: "Camera-based perception systems are central to modern autonomous and assisted driving. However, environmental soiling — including dirt, water droplets, mud, and fog — can severely degrade image quality and compromise detection accuracy. This thesis addresses the challenge of building robust, flexible soiling detection systems that generalise across diverse soiling types and camera geometries in real-world automotive conditions.",
-    },
-    {
-      heading: "Framework for Synthetic Soiling Generation",
-      text: "A data-driven framework was designed and implemented to generate realistic synthetic camera soiling for training and evaluation. The framework supports multiple soiling categories and is adaptable to different camera models including Pinhole and Fisheye geometries. This approach enables scalable dataset creation without requiring costly physical soiling experiments.",
-    },
-    {
-      heading: "Generative Models — GANs",
-      text: "GAN-based architectures, specifically CycleGAN and MudGAN, were trained to synthesise photorealistic soiling patterns on clean camera images. These models learn the visual distribution of real soiling and transfer it convincingly to synthetic data, closing the domain gap between simulated and real-world inputs.",
-    },
-    {
-      heading: "Deep Learning Detection Models",
-      text: "Several state-of-the-art deep learning architectures were implemented, trained, and evaluated for soiling detection: CNN-based models (DeepLabv3+), Vision Transformer models (SegFormer), and hybrid CNN architectures (PIDNet). All models were developed in Python using PyTorch and OpenCV, with additional experiments conducted using TensorFlow.",
-    },
-    {
-      heading: "Evaluation & Benchmarking",
-      text: "A rigorous evaluation protocol was established combining objective perceptual metrics — Kernel Inception Distance (KID) and Learned Perceptual Image Patch Similarity (LPIPS) — with structured human studies including Mean Opinion Score (MOS) and the Visual Turing Test. Systematic benchmarks assessed cross-domain generalisation and model robustness across varied soiling conditions.",
-    },
-    {
-      heading: "Outcome",
-      text: "The thesis was awarded a grade of 1.0 (Excellent), the highest possible distinction in the German grading system. The work contributes a flexible, reproducible pipeline for soiling simulation and detection that is directly applicable to production-level automotive camera perception systems.",
-    },
-  ],
-};
-
 // ── Bold markdown renderer ─────────────────────────────────────────────────────
 function Bold({ text }) {
   const parts = text.split(/\*\*(.+?)\*\*/g);
