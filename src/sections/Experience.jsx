@@ -18,7 +18,7 @@ const experiences = [
     company: "IAV GmbH",
     location: "Chemnitz, Germany",
     certificate: "/certificates/iav_thesis_certificate.pdf",
-    thesisOverview: "/certificates/iav_thesis_certificate.pdf",
+    thesisOverview: "/certificates/Vardhan_Mistry_Master_Thesis_Summary.pdf",
     positions: [
       {
         title: "Master's Thesis | Grade: 1.0 (Excellent)",
