@@ -141,15 +141,7 @@ export default function About() {
               textAlign: "justify",
             }}
           >
-            MSc Mechatronics graduate with over two years of industrial experience and 
-            a strong research driven computational background in {" "}
-            <strong style={{ fontWeight: 700, color: "#111827" }}> AI/ML, 
-            deep learning, computer vision, and image processing.</strong> I design scalable and 
-            reproducible data pipelines, develop and fine tune models, and perform rigorous 
-            experimental evaluation. I have hands on experience optimizing inference and 
-            deploying models on embedded and edge hardware, transforming research concepts 
-            into reliable production ready systems. I work independently on complex technical 
-            problems with both academic rigor and industrial focus.
+            MSc Mechatronics graduate focused on computer vision for real-world perception systems. My work spans synthetic data generation, robust model training, and evaluation under challenging conditions such as camera soiling. I develop and benchmark deep learning models, optimise them for real-time inference, and integrate them into end-to-end prototypes. With experience from research to vehicle-level validation, I take a practical, system-oriented approach to solving complex vision problems.
           </p>
         </div>
       </div>
