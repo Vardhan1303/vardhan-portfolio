@@ -18,7 +18,7 @@ const experiences = [
     company: "IAV GmbH",
     location: "Chemnitz, Germany",
     certificate: "/certificates/iav_thesis_certificate.pdf",
-    thesisOverview: true,
+    thesisOverview: "/certificates/iav_thesis_certificate.pdf",
     positions: [
       {
         title: "Master's Thesis | Grade: 1.0 (Excellent)",
