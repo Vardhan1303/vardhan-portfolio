@@ -670,9 +670,13 @@ function ExperienceCard({ exp, index }) {
         />
       )}
 
-      {showThesis && (
-        <ThesisModal onClose={() => setShowThesis(false)} />
-      )}
+     {showThesis && (
+      <CertModal
+        url={exp.thesisOverview}
+        company="Thesis Overview"
+        onClose={() => setShowThesis(false)}
+      />
+    )}
     </>
   );
 }
